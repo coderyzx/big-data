@@ -1,0 +1,17 @@
+import React, { Component } from 'react'
+import { Card } from 'antd';
+import CodeBoard from '@/components/CodeBoard';
+import UCarousel from '@/components/uCarousel';
+
+class uCarouselDemo extends Component {
+
+  render() {
+    return (
+      <>
+        <UCarousel />
+      </>
+    )
+  }
+}
+
+export default uCarouselDemo

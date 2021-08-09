@@ -1,0 +1,49 @@
+import React from 'react';
+import CodeBoard from '@/components/CodeBoard';
+import RemindComponent from '@/components/RemindComponent';
+import { Tabs } from 'antd';
+import styles from './index.less';
+
+const { TabPane } = Tabs;
+
+class remindDemo extends React.Component {
+
+  constructor(props) {
+    super(props);
+     this.state = {
+      currentKey: 'commonError',
+    }
+  }
+
+
+
+  render() {
+    const { currentKey } = this.state;
+    return (
+      <>
+          <Tabs
+           defaultActiveKey={currentKey}
+          >
+            <TabPane tab="403显示页面" key="commonError">
+              <div className={styles.remindBox}>
+                <RemindComponent remindState="403"/>
+              </div>
+            </TabPane >
+            <TabPane tab="404显示页面" key="pageNotFound">
+              <div className={styles.remindBox}>
+                <RemindComponent remindState="404"/>
+              </div>
+            </TabPane >
+            <TabPane tab="500显示页面" key="internalServerError">
+              <div className={styles.remindBox}>
+                <RemindComponent remindState="500"/>
+              </div>
+            </TabPane >
+          </Tabs>
+      </>
+    )
+  }
+}
+
+export default remindDemo;
+

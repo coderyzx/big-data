@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="12px" height="12px" viewBox="0 0 12 12" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 62 (91390) - https://sketch.com -->
+    <title>icon/12px/删除备份</title>
+    <desc>Created with Sketch.</desc>
+    <g id="icon/12px/删除备份" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="4.5" y1="4.5" x2="7.5" y2="7.5" id="路径-14" stroke="#F56C6C" stroke-width="0.5"></line>
+        <line x1="4.5" y1="7.5" x2="7.5" y2="4.5" id="路径-15" stroke="#F56C6C" stroke-width="0.5"></line>
+        <circle id="椭圆形" stroke="#F56C6C" stroke-width="0.5" cx="6" cy="6" r="4"></circle>
+    </g>
+</svg>

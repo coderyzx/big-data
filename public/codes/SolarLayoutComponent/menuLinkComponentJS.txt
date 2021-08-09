@@ -1,0 +1,34 @@
+import React, { Component } from 'react';
+import NavLink from 'umi/navlink'
+import styles from './index.less'
+
+class MenuLinkComponent extends Component {
+  static getDerivedStateFromProps(props) {
+    const { menus } = props;
+    return {
+      menus,
+    }
+  }
+
+  renderHeaderMenus = () => this.state.menus.map(item => (
+    <NavLink
+      key={item.path}
+      to={item.subMenus ? item.subMenus[0].path : item.path}
+      isActive={() => this.state.navMenu === item}
+      className={styles.navMenuItem}
+      activeClassName={styles.navMenuItemActive}
+    >
+      {item.name}
+    </NavLink>
+  ))
+
+  render() {
+    return (
+      <div className={styles.navMenus}>
+        {this.renderHeaderMenus()}
+      </div>
+    );
+  }
+}
+
+export default MenuLinkComponent;

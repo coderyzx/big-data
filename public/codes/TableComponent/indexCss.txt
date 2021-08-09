@@ -1,0 +1,169 @@
+
+@import '~@/theme/theme.less';
+
+.placeCenter {
+  justify-content: center;
+}
+
+.tableContainer {
+  position: relative;
+
+  .emptyTable {
+    text-align: center;
+    :global {
+      .ant-table-placeholder {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-bottom: none;
+      }
+    }
+  }
+
+  :global {
+    .react-resizable {
+      position: relative;
+      background-clip: padding-box;
+      border-right: 1px solid #e8e8e8;
+    }
+
+    .react-resizable-handle {
+      position: absolute;
+      width: 10px;
+      height: 100%;
+      bottom: 0;
+      right: -5px;
+      cursor: col-resize;
+      z-index: 1;
+    }
+
+    .ant-table-wrapper{
+      width: 100%;
+    }
+    // 添加表格边框样式
+    .ant-table {
+      border: 1px solid #e8e8e8;
+    }
+    .ant-table-small > .ant-table-content > .ant-table-body{
+      margin: 0;
+    }
+    // 去除展开图标的样式
+    .ant-table-expand-icon-th,
+    .ant-table-row-expand-icon-cell {
+      width: 0;
+    }
+    // 通过padding调整行高
+    .ant-table-thead > tr > th,
+    .ant-table-tbody > tr > td {
+      height: 40px;
+      padding: 8px 16px;
+    }
+    // 去除掉排序列的背景颜色
+    .ant-table-thead > tr > th.ant-table-column-sort {
+      background: #fafafa;
+    }
+    .ant-table-tbody > tr > td.ant-table-column-sort {
+      background: unset;
+    }
+
+    .ant-table-tbody > tr > td{
+      border-bottom: none;
+    }
+    // 添加奇数行背景颜色
+    // .ant-table-tbody > tr:not(.ant-table-expanded-row):nth-child(even){
+    //   background-color: #f6f8fb;
+    // }
+    // 行hover样式
+    .ant-table-tbody tr.ant-table-row:not(.isExpaned):hover > td,
+    .ant-table-tbody > tr:not(.isExpaned):hover.ant-table-row-selected > td.ant-table-column-sort {
+      background: #edf0ff;
+    }
+    .ant-table-tbody tr.ant-table-row.isExpaned:hover > td {
+      background: rgb(228, 230, 235);
+    }
+    // 去除选中列样式
+    .ant-table-tbody > tr.ant-table-row-selected:not(.isExpaned) td {
+      background: unset;
+    }
+    // 列表自带的分页样式------------------------------------------------------------------------------------------------------------------------
+    // 设置分页栏的位置
+    .ant-table-pagination.ant-pagination {
+      margin: 20px 0 40px 0;
+    }
+    // 设置分页栏按钮样式
+    .ant-pagination-prev,
+    .ant-pagination-next,
+    .ant-pagination-jump-prev,
+    .ant-pagination-jump-next,
+    .ant-pagination-item {
+      min-width: 30px;
+      height: 30px;
+    }
+    .ant-pagination-item-active {
+      background: @themeColor;
+      a {
+        color: @fontPrimaryColor;
+      }
+    }
+
+    // 与列表分离的分页样式------------------------------------------------------------------------------------------------------------------------
+    .ant-pagination {
+      margin: 20px 0 40px 0;
+      text-align: right;
+    }
+    .ant-pagination-options-size-changer.ant-select {
+      margin-right: 0px;
+    }
+    .ant-pagination-options-quick-jumper {
+      margin-left: 8px;
+    }
+
+
+    // 加载区域样式
+    .ant-spin-nested-loading > div > .ant-spin {
+      max-height: unset;
+    }
+    // 展开列样式
+    .ant-table-tbody >tr.ant-table-expanded-row {
+      background: rgb(228, 230, 235);
+      td {
+        text-align: center;
+        padding: 0;
+        border-bottom: 1px solid @expandedRowBorderColor !important;
+      }
+      .ant-spin {
+        margin-bottom: -1px;
+      }
+    }
+    .isExpaned > td,
+    tr.ant-table-row-selected.isExpaned > td,
+    .ant-table-tbody > tr.isExpaned > td.ant-table-column-sort {
+      background: rgb(228, 230, 235);
+      border-bottom: 1px solid @expandedRowBorderColor !important;
+    }
+  }
+
+  .filetypeIcon {
+    min-width: 20px;
+    margin-right: 10px;
+    flex: 0 0 20px;
+    font-size: 1.5em;
+    line-height: 24px;
+  }
+
+  .disabled {
+    pointer-events: none;
+  }
+
+  .documentName {
+    height: 24px;
+    cursor: pointer;
+    span {
+      vertical-align: bottom;
+    }
+    &:hover {
+      color: @themeColor;
+    }
+  }
+}
+

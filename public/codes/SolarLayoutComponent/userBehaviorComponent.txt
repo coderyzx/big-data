@@ -1,0 +1,25 @@
+import React from 'react
+import { LogoComponent } from '@/components/BasicHeaderComponents';
+
+const usercenter = [
+  {
+    title: '个人中心',
+    linkTo: '/gerenzhongxin',
+    component: <div>111</div>,
+  },
+  {
+    title: '消息',
+    linkTo: '/xiaoxi',
+    component: <div>111</div>,
+  },
+]
+
+export default class extends React.Component {
+  render () {
+    return (
+      <UserBehaviorComponent
+        usercenter={usercenter}
+      />
+    )
+  }
+}

@@ -1,0 +1,226 @@
+import React, { useState } from 'react';
+import LazyLoad from 'react-lazy-load';
+import { Tooltip } from 'antd';
+import vieoCover from '@/assets/videoCover.png'
+import playIcon from '@/assets/play.png'
+import { formatSeconds } from './formatSeconds.js'
+import styles from './index.less';
+
+export const datas = [
+  {
+    active: true,
+    auditStatus: '2',
+    clickNum: '74',
+    duration: '46.4427',
+    id: '42292105564243395651',
+    name: 'CT用户操作指南-GJYY',
+    nodeName: '高级应用-ct',
+    label: ['CT', '操作指南'],
+    desc: 'CT用户操作指南-GJYY',
+    ossCoverPcId: vieoCover,
+    ossFileId: vieoCover,
+    title: 'CT用户操作指南-GJYY',
+    uploadDatetime: '2020-05-28T16:56:21.000+0800',
+  },
+  {
+    active: true,
+    auditStatus: '2',
+    clickNum: '74',
+    duration: '46.4427',
+    id: '42292105564243395652',
+    name: 'CT用户操作指南-GJYY',
+    nodeName: '高级应用-ct',
+    label: ['CT', '操作指南'],
+    desc: 'CT用户操作指南-GJYY',
+    ossCoverPcId: vieoCover,
+    ossFileId: vieoCover,
+    title: 'CT用户操作指南-GJYY',
+    uploadDatetime: '2020-05-28T16:56:21.000+0800',
+  },
+  {
+    active: true,
+    auditStatus: '2',
+    clickNum: '74',
+    duration: '46.4427',
+    id: '42292105564243395653',
+    name: 'CT用户操作指南-GJYY',
+    nodeName: '高级应用-ct',
+    label: ['CT', '操作指南'],
+    desc: 'CT用户操作指南-GJYY',
+    ossCoverPcId: vieoCover,
+    ossFileId: vieoCover,
+    title: 'CT用户操作指南-GJYY',
+    uploadDatetime: '2020-05-28T16:56:21.000+0800',
+  },
+  {
+    active: true,
+    auditStatus: '2',
+    clickNum: '74',
+    duration: '46.4427',
+    id: '42292105564243395654',
+    name: 'CT用户操作指南-GJYY',
+    nodeName: '高级应用-ct',
+    label: ['CT', '操作指南'],
+    desc: 'CT用户操作指南-GJYY',
+    ossCoverPcId: vieoCover,
+    ossFileId: vieoCover,
+    title: 'CT用户操作指南-GJYY',
+    uploadDatetime: '2020-05-28T16:56:21.000+0800',
+  },
+  {
+    active: true,
+    auditStatus: '2',
+    clickNum: '74',
+    duration: '46.4427',
+    id: '42292105564243395655',
+    name: 'CT用户操作指南-GJYY',
+    nodeName: '高级应用-ct',
+    label: ['CT', '操作指南'],
+    desc: 'CT用户操作指南-GJYY',
+    ossCoverPcId: vieoCover,
+    ossFileId: vieoCover,
+    title: 'CT用户操作指南-GJYY',
+    uploadDatetime: '2020-05-28T16:56:21.000+0800',
+  },
+  {
+    active: true,
+    auditStatus: '2',
+    clickNum: '74',
+    duration: '46.4427',
+    id: '42292105564243395656',
+    name: 'CT用户操作指南-GJYY',
+    nodeName: '高级应用-ct',
+    label: ['CT', '操作指南'],
+    desc: 'CT用户操作指南-GJYY',
+    ossCoverPcId: vieoCover,
+    ossFileId: vieoCover,
+    title: 'CT用户操作指南-GJYY',
+    uploadDatetime: '2020-05-28T16:56:21.000+0800',
+  },
+  {
+    active: true,
+    auditStatus: '2',
+    clickNum: '74',
+    duration: '46.4427',
+    id: '42292105564243395657',
+    name: 'CT用户操作指南-GJYY',
+    nodeName: '高级应用-ct',
+    label: ['CT', '操作指南'],
+    desc: 'CT用户操作指南-GJYY',
+    ossCoverPcId: vieoCover,
+    ossFileId: vieoCover,
+    title: 'CT用户操作指南-GJYY',
+    uploadDatetime: '2020-05-28T16:56:21.000+0800',
+  },
+  {
+    active: true,
+    auditStatus: '2',
+    clickNum: '74',
+    duration: '46.4427',
+    id: '42292105564243395658',
+    name: 'CT用户操作指南-GJYY',
+    nodeName: '高级应用-ct',
+    label: ['CT', '操作指南'],
+    desc: 'CT用户操作指南-GJYY',
+    ossCoverPcId: vieoCover,
+    ossFileId: vieoCover,
+    title: 'CT用户操作指南-GJYY',
+    uploadDatetime: '2020-05-28T16:56:21.000+0800',
+  },
+]
+let timer = null;
+const RenderPop = ({
+  label = [],
+  ossCoverPcId, title, desc, show, duration = 1000,
+  }) => (
+    <div className={`${styles.popCardWrap} ${show ? styles.showPopCard : ''}`}>
+      <div className={styles.contentWrap}>
+        <div className={styles.img}>
+          <img src={ossCoverPcId || null} alt="" />
+        </div>
+        <div className={styles.infoConent}>
+          <div className={styles.title} title={title}>
+            {title}
+          </div>
+          <div className={styles.tags}>
+            <span className={styles.tagItem}>标签: </span>
+            <span className={styles.tagItem}>{label.join('、')}</span>
+          </div>
+          <Tooltip title={desc} placement="bottomLeft">
+            <div className={styles.summary}>简介：{desc}</div>
+          </Tooltip>
+          <div className={styles.moreAction}>
+            <div className={styles.time}>
+              <span className={styles.text}>
+                <img src={playIcon} alt={title} ></img>
+                {formatSeconds(duration)}
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+
+const UImageListDemo = ({ offsetTop = 0 }) => {
+  const [pop, setPop] = useState();
+
+  const storePop = (e, index) => {
+    e.preventDefault();
+    e.stopPropagation();
+    timer = setTimeout(() => {
+      setPop(index)
+    }, 1000)
+  }
+
+  const removePop = e => {
+    e.preventDefault();
+    e.stopPropagation();
+    clearTimeout(timer);
+    setPop();
+  }
+
+  const infoDetail = () => {
+      window.open('/', '_blank');
+  }
+  return (
+    <div className={styles.popularImageListWrap}>
+      <div className={ styles.imageListBox }>
+        {
+          datas.length > 0 && datas.map((item, index) => {
+            const { id, title, ossCoverPcId, nodeName } = item;
+            return (
+              <div
+                className={styles.item}
+                key={id}
+              >
+                <LazyLoad
+                  offsetTop={parseInt(offsetTop, 10)}
+                >
+                  <div
+                    onClick={() => infoDetail(id)}
+                    className={styles.imgA}
+                    style={{ backgroundImage: `url(${ossCoverPcId})` }}
+                    onMouseEnter={e => { storePop(e, index) }}
+                    onMouseLeave={e => { removePop(e) }}
+                  >
+                    <RenderPop
+                      {...item}
+                      show = {(pop === index)}
+                    />
+                  </div>
+                </LazyLoad>
+                <div className={styles.title} title={title} onClick={() => infoDetail(id)}>
+                  {title}
+                </div>
+                <span className={styles.secName}>{nodeName}</span>
+              </div>
+            )
+          })
+        }
+      </div>
+    </div>
+  )
+}
+
+export default UImageListDemo;

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="20px" height="24px" viewBox="0 0 20 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 62 (91390) - https://sketch.com -->
+    <title>icon/file/pdf备份</title>
+    <desc>Created with Sketch.</desc>
+    <g id="icon/file/pdf备份" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <path d="M2,0 L14.1715729,0 C14.7020059,3.01118551e-15 15.2107137,0.210713681 15.5857864,0.585786438 L19.4142136,4.41421356 C19.7892863,4.78928632 20,5.29799415 20,5.82842712 L20,22 C20,23.1045695 19.1045695,24 18,24 L2,24 C0.8954305,24 1.3527075e-16,23.1045695 0,22 L0,2 C-1.3527075e-16,0.8954305 0.8954305,2.02906125e-16 2,0 Z" id="矩形备份-2" fill="#2B33AE" opacity="0.15"></path>
+        <text id="html" font-family="RobotoCondensed-Bold, Roboto Condensed" font-size="10" font-style="condensed" font-weight="bold" fill="#2F38C0">
+            <tspan x="1" y="16">html</tspan>
+        </text>
+    </g>
+</svg>

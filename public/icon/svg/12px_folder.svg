@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>icon/12px/folder</title>
+    <g id="icon/12px/folder" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <path d="M9.38196601,5 C9.76073807,5 10.1070012,5.21400238 10.2763932,5.5527864 L10.5,6 L18,6 C18.5522847,6 19,6.44771525 19,7 L19,9 C19.5522847,9 20,9.44771525 20,10 L20,18 C20,18.5522847 19.5522847,19 19,19 L5,19 C4.44771525,19 4,18.5522847 4,18 L4,6 C4,5.44771525 4.44771525,5 5,5 L9.38196601,5 Z M9.38196601,6 L5,6 L5,18 L19,18 L19,10 L11.381966,10 L9.38196601,6 Z M12,9 L18,9 L18,7 L11,7 L12,9 Z" id="形状结合" fill="#5063C2"></path>
+    </g>
+</svg>

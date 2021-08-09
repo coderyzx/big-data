@@ -1,0 +1,180 @@
+import React, { Component } from 'react';
+import { Input } from 'antd';
+import HistoryList from '@/components/UHistorySearchDemo/HistoryList';
+import styles from '@/components/UHistorySearchDemo/index.less';
+
+const searchKey = 'handBook'; // 根据不同的页面设置不同的key值
+const userId = 2103120119191718001 // 在U课堂中，userID可以从props中解构出，这里暂时写死。
+let switchCount = -1; // 为实现默认不选中状态，这里的初始值不能为0
+
+class UHistorySearch extends Component {
+  setting = { // 历史搜索组件参数设置
+    maxLength: 38, // input 框输入字符最大长度
+    maxNum: 4, // 历史记录最大保存个数
+  }
+
+  constructor(props) {
+    super(props)
+    this.state = {
+      historyDatas: {
+        datas: [],
+      },
+      inputValue: '',
+    }
+  }
+
+  getSearchHistory = () => { // 获取历史搜索记录
+    const searchHistory = JSON.parse(localStorage.getItem(userId)) || {};
+    if (!searchHistory[searchKey]) {
+      searchHistory[searchKey] = [];
+    }
+    return searchHistory;
+  }
+
+  saveSearchHistory = str => { // 保存历史搜索记录
+    const curStr = str.trim();
+    if (userId && searchKey && curStr) {
+      const searchHistory = this.getSearchHistory();
+      if (searchHistory[searchKey].indexOf(curStr) > -1) {
+        searchHistory[searchKey] =
+        searchHistory[searchKey].filter(item => item !== curStr);
+      }
+      searchHistory[searchKey].unshift(curStr);
+      if (searchHistory[searchKey].length > this.setting.maxNum) {
+        searchHistory[searchKey].pop();
+      }
+      localStorage.setItem(userId, JSON.stringify(searchHistory));
+    }
+  }
+
+  queryKeyWord = val => {
+    // 保存搜索记录
+    this.saveSearchHistory(val);
+    // window.open(`https://www.baidu.com?k=${window.encodeURIComponent(val)}`); // 设置历史搜索记录的跳转路由，
+    this.hideHistory()
+  }
+
+  showHistory = () => { // 展示历史搜索记录列表
+    const history = this.getSearchHistory();
+    if (history && history[searchKey].length > 0) {
+      this.setState({
+        historyDatas: {
+          datas: history[searchKey].map(item => ({
+            id: item,
+            name: item,
+          })),
+        },
+      })
+    }
+    switchCount = -1;
+  };
+
+  clearHistory = () => { // 清除历史搜索记录
+    localStorage.removeItem(userId);
+  }
+
+  hideHistory = () => { // 隐藏历史搜索记录列表
+    this.setState({
+      historyDatas: {
+        datas: [],
+      },
+    })
+    switchCount = -1;
+  }
+
+  onFocus = () => {
+    clearTimeout(this.timer);
+    this.showHistory(); // Input框在获取焦点的时候，展示历史搜索记录框
+  }
+
+  onBlur = () => { // Input框在失去焦点的时候，展示历史搜索记录框
+    this.timer = setTimeout(() => {
+      this.hideHistory();
+    }, 200);
+  }
+
+  onChange = e => {
+    const val = e.target.value;
+    this.setState({ inputValue: val })
+    if (!val) {
+      clearTimeout(this.timer);
+      this.showHistory();
+    } else {
+      this.hideHistory();
+    }
+  }
+
+  inputKeydown= e => {
+    const { historyDatas: { datas } } = this.state;
+    switch (e.keyCode) {
+      case 40: // 若键盘输入为 ↓ 键
+        if (switchCount === datas.length - 1) { // 若已经遍历到了最后一个，则返回至第一个
+          switchCount = 0
+        } else {
+          switchCount += 1;
+        }
+        if (datas.length) {
+          this.setState({
+            inputValue: datas[switchCount].name,
+          })
+        }
+        break;
+      case 38: // 若键盘输入为 ↑ 键
+        e.preventDefault();
+        if (switchCount < 1) { // 若目前处于第一个，则跳转至最后一个
+          switchCount = datas.length - 1;
+        } else {
+          switchCount -= 1;
+        }
+        if (datas.length) {
+          this.setState({
+            inputValue: datas[switchCount].name,
+          })
+        }
+        break;
+      default: break;
+    }
+  }
+
+  updateChosenInfo = (index, name) => { // 修改选中信息，作为回调函数使用
+    this.setState({
+      inputValue: name,
+    })
+    switchCount = index;
+  }
+
+  render() {
+    const { historyDatas, inputValue } = this.state
+    const isShowHistroy = historyDatas.datas && historyDatas.datas.length > 0;
+
+    return (
+      <div className={styles.searchWrap}>
+        <Input
+          prefix={
+            <svg className={styles.iconFont} aria-hidden="true"><use xlinkHref="#icon16px_search"></use></svg>
+          }
+          allowClear
+          maxLength={this.setting.maxLength}
+          onChange={e => { this.onChange(e) }}
+          onBlur={e => { this.onBlur(e) }}
+          onFocus={e => { this.onFocus(e) }}
+          onPressEnter={() => { this.queryKeyWord(inputValue) }}
+          autoComplete = "off"
+          onKeyDown = {this.inputKeydown}
+          value = {inputValue}
+        />
+        <div className={`${styles.searchPop} ${isShowHistroy && styles.showSearchPop}`}>
+          <HistoryList
+            clickFuc={this.queryKeyWord}
+            clearHistory={this.clearHistory}
+            {...historyDatas}
+            switchCount={switchCount}
+            updateChosenInfo = {this.updateChosenInfo}
+          />
+        </div>
+      </div>
+    );
+  }
+}
+
+export default UHistorySearch;

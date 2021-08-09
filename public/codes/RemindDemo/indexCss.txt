@@ -1,0 +1,45 @@
+
+.remind {
+  display: flex;
+  justify-content: center;
+}
+
+.remindImg {
+  width: 300px;
+  height: 300px;
+  margin-right: 110px;
+}
+
+.remindTxt {
+  font-family: MicrosoftYaHei-Bold;
+  font-size: 60px;
+  font-weight: 700;
+  color: #3D404D;
+  line-height: 70px;
+}
+
+.remindState {
+  color: var(--theme-color);
+  font-weight: 700;
+}
+
+.remindInfo {
+  width: 350px;
+  margin: 20px 0 47px;
+  font-family: MicrosoftYaHei;
+  font-size: 18px;
+  color: #9298B3;
+  line-height: 30px;
+}
+
+.refresh {
+  width: 150px;
+  line-height: 1!important;
+  span {
+    font-family: PingFangSC-Regular;
+    font-size: 14px;
+    color: #FFFFFF;
+    text-align: center;
+    letter-spacing: 1px;
+  }
+}

@@ -1,0 +1,18 @@
+.selectDemo {
+  :global {
+    .ant-select-selection__placeholder, .ant-select-search__field__placeholder {
+      color: #B3B6C7;
+    }
+  }
+}
+.selectDropDown {
+  .selectOption {
+    height: 40px;
+    line-height: 40px!important;
+    padding: 0 12px!important;
+    &:first-child {
+      margin-top: 5px;
+    }
+  }
+
+}

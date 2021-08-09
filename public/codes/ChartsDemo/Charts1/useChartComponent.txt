@@ -1,0 +1,9 @@
+<Chart1 innerCircle="45%" outerCircle="65%" style={{ width: '500px', height: '350px' }} title="环形数据显示" subtitle="xxx总数" chart1Data={chart1Data} />
+
+export const chart1Data = [
+  { name: '反馈', value: 10, firstC: '#256CFA', secondC: '#359AFF' },
+  { name: '通用组件', value: 3, firstC: '#5842FF', secondC: '#736CFF' },
+  { name: '导航组件', value: 7, firstC: '#F5902A', secondC: '#FFC543' },
+  { name: '数据录入', value: 17, firstC: '#4EC86E', secondC: '#6BC594' },
+  { name: '数据展示', value: 18, firstC: '#F7564B', secondC: '#FF7E53' },
+]

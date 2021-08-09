@@ -1,0 +1,45 @@
+import React from 'react';
+import Uploader from '@/components/Uploader';
+
+
+class UploaderDemo extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      isShowModal: false,
+    }
+  }
+
+  handleDrag = () => {
+    this.setState({
+      isShowModal: true,
+    })
+  }
+
+  modalCancel = () => {
+   this.setState({
+     isShowModal: false,
+   })
+  }
+
+  confirmDelete = () => {
+    this.setState({
+      isShowModal: false,
+    })
+  }
+
+
+  render() {
+    const { isShowModal } = this.state
+    return (
+      <>
+          上传图片功能:<div className={styles.showInput}>
+            <Uploader clickFnc={() => this.handleDrag()}
+            isShowModal={isShowModal}
+            modalCancel={() => { this.modalCancel() }}
+            confirmDelete={ () => { this.confirmDelete() }}></Uploader>
+          </div>
+      </>
+    )
+  }
+}

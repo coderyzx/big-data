@@ -1,0 +1,83 @@
+import React from 'react';
+import { Tabs } from 'antd'
+import UTable from '@/components/TableComponent'
+import CodeBoard from '@/components/CodeBoard';
+import ApiTable from '@/components/ApiTable';
+import { columnsConfig, apiData } from './config.js';
+
+const { TabPane } = Tabs;
+
+const data = [
+  { key: 0, date: '2018-01-01', amount: 67, type: 0, note: 3 },
+  { key: 1, date: '2018-01-01', amount: 67, type: 0, note: 3 },
+  { key: 2, date: '2018-01-01', amount: 67, type: 0, note: 3 },
+  { key: 3, date: '2018-01-01', amount: 67, type: 0, note: 3 },
+  { key: 4, date: '2018-01-01', amount: 67, type: 0, note: 3 },
+  { key: 5, date: '2018-01-01', amount: 67, type: 0, note: 3 },
+  { key: 6, date: '2018-01-01', amount: 67, type: 0, note: 3 },
+  { key: 7, date: '2018-01-01', amount: 67, type: 0, note: 3 },
+  { key: 8, date: '2018-01-01', amount: 67, type: 0, note: 3 },
+  { key: 9, date: '2018-01-01', amount: 67, type: 0, note: 3 },
+  { key: 10, date: '2018-01-01', amount: 67, type: 0, note: 3 },
+  { key: 11, date: '2018-01-01', amount: 67, type: 0, note: 3 },
+  { key: 12, date: '2018-01-01', amount: 67, type: 0, note: 3 },
+  { key: 13, date: '2018-01-01', amount: 67, type: 0, note: 3 },
+  { key: 14, date: '2018-01-01', amount: 67, type: 0, note: 3 },
+]
+
+class TableDemo extends React.Component {
+  state = {
+    tabKey: '',
+  }
+
+  codeDatas = [
+    {
+      path: '/codes/TableComponent/indexJs.txt',
+      title: 'JS - IndexCode',
+    },
+    {
+      path: '/codes/TableComponent/indexCss.txt',
+      title: 'CSS - IndexCode',
+    },
+    {
+      path: '/codes/TableComponent/useToastComponent.txt',
+      title: '使用的方法',
+    },
+  ]
+
+  handleChange = key => {
+    this.setState({
+      tabKey: key,
+    })
+  }
+
+  render() {
+    const props = {
+      pagination: {
+        showSizeChanger: true,
+        pageSize: 10,
+        showQuickJumper: true,
+      },
+      dataSource: data,
+      columns: columnsConfig,
+    }
+    const { tabKey } = this.state;
+    return (
+      <>
+        <CodeBoard datas={this.codeDatas}>
+          <Tabs onChange={this.handleChange} type="card" activeKey={tabKey}>
+            <TabPane tab="头部可调节" key="1">
+              <UTable useResize actionComponent={[{ type: 'plus-circle', onclick: () => alert(1111) }]} {...props} />
+            </TabPane>
+            <TabPane tab="列可交换" key="2">
+              <UTable useDrag {...props} />
+            </TabPane>
+          </Tabs>
+        </CodeBoard>
+        <ApiTable data={apiData} />
+      </>
+    )
+  }
+}
+
+export default TableDemo;

@@ -1,0 +1,48 @@
+import React from 'react'
+import { Button } from 'antd'
+
+import DeviceArchive from '@/components/DeviceArchive';
+
+
+class CustomFormDemo extends React.Component {
+
+  constructor(props) {
+    super(props)
+    this.state = {
+      visibal: false,
+    }
+  }
+
+  showModal=() => {
+    this.setState({
+      visibal: true,
+    })
+  }
+
+  onSubmit=() => {
+    this.setState({
+      visibal: false,
+    })
+  }
+
+  onDrawerClose=() => {
+    this.setState({
+      visibal: false,
+    })
+  }
+
+  render() {
+    const { visibal } = this.state
+    return (
+      <>
+          <Button type="primary" onClick={this.showModal}>show CustomForm</Button>
+          <div className={styles.showInput}>
+            <DeviceArchive onSubmit={this.onSubmit} visibal={visibal}
+            onDrawerClose={this.onDrawerClose}></DeviceArchive>
+          </div>
+      </>
+    )
+  }
+}
+
+export default CustomFormDemo;

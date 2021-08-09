@@ -1,0 +1,93 @@
+.archiveDrawerWrapper {
+
+  :global {
+    .ant-form-item {
+      margin-bottom: 6px;
+    }
+
+    .ant-input[disabled] {
+      color: #9298B3;
+    }
+
+    .ant-drawer-close {
+      background: #FAFAFB;
+      border-radius: 4px 0 0 4px;
+      width: 35px;
+      height: 40px;
+      line-height: 40px;
+      top: 15px;
+    }
+  }
+
+  .customTabsStyle {
+    height: 100%;
+    :global {
+      .ant-tabs-nav .ant-tabs-tab {
+        padding: 23px 0;
+        font-size: 16px;
+        font-weight: bold;
+        margin: 0 38px 0 0;
+        height: 70px;
+        flex: 0 0 70px;
+      }
+
+      .ant-tabs-nav .ant-tabs-tab:last-child {
+        margin-right: 0;
+      }
+
+      .ant-tabs-bar {
+        margin: 0 20px;
+      }
+
+      .ant-tabs-ink-bar {
+        height: 4px;
+        border-radius: 2px;
+      }
+
+      .ant-tabs-top-content {
+        height: calc(100% - 70px);
+        flex: 1;
+      }
+    }
+
+    .switch {
+      padding: 15px 40px;
+      text-align: right;
+      .switchText {
+        font-size: 14px;
+        margin-right: 10px;
+        vertical-align: middle;
+      }
+    }
+
+    .customTabsTabpane {
+      padding: 0;
+      overflow: auto;
+      height: 100%;
+    }
+
+    .centerFormContainer {
+      flex: 1;
+      overflow-y: auto;
+      overflow-x: hidden;
+      padding: 0 160px;
+      :global {.ant-form {
+           width: 100%;
+        }
+      }
+    }
+
+    .commonBottomContainer {
+      height: 92px;
+      padding: 20px 40px 40px;
+      text-align: right;
+      .commonBottomBtn {
+
+        width: 100px;
+        &:nth-child(n + 2) {
+          margin-left: 20px;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,304 @@
+import React from 'react'
+import { Table } from 'antd';
+
+import tableWrapper from './TableWrapper';
+import withDragColumn from './DragColumn';
+
+const WithResizeable = tableWrapper(Table);
+const HeaderResizeDragTable = withDragColumn(tableWrapper(Table));
+const HeaderDragTable = withDragColumn(Table);
+
+const UTable = props => {
+  const { useResize, useDrag, ...rest } = props;
+  if (useResize && useDrag) {
+    return <HeaderResizeDragTable {...rest} />
+  }
+  if (useResize) {
+    return <WithResizeable {...rest} />
+  }
+  if (useDrag) {
+    return <HeaderDragTable {...rest} />
+  }
+  return <Table {...rest} />
+}
+
+export default UTable;
+
+/* -------------------TableWrapper-------------------------- */
+
+import React from 'react'
+import { Icon } from 'antd'
+import { throttle } from 'lodash';
+import { Resizable } from 'react-resizable';
+
+import styles from '../index.less'
+
+const ResizeableTitle = props => {
+  const { onResize, width, ...restProps } = props;
+
+  if (!width) {
+    return <th {...restProps} />;
+  }
+
+  return (
+    <Resizable
+      width={width}
+      height={0}
+      onResize={onResize}
+      draggableOpts={{ enableUserSelectHack: false }}
+    >
+      <th {...restProps} />
+    </Resizable>
+  );
+};
+
+const tableWrapper = WrappedComponent =>
+  class extends React.PureComponent {
+    state = {
+      columns: null,
+      prevColumns: null,
+    }
+
+    components = {
+      header: {
+        cell: ResizeableTitle,
+      },
+    };
+
+    // 获取传入的columns
+    static getDerivedStateFromProps(props, state) {
+      if (props.columns && props.columns !== state.prevColumns) {
+        let columns = [...props.columns]
+        if (state.columns && state.columns.length > 0) {
+          columns = columns.map((col, index) => {
+            if (index < state.columns.length) {
+              return { ...col, width: state.columns[index].width }
+            }
+            return col
+          });
+        }
+        return {
+          columns,
+          prevColumns: columns,
+        }
+      }
+      return null;
+    }
+
+    componentDidMount() {
+      const handlers = document.querySelectorAll('.react-resizable .react-resizable-handle');
+      handlers.forEach(handler =>
+        handler.addEventListener('click', () => false),
+      );
+    }
+
+    handleResize = index => throttle((e, { size }) => {
+      e.stopImmediatePropagation();
+      e.preventDefault();
+      this.setState(({ columns }) => {
+        const nextColumns = [...columns];
+        nextColumns[index] = {
+          ...nextColumns[index],
+          width: size.width,
+        };
+        return { columns: nextColumns };
+      });
+    }, 50);
+
+    getActionComponent = () => {
+      const { actionComponent } = this.props;
+      const result = actionComponent.every(item => typeof item.type === 'string' && Object.prototype.toString.call(item.onclick) === '[object Function]')
+      if (result) {
+        return {
+          title: 'Action',
+          dataIndex: 'action',
+          render: () => (
+            <>
+              {
+                actionComponent.map(item => (
+                  <Icon key={item.type} type={item.type} onClick={item.onclick} />
+                ))
+              }
+            </>
+          ),
+        }
+      }
+      return null;
+    }
+
+    render() {
+      const { columns } = this.state;
+      const actionColumn = this.getActionComponent()
+      let totalColumns = actionColumn ? [...columns, actionColumn] : columns;
+      totalColumns = totalColumns.map((col, index) => ({
+        ...col,
+        onHeaderCell: column => ({
+          width: column.width,
+          onResize: this.handleResize(index),
+        }),
+      }));
+      return (
+        <div className={styles.tableContainer}>
+          <WrappedComponent
+            {...this.props}
+            components={this.components}
+            columns={totalColumns}
+          />
+        </div>
+      )
+    }
+  }
+
+export default tableWrapper;
+
+/* ----------------------DragColumn------------------------- */
+
+import React from 'react';
+
+import styles from '../index.less'
+
+const withResizableHeader = WrappedComponent =>
+  class extends React.PureComponent {
+    state = {
+      columns: null,
+      prevColumns: null,
+    }
+
+    // 获取传入的columns
+    static getDerivedStateFromProps(props, state) {
+      if (props.columns && props.columns !== state.prevColumns) {
+        const columns = [...props.columns]
+        if (state.columns && state.columns.length > 0) {
+          return columns;
+        }
+        return {
+          columns,
+          prevColumns: columns,
+        }
+      }
+      return null;
+    }
+
+    onMouseDown = e => {
+      e.preventDefault();
+      e.stopPropagation();
+      this.startTime = e.timeStamp;
+      // 如果不是通过resize触发此次事件
+      if (
+        e.target.className.indexOf('react-resizable-handle react-resizable-handle-se') === -1
+      ) {
+        this.headerText = e.target.innerText.trim();
+        let headerRow = e.target;
+        let header = e.target;
+        while (headerRow.nodeName !== 'TR') {
+          headerRow = headerRow.parentNode;
+        }
+        while (header.nodeName !== 'TH') {
+          header = header.parentNode;
+        }
+        this.allHeaders = [];
+        const { children = [] } = headerRow;
+        this.allHeaders = children;
+        // 如果不是最后一栏或者选项栏，最后一栏通常为操作栏，不允许拖拽
+        if (
+          this.headerText !== children[children.length - 1].innerText.trim()
+          && header.className.indexOf('ant-table-expand-icon-th') === -1
+          && header.className.indexOf('ant-table-selection-column') === -1
+        ) {
+          header.style.background = '#f2f2f2';
+          for (let i = 0; i < this.allHeaders.length - 1; i += 1) {
+            if (
+              this.allHeaders[i].className.indexOf('ant-table-row-cell-break-word') !== -1
+              && this.allHeaders[i].className.indexOf('ant-table-expand-icon-th') === -1
+              && this.allHeaders[i].className.indexOf('ant-table-selection-column') === -1
+            ) {
+              const that = this;
+              this.allHeaders[i].onmouseover = function mouseover() {
+                for (let j = 0; j < that.allHeaders.length; j += 1) {
+                  that.allHeaders[j].style.background = '';
+                  that.allHeaders[j].style.opacity = 1;
+                }
+                this.style.opacity = 0.5;
+                header.style.opacity = 1;
+                header.style.background = '#f2f2f2';
+              }
+              // this.th[i].onmouseout = function mouseout() {
+              //   this.style.background = '';
+              // }
+            }
+          }
+        }
+      }
+    }
+
+    onMouseUp = e => {
+      e.stopPropagation();
+      e.preventDefault();
+      if (this.startTime) {
+        const diffTime = e.timeStamp - this.startTime
+        if (diffTime < 150) {
+          this.canChange = true;
+        } // 小于150就执行单击操作
+        this.startTime = 0
+      }
+      if (
+        e.target.innerText.trim()
+        && e.target.className.indexOf('react-resizable-handle react-resizable-handle-se') === -1
+        && this.headerText
+        && this.headerText !== this.allHeaders[this.allHeaders.length - 1].innerText.trim()
+        && e.target.innerText.trim()
+        !== this.allHeaders[this.allHeaders.length - 1].innerText.trim()
+      ) {
+        // 重置事件和属性
+        for (let i = 0; i < this.allHeaders.length; i += 1) {
+          this.allHeaders[i].onmouseover = null;
+          this.allHeaders[i].onmouseout = null;
+          this.allHeaders[i].style.background = '';
+          this.allHeaders[i].style.opacity = '1';
+        }
+        this.resetTableColumns(this.headerText, e.target.innerText.trim());
+      }
+    }
+
+    resetTableColumns = (oldNode, targetNode) => {
+      const { columns } = this.state;
+      const result = [];
+      let oldIndex = null;
+      let targetIndex = null;
+      let tmp = null;
+      for (let i = 0; i < columns.length; i += 1) {
+        result[i] = columns[i];
+        if (columns[i].title === oldNode) {
+          oldIndex = i;
+        }
+        if (columns[i].title === targetNode) {
+          targetIndex = i;
+        }
+      }
+      tmp = result[targetIndex];
+      result[targetIndex] = result[oldIndex];
+      result[oldIndex] = tmp;
+      this.headerText = null;
+      this.th = [];
+      this.setState({
+        columns: result,
+      })
+    }
+
+    render() {
+      return (
+        <div className={styles.tableContainer}>
+          <WrappedComponent
+            {...this.props}
+            columns={this.state.columns}
+            onHeaderRow={column => ({
+              onMouseDown: e => { this.onMouseDown(e, column) },
+              onMouseUp: e => { this.onMouseUp(e, column) },
+            })}
+          />
+        </div>
+      )
+    }
+  }
+
+export default withResizableHeader;

@@ -1,0 +1,14 @@
+import React, { Component } from 'react'
+import UHistorySearch from '@/components/UHistorySearchDemo';
+
+class UHistorySearchDemo extends Component {
+  render() {
+    return (
+      <>
+        <UHistorySearch />
+      </>
+    )
+  }
+}
+
+export default UHistorySearchDemo

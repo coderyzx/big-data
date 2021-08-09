@@ -1,0 +1,103 @@
+@color: #eee;
+.mainContent {
+  margin: 0 auto;
+  text-align: center;
+  .topContent {
+    height: 500px;
+    border: 1px solid red;
+    margin-bottom: 25px;
+    line-height: 500px;
+  }
+  .contentIndexWrap {
+    div {
+      height: 188px;
+      margin-bottom: 26px;
+      border: 1px solid black;
+      line-height: 188px;
+    }
+  }
+  .elevatorWrap {
+    :global(.ant-anchor) {
+      padding: 0;
+      z-index: 10;
+      top: 180px;
+      right: 100px;
+      position: fixed;
+      width: 54px;
+      background: #F0F2FF;
+      border-radius: 8px;
+      :global(.ant-anchor-ink) {
+        display: none;
+      }
+      :global(.ant-anchor-link-active) {
+        a {
+          color: #fff;
+          border: none !important;
+        }
+        background-image: linear-gradient(135deg, #4d97ff 0%,#3f5fff 100% );
+      }
+      :global(.ant-anchor-link-title-active) {
+        border: none !important;
+      }
+      :global(.ant-anchor-link:nth-child(2)) {
+        border-radius: 8px 8px 0 0;
+      }
+      :global(.ant-anchor-link:last-child a) {
+        border-bottom: none;
+      }
+      :global(.ant-anchor-link:hover) {
+        span {
+          display: block;
+        }
+      }
+      :global(.ant-anchor-link) {
+        position: relative;
+        padding: 0px 3px;
+        line-height: 24px;
+        text-align: center;
+        cursor: pointer;
+        word-wrap:break-word;
+        word-break:break-all;
+        a {
+          margin: 0 auto;
+          width: 80%;
+          padding: 18px 0px;
+          text-overflow: none;
+          border-bottom: 1px solid #ccc;
+          white-space: normal;
+        }
+        span {
+          display: none;
+          position: absolute;
+          width: 120px;
+          padding: 4px;
+          bottom: 20px;
+          left: -132px;
+          background: rgba(0,0,0,0.80);
+          border-radius: 2px;
+          color: #fff;
+          i {
+            position: absolute;
+            width: 0;
+            height: 0;
+            top: 8px;
+            right: -16px;
+            border-top: 8px solid transparent;
+            border-right: 8px solid transparent;
+            border-bottom: 8px solid transparent;
+            border-left: 8px solid rgba(0,0,0,0.80);
+          }
+        }
+      }
+    }
+    .active {
+      a {
+        color: #fff;
+      }
+      background-image: linear-gradient(135deg, #4d97ff 0%,#3f5fff 100% );
+    }
+    .item {
+      color: @color;
+    }
+  }
+}

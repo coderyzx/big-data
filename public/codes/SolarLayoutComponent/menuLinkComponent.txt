@@ -1,0 +1,35 @@
+import React from 'react
+import { LogoComponent } from '@/components/BasicHeaderComponents';
+
+const menus = [
+  {
+    path: '/Components/Wellcome',
+    name: '首页',
+  },
+  {
+    path: '/Components/Wellcome',
+    name: '首页',
+  },
+  {
+    path: '/Components/Wellcome',
+    name: '首页',
+  },
+  {
+    path: '/Components/Wellcome',
+    name: '首页',
+  },
+  {
+    path: '/Components/Wellcome',
+    name: '首页',
+  },
+]
+
+export default class extends React.Component {
+  render () {
+    return (
+      <MenuLinkComponent
+        menus={menus}
+      />
+    )
+  }
+}

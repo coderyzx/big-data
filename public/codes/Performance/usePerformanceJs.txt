@@ -1,0 +1,18 @@
+import performanceFn from '@/utils/performance';
+
+class HomeLayout extends React.Component {
+  componentDidMount () {
+    console.log(performanceFn());
+  }
+
+  render() {
+    const { children } = this.props;
+    return (
+      <>
+        {children}
+      </>
+    )
+  }
+}
+
+export defualt HomeLayout;

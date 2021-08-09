@@ -1,0 +1,29 @@
+import React, { Component } from 'react';
+import { Tooltip } from 'antd';
+
+import styles from './index.less'
+
+class UserBehaviorComponent extends Component {
+  gotoLink = link => {
+    window.open(link)
+  }
+
+  render() {
+    const { usercenter } = this.props;
+    return (
+      <div className={styles.rightMenus}>
+        {
+          usercenter.map(item => (
+            <Tooltip key={item.title} placement="bottom" title={item.title}>
+              <div className={styles.commonImgIcon} onClick={() => this.gotoLink(item.linkTo)}>
+                {item.component}
+              </div>
+            </Tooltip>
+          ))
+        }
+      </div>
+    );
+  }
+}
+
+export default UserBehaviorComponent;

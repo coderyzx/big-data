@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="32px" height="32px" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 62 (91390) - https://sketch.com -->
+    <title>icon/32px/home</title>
+    <desc>Created with Sketch.</desc>
+    <g id="icon/32px/home" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <path d="M17.2664756,7.03620729 L26.2664756,14.3998437 C26.7307464,14.7797016 27,15.347892 27,15.9477583 L27,24 C27,25.1045695 26.1045695,26 25,26 L7,26 C5.8954305,26 5,25.1045695 5,24 L5,15.9477583 C5,15.347892 5.26925355,14.7797016 5.73352442,14.3998437 L14.7335244,7.03620729 C15.4702562,6.43342676 16.5297438,6.43342676 17.2664756,7.03620729 Z M16,8.58412189 L7,15.9477583 L7,24 L25,24 L25,15.9477583 L16,8.58412189 Z M20,20 C20.5522847,20 21,20.4477153 21,21 C21,21.5522847 20.5522847,22 20,22 L12,22 C11.4477153,22 11,21.5522847 11,21 C11,20.4477153 11.4477153,20 12,20 L20,20 Z" id="Combined-Shape" fill="#5063C2" fill-rule="nonzero"></path>
+    </g>
+</svg>

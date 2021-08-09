@@ -1,0 +1,23 @@
+import React from 'react';
+import TreeSelect from '@/components/TreeSelect';
+import styles from './index.less';
+
+class TreeSelectDemo extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+    };
+  }
+
+  render() {
+    return (
+      <>
+          树型控件：<div className={styles.showInput}>
+            <TreeSelect></TreeSelect>
+          </div>
+      </>
+    )
+  }
+}
+
+export default TreeSelectDemo;

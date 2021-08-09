@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="100px" height="87px" viewBox="0 0 100 87" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 62 (91390) - https://sketch.com -->
+    <title>icon/ct-产品使用</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="linearGradient-1">
+            <stop stop-color="#FF5B4C" stop-opacity="0.15" offset="0%"></stop>
+            <stop stop-color="#FF5B4C" stop-opacity="0.299228638" offset="26.0517713%"></stop>
+            <stop stop-color="#FF5B4C" stop-opacity="0.412265473" offset="48.4643183%"></stop>
+            <stop stop-color="#FF5040" stop-opacity="0.7" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="linearGradient-2">
+            <stop stop-color="#4B61FA" offset="0%"></stop>
+            <stop stop-color="#4A60F7" stop-opacity="0.15" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="linearGradient-3">
+            <stop stop-color="#FFFFFF" offset="0%"></stop>
+            <stop stop-color="#FFFFFF" stop-opacity="0.500600962" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="linearGradient-4">
+            <stop stop-color="#FFFFFF" stop-opacity="0.404392483" offset="0%"></stop>
+            <stop stop-color="#FFFFFF" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="linearGradient-5">
+            <stop stop-color="#FFFFFF" stop-opacity="0.4" offset="0%"></stop>
+            <stop stop-color="#FFFFFF" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="linearGradient-6">
+            <stop stop-color="#FFFFFF" stop-opacity="0.4" offset="0%"></stop>
+            <stop stop-color="#FFFFFF" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="icon/ct-产品使用" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="编组-3">
+            <rect id="矩形备份-3" stroke="#E6E9F5" fill="#FFFFFF" opacity="0" x="0.5" y="0.5" width="99" height="86" rx="2"></rect>
+            <g id="编组" transform="translate(31.000000, 20.000000)">
+                <path d="M38,22 L38,32 L0,32 L0,22 C-3.70527908e-16,18.97441 2.23946706,16.4718756 5.1512273,16.0595706 C6.14661741,22.8152643 11.9678287,28 19,28 C26.0321713,28 31.8533826,22.8152643 32.8495211,16.0599057 C35.7605329,16.4718756 38,18.97441 38,22 Z" id="形状结合" fill="url(#linearGradient-1)"></path>
+                <circle id="椭圆形" fill="url(#linearGradient-2)" cx="19" cy="14" r="14"></circle>
+                <circle id="椭圆形" fill="url(#linearGradient-3)" cx="19" cy="14" r="7"></circle>
+                <rect id="矩形" fill="url(#linearGradient-4)" x="15" y="14" width="8" height="16"></rect>
+                <rect id="矩形" fill="url(#linearGradient-5)" x="15" y="14" width="8" height="3"></rect>
+                <rect id="矩形备份" fill="url(#linearGradient-6)" x="15" y="28" width="8" height="4"></rect>
+            </g>
+        </g>
+    </g>
+</svg>

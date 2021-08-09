@@ -1,0 +1,27 @@
+.input {
+  font-family: MicrosoftYaHei;
+  font-size: 14px;
+  color: #1F2127;
+  margin-top: 10px;
+  :global {
+    .anticon {
+      color: #B3B6C7;
+    }
+    .ant-input {
+      line-height: 32px;
+    }
+  }
+  input::-webkit-input-placeholder {
+    color: #B3B6C7;
+  }
+  input:-moz-placeholder {
+    color: #B3B6C7;
+  }
+  input::-moz-placeholder {
+    color: #B3B6C7;
+    opacity:  1;
+  }
+  input:-ms-input-placeholder {
+    color: #B3B6C7;
+  }
+}

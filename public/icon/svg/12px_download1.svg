@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="12px" height="12px" viewBox="0 0 12 12" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 62 (91390) - https://sketch.com -->
+    <title>icon/12px/download备份</title>
+    <desc>Created with Sketch.</desc>
+    <g id="icon/12px/download备份" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round">
+        <polyline id="路径-8" stroke="#5C6280" stroke-width="0.5" stroke-linejoin="round" points="6 2 6 7 8.5 4.5"></polyline>
+        <line x1="6" y1="7" x2="3.5" y2="4.5" id="路径-9" stroke="#5C6280" stroke-width="0.5" stroke-linejoin="round"></line>
+        <path d="M2,8 L2,8.5 C2,8.77614237 2.22385763,9 2.5,9 L9.5,9 C9.77614237,9 10,8.77614237 10,8.5 L10,8 L10,8" id="路径-10" stroke="#5C6280" stroke-width="0.5"></path>
+    </g>
+</svg>

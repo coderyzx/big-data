@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 62 (91390) - https://sketch.com -->
+    <title>icon/24px/home备份</title>
+    <desc>Created with Sketch.</desc>
+    <g id="icon/24px/home备份" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g>
+            <g id="编组-9">
+                <rect id="矩形" x="0" y="0" width="24" height="24"></rect>
+            </g>
+            <path d="M5,11 L3.5527864,11.7236068 C3.21400238,11.8929988 3,12.2392619 3,12.618034 L3,19 C3,19.5522847 3.44771525,20 4,20 L20,20 C20.5522847,20 21,19.5522847 21,19 L21,12.618034 C21,12.2392619 20.7859976,11.8929988 20.4472136,11.7236068 L19,11 L19,11 L5,11 Z" id="路径-3" stroke="#5C6280" fill="#FFFFFF" stroke-linecap="round" stroke-linejoin="round"></path>
+            <circle id="椭圆形" stroke="#FFFFFF" stroke-width="2" fill="#5063C2" stroke-linecap="round" stroke-linejoin="round" cx="12" cy="11" r="7"></circle>
+            <circle id="椭圆形" stroke="#5C6280" fill="#FFFFFF" stroke-linecap="round" stroke-linejoin="round" cx="12" cy="11" r="7"></circle>
+            <circle id="椭圆形" stroke="#5C6280" stroke-linecap="round" stroke-linejoin="round" cx="12" cy="11" r="3"></circle>
+            <rect id="矩形" fill="#FFFFFF" x="12" y="10" width="10" height="12" rx="0.4"></rect>
+            <line x1="14.8978678" y1="13.4412435" x2="19.1346842" y2="13.4412435" id="路径-8" stroke="#5C6280" stroke-linecap="round"></line>
+            <line x1="14.8978678" y1="16" x2="19.1346842" y2="16" id="路径-8" stroke="#5C6280" stroke-linecap="round"></line>
+            <line x1="14.8978678" y1="18.5587565" x2="19.1346842" y2="18.5587565" id="路径-8" stroke="#5C6280" stroke-linecap="round"></line>
+        </g>
+    </g>
+</svg>

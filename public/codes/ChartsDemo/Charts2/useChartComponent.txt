@@ -1,0 +1,21 @@
+<div style={{ position: 'relative', width: '100%', height: '500px' }}>
+  <Chart2
+    title="中国地图呀呀呀呀呀呀"
+    provinceMap={provinceMap}
+    updateProvinceName={this.updateProvinceName}
+    actionRef={this.actionRef}
+  />
+  <Button style={{ position: 'absolute', left: 10, top: 100 }} type="default" onClick={this.resetMap}>重置大小</Button>
+</div>
+
+-------------------
+
+actionRef = React.createRef();
+
+resetMap = () => {
+  this.actionRef.current.resetMap()
+}
+
+updateProvinceName = provinceName => {
+  message.info(provinceName)
+}

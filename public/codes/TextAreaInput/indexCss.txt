@@ -1,0 +1,25 @@
+.textArea {
+  position: relative;
+  width: 500px;
+  .maxLength {
+    position: absolute;
+    right: 10px;
+    bottom: 7px;
+    font-family: MicrosoftYaHei;
+    font-size: 12px;
+    color: #B3B6C7;
+  }
+  textArea::-webkit-input-placeholder {
+    color: #B3B6C7;
+  }
+  textArea:-moz-placeholder {
+    color: #B3B6C7;
+  }
+  textArea::-moz-placeholder {
+    color: #B3B6C7;
+    opacity:  1;
+  }
+  textArea:-ms-input-placeholder {
+    color: #B3B6C7;
+  }
+}

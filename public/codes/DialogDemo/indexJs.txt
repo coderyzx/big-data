@@ -1,0 +1,72 @@
+import React from 'react';
+import { Button, Modal } from 'antd';
+import classNames from 'classnames';
+import warningSvg from '@/assets/warning.svg';
+import exportSvg from '@/assets/export.svg';
+import deleteSvg from '@/assets/delete.svg';
+import styles from './index.less';
+
+class Dialog extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      title: '提示',
+      cancelText: '不保存',
+      okText: '保存',
+    };
+  }
+
+  iconSvg = () => {
+    const { type } = this.props;
+    switch (type) {
+      case 'warning':
+        return warningSvg;
+      case 'export':
+        return exportSvg;
+      case 'delete':
+        return deleteSvg;
+      default:
+        return warningSvg;
+    }
+  }
+
+  content = () => (
+    <>
+      {this.props.iconHtml || <img src={this.iconSvg()} alt="warning" className={styles.modalIcon} />}
+      <div className={styles.contentText}>{this.props.contentText || '确定删除所选5项文档？'}</div>
+    </>
+    )
+
+  render() {
+    const {
+      title,
+      visible,
+      okLoading,
+      children,
+      cancelText,
+      okText,
+      onOk,
+      onCancel,
+    } = this.props;
+    return (
+      <>
+        <Modal
+          title={title || this.state.title}
+          visible={visible}
+          onCancel={() => onCancel()}
+          className={styles.modal}
+          closeIcon={<span className={classNames(styles.closeIcon, 'iconfont', 'icon12px_close')} />}
+          footer={[
+            <Button key="back" onClick={() => onCancel()}>{cancelText || this.state.cancelText}</Button>,
+            <Button key="submit" type="primary" loading={okLoading} onClick={() => onOk()}>{okText || this.state.okText}</Button>,
+          ]}
+        >
+          {children || this.content()}
+        </Modal>
+      </>
+    )
+  }
+}
+
+
+export default Dialog;

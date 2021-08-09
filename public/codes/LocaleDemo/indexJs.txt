@@ -1,0 +1,51 @@
+import React from 'react';
+import { Card, Row, Col, Button } from 'antd';
+import { getLocale, setLocale, FormattedHTMLMessage, formatHTMLMessage } from 'umi-plugin-react/locale';
+
+class LocaleDemo extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {}
+  }
+
+  changeLanguage = () => {
+    const curLanguage = getLocale();
+    if (curLanguage === 'zh-CN') {
+      setLocale('en-US', false);
+    } else {
+      setLocale('zh-CN', false);
+    }
+  }
+
+  render () {
+    const localeLanguage = getLocale();
+    return (
+      <>
+        <Card title="样例">
+          <Row gutter={24}>
+            <Col span={6} offset={6}>
+               组件： {'<FormattedHTMLMessage />'}
+            </Col>
+            <Col span={12}>
+              <FormattedHTMLMessage id="dsa-language" />
+            </Col>
+          </Row>
+          <hr />
+          <Row gutter={24}>
+            <Col span={6} offset={6}>
+              函数: {'formatHTMLMessage() {}'}
+            </Col>
+            <Col span={12}>
+              {formatHTMLMessage({ id: 'dsa-language' })}
+            </Col>
+          </Row>
+        </Card>
+        <Button type="primary" onClick={() => { this.changeLanguage() } } style={ { display: 'block', margin: '20px auto' }}>
+          {localeLanguage}变
+        </Button>
+      </>
+    )
+  }
+}
+
+export default LocaleDemo;

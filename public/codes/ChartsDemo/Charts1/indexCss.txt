@@ -1,0 +1,17 @@
+.statisticsWraper {
+  height: 282px;
+  width: 250px;
+  display: flex;
+  border: 1px dashed #ccc;
+  flex-direction: column;
+  .title {
+    font-size: 16px;
+    color: #5C6280;
+    font-weight: bold;
+    margin: 10px 0 0 20px;
+  }
+  overflow-x: hidden;
+  .chartStatistics {
+    padding-top: 10px;
+  }
+}

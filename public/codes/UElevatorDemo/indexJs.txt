@@ -1,0 +1,108 @@
+import React from 'react';
+import { Anchor } from 'antd';
+import styles from './index.less';
+
+
+const { Link } = Anchor;
+
+class UElevatorDemo extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      showToBack: false,
+      targetOffset: 10,
+      datas: [
+        { id: '1000132812', name: 'CT' },
+        { id: '1000132813', name: 'MR' },
+        { id: '1000132814', name: 'DR' },
+        { id: '1000132815', name: 'DX' },
+        { id: '1000132816 ', name: 'MG' },
+        { id: '1000132817', name: '远程影像' },
+      ],
+    }
+
+    this.container = document.querySelector('#mainContent');
+  }
+
+  componentDidMount() {
+    this.setState({
+      targetOffset: window.innerHeight / 2,
+    });
+  }
+
+  onChange = currentActiveLink => {
+    if (currentActiveLink.trim()) {
+      const { showToBack, datas } = this.state;
+      const index = datas.findIndex(item => `#${item.name}` === currentActiveLink);
+      if (index > 0) {
+        if (currentActiveLink !== '#top' && !showToBack) {
+          this.setState({ showToBack: true });
+        }
+      } else {
+        this.setState({ showToBack: false });
+      }
+      if (currentActiveLink === '#top') {
+        this.container.scrollTop = 0;
+        this.setState({ showToBack: false });
+      }
+    }
+  }
+
+  renderList = datas => {
+    const result = [];
+    if (datas && datas.length) {
+      const { showToBack } = this.state;
+      datas.forEach((element, index) => {
+        if (index < 6) {
+          const { name, id } = element;
+          let node = (
+            <Link key={id} href={`#${name}`} title={name} />
+          );
+          if (name.length > 4) {
+            const curName = `${name.substring(0, 3)}...`;
+            node = (<Link key={id} href={`#${name}`} title={curName}><span className={styles.tips}>{name}<i /></span></Link>);
+          }
+          result.push(node)
+        }
+      });
+
+      if (showToBack) {
+        result.push(<Link href="#top" key="toTop" title="回到顶部" />)
+      }
+    }
+
+    return result;
+  }
+
+  render() {
+    const { targetOffset, datas } = this.state;
+    const listNodes = this.renderList(datas);
+    return (
+      <div id="container" className={styles.mainContent}>
+        <div>
+          <div className={styles.topContent}>Header</div>
+          <div className={styles.contentIndexWrap}>
+            <div id="CT">CT</div>
+            <div id="MR">MR</div>
+            <div id="DR">DR</div>
+            <div id="DX">DX</div>
+            <div id="MG">MG</div>
+            <div id="远程影像">远程影像</div>
+          </div>
+          <div className={styles.elevatorWrap}>
+            <Anchor
+              offsetTop={10}
+              targetOffset={targetOffset}
+              showInkInFixed={false}
+              getContainer={() => this.container}
+              onChange={currentActiveLink => { this.onChange(currentActiveLink) }}
+            >
+              {listNodes}
+            </Anchor>
+          </div>
+        </div>
+      </div>
+    );
+  }
+}
+export default UElevatorDemo;

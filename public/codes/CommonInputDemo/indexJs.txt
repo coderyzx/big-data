@@ -1,0 +1,13 @@
+import React from 'react';
+import { Input } from 'antd';
+import styles from './index.less'
+
+const CommonInput = () => (
+  <Input
+          className={ styles.input}
+          style={{ width: '300px' }}
+          allowClear
+        />
+)
+
+export default CommonInput;

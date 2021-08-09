@@ -1,0 +1,56 @@
+import React, { PureComponent } from 'react'
+import IconLogo from '@/assets/more.png'
+import CodeBoard from '@/components/CodeBoard';
+import ApiTable from '@/components/ApiTable';
+import { LogoComponent, MenuLinkComponent, UserBehaviorComponent } from '@/components/BasicHeaderComponents';
+import { apiData } from './config.js';
+import Header from './Header'
+
+const menus = [
+  {
+    path: '/Components/Wellcome',
+    name: '首页',
+  },
+  {
+    path: '/Components/Wellcome',
+    name: '首页',
+  },
+  {
+    path: '/Components/Wellcome',
+    name: '首页',
+  },
+  {
+    path: '/Components/Wellcome',
+    name: '首页',
+  },
+  {
+    path: '/Components/Wellcome',
+    name: '首页',
+  },
+]
+
+const usercenter = [
+  {
+    title: '个人中心',
+    linkTo: '/gerenzhongxin',
+    component: <div>111</div>,
+  },
+  {
+    title: '消息',
+    linkTo: '/xiaoxi',
+    component: <div>111</div>,
+  },
+]
+
+export default class extends React.Component {
+  render () {
+    return (
+      <Header
+        IconLogo={IconLogo}
+        logoText="SOLAR"
+        menus={menus}
+        usercenter={usercenter}
+      />
+    )
+  }
+}

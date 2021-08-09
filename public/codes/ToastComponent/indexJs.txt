@@ -1,0 +1,92 @@
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { Icon } from 'antd';
+import classNames from 'classnames';
+import styles from './index.less';
+
+// 可以输入 success-error-warning 显示不同的模板
+// 也可以通过props.children自定义模板
+// 可以设置最外层modal的样式
+// 最外层modal的宽度限定一个最小值，并且宽度不固定时动态的让toast保持居中
+// toast内容可以单行也可以多行，通过row属性控制，传boolean进来
+
+
+class Toast extends React.Component {
+  state = {
+    success: {
+      icon: 'check-circle',
+      text: '保存成功',
+    },
+    error: {
+      icon: 'close-circle',
+      text: '保存失败',
+    },
+    warning: {
+      icon: 'exclamation-circle',
+      text: '警告',
+    },
+  };
+
+  ref = React.createRef();
+
+  shouldComponentUpdate = () => {
+    if (this.timer) {
+      return false;
+    }
+    return true;
+  }
+
+  componentDidMount = () => {
+    this.setMarginLeft();
+    this.timer = setTimeout(() => {
+      const noticeList = document.getElementsByClassName('noticeList')[0];
+      noticeList.remove();
+      clearTimeout(this.timer);
+      return false;
+    }, this.props.duration || 3000)
+  }
+
+  // 动态的让toast保持居中
+  setMarginLeft = () => {
+    const { current } = this.ref;
+    const marginLeft = -Math.floor(current.offsetWidth / 2);
+    current.style.marginLeft = `${marginLeft}px`;
+  }
+
+  render() {
+    const { style, type, icon, text, row, children } = this.props;
+    const consttoastHtml = () => (
+      <>
+        <Icon type={icon || this.state[type].icon} className={styles.toastIcon} />
+        <div className={styles.noticeText}>
+          {text || this.state[type].text}
+        </div>
+      </>
+    )
+    return (
+      <div
+        className={classNames(styles.notice, row ? styles.row : styles.column)}
+        style={{ ...style }}
+        ref={this.ref}
+      >
+        {children || consttoastHtml()}
+      </div>
+    )
+  }
+}
+
+
+const showToast = props => {
+  let div;
+  const noticeList = document.getElementsByClassName('noticeList')[0];
+  if (noticeList) {
+    div = noticeList;
+  } else {
+    div = document.createElement('div');
+    div.setAttribute('class', 'noticeList');
+    document.body.appendChild(div);
+  }
+  ReactDOM.render(<Toast {...props} />, div);
+}
+
+export default showToast;

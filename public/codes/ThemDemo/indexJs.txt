@@ -1,0 +1,143 @@
+
+/*首先进行包安装以及环境配置：*/
+
+npm install umi-plugin-antd-theme 或者 yarn add umi-plugin-antd-theme
+
+// 下载完成之后，在config文件夹下进行配置：
+
+
+import theme from './theme.config'
+
+ [
+    'umi-plugin-antd-theme',
+    {
+      theme: [
+        {
+          fileName: 'theme1.css',
+          key: 'theme1',
+          modifyVars: {
+            '@primary-color': '#13C2C2',
+            '@menu-dark-color': '#324444',
+            '@menu-dark-bg': '#5A5A5A',
+          },
+        },
+        {
+          fileName: 'theme2.css',
+          key: 'theme2',
+          modifyVars: {
+            '@primary-color': 'red',
+            '@menu-dark-color': '#9B9B9B',
+            '@menu-dark-bg': '#3A3A3A',
+          },
+        },
+      ],
+      // 是否压缩css
+      min: true,
+      // css module
+      isModule: true,
+      // 忽略 antd 的依赖
+      ignoreAntd: false,
+      // 忽略 pro-layout
+      ignoreProLayout: false,
+      // 不使用缓存
+      cache: true,
+    },
+  ]
+
+ // 通过import theme from './theme.config' 进行引入
+
+  export default [
+  {
+    fileName: 'theme1.css',
+    key: 'theme1',
+    modifyVars: {
+      'primary-color': '#5063C2', // 全局主色
+      'layout-header-background': '#5063C2', // 头部背景色
+      'link-color': '#5063C2', // 链接色
+      'success-color': '#41c87f', // 成功色
+      'warning-color': '#ffc350', // 警告色
+      'error-color': '#f26255', // 错误色
+      'font-size-base': '14px', // 主字号
+      'heading-color': '#5C6280', // 标题色
+      'text-color': '#3D404D', // 主文本色
+      'text-color-secondary ': 'rgba(0, 0, 0, .45)', // 次文本色
+      'disabled-color ': 'rgba(0, 0, 0, .25)', // 失效色
+      'border-radius-base': '2px', // 组件/浮层圆角
+      'border-color-base': ' #D5D7E0', // 边框颜色
+      'box-shadow-base': '0 2px 8px rgba(0, 0, 0, 0.15)', // 浮层阴影
+      'processing-color': '#5063C2', // 进度条颜色
+      'table-selected-row-bg': '#e6eafd', // table选中行背景色
+    },
+  },
+  {
+    fileName: 'theme2.css',
+    key: 'theme2',
+    modifyVars: {
+      'primary-color': '#3245a8', // 全局主色
+      'layout-header-background': '#3245a8', // 头部背景色
+      'link-color': '#3245a8', // 链接色
+      'success-color': '#41c87f', // 成功色
+      'warning-color': '#ffc350', // 警告色
+      'error-color': '#f26255', // 错误色
+      'font-size-base': '14px', // 主字号
+      'heading-color': '#5C6280', // 标题色
+      'text-color': '#3D404D', // 主文本色
+      'text-color-secondary ': 'rgba(0, 0, 0, .45)', // 次文本色
+      'disabled-color ': 'rgba(0, 0, 0, .25)', // 失效色
+      'border-radius-base': '2px', // 组件/浮层圆角
+      'border-color-base': ' #D5D7E0', // 边框颜色
+      'box-shadow-base': '0 2px 8px rgba(0, 0, 0, 0.15)', // 浮层阴影
+      'processing-color': '#3245a8', // 进度条颜色
+      'table-selected-row-bg': '#e6eafd', // table选中行背景色
+    },
+  },
+  {
+    fileName: 'theme3.css',
+    key: 'theme3',
+    modifyVars: {
+      'primary-color': '#6d7ed4', // 全局主色
+      'layout-header-background': '#6d7ed4', // 头部背景色
+      'link-color': '#6d7ed4', // 链接色
+      'success-color': '#41c87f', // 成功色
+      'warning-color': '#ffc350', // 警告色
+      'error-color': '#f26255', // 错误色
+      'font-size-base': '14px', // 主字号
+      'heading-color': '#5C6280', // 标题色
+      'text-color': '#3D404D', // 主文本色
+      'text-color-secondary ': 'rgba(0, 0, 0, .45)', // 次文本色
+      'disabled-color ': 'rgba(0, 0, 0, .25)', // 失效色
+      'border-radius-base': '2px', // 组件/浮层圆角
+      'border-color-base': ' #D5D7E0', // 边框颜色
+      'box-shadow-base': '0 2px 8px rgba(0, 0, 0, 0.15)', // 浮层阴影
+      'processing-color': '#6d7ed4', // 进度条颜色
+      'table-selected-row-bg': '#e6eafd', // table选中行背景色
+    },
+  }
+]
+
+const config = {
+  plugins,
+  uglifyJSOptions(opts) {
+    opts.uglifyOptions.compress.drop_console = true;
+    opts.uglifyOptions.compress.drop_debugger = true;
+    return opts;
+  },
+  history: 'hash',
+  treeShaking: true,
+  targets: {
+    ie: 11,
+  },
+  routes,
+  theme: theme[0].modifyVars,
+  proxy: {
+    '/api': {
+      target: 'http://your.domain.com',
+      changeOrigin: true,
+      pathRewrite: {
+        '^/your': '',
+      },
+    },
+  },
+  chainWebpack: webpackPlugin,
+}
+*/

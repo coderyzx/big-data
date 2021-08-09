@@ -1,0 +1,33 @@
+.inputNumber {
+  display: flex;
+  .input {
+    width: 112px;
+    height: 36px;
+    margin: 0 10px;
+    text-align: center;
+  }
+}
+
+.iconBtn {
+  display: inline-block;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid #D5D7E0;
+  box-sizing: border-box;
+  background: #FFFFFF;
+  color: #3F51B5;
+  font-size: 18px;
+  text-align: center;
+  line-height: 36px;
+  cursor: pointer;
+  &:hover {
+    background: #EDEFF9;
+    border: 1px solid rgba(143,153,204,0.50);
+  }
+  &:active {
+    background: #3F51B5;
+    border: 1px solid #CED0D9;
+    color: #fff;
+  }
+}

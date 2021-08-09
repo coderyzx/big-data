@@ -1,0 +1,93 @@
+import React from 'react';
+import { Input, Tooltip } from 'antd';
+import classNames from 'classnames';
+import styles from './index.less';
+
+function formatNumber(value) {
+  value += '';
+  const list = value.split('.');
+  const prefix = list[0].charAt(0) === '-' ? '-' : '';
+  let num = prefix ? list[0].slice(1) : list[0];
+  let result = '';
+  while (num.length > 3) {
+    result = `,${num.slice(-3)}${result}`;
+    num = num.slice(0, num.length - 3);
+  }
+  if (num) {
+    result = num + result;
+  }
+  return `${prefix}${result}${list[1] ? `.${list[1]}` : ''}`;
+}
+
+class InputNumber extends React.Component {
+  state = {
+    value: 0,
+  };
+
+  onChange = e => {
+    const { value } = e.target;
+    const reg = /^[1-9]\d*$/;
+    if ((!Number.isNaN(value) && reg.test(value)) || value === '0' || value === '') {
+      this.setState({ value });
+    }
+  };
+
+  onBlur = () => {
+    const { value } = this.state;
+    if (!value) return;
+    let valueTemp = value;
+    if (value.charAt(value.length - 1) === '.' || value === '-') {
+      valueTemp = value.slice(0, -1);
+    }
+    this.setState({ value: valueTemp });
+  };
+
+  plus = () => {
+    let { value: valueTemp } = this.state;
+    valueTemp = +valueTemp + 1;
+    this.setState({
+      value: valueTemp,
+    })
+  }
+
+  subtract = () => {
+    let { value: valueTemp } = this.state;
+    valueTemp = +valueTemp;
+    if (valueTemp === 0) return;
+    valueTemp -= 1;
+    this.setState({
+      value: valueTemp,
+    })
+  }
+
+  render() {
+    const { value } = this.state;
+    const title = value || value !== '0' ? (
+      <span className="numeric-input-title">{value !== '-' ? formatNumber(value) : '-'}</span>
+    ) : (
+      'Input a number'
+    );
+    return (
+      <div className={styles.inputNumber}>
+        <span className={classNames(styles.iconBtn, 'iconfont', 'iconsubtract')} onClick={this.subtract}></span>
+        <Tooltip
+          trigger={['focus']}
+          title={title}
+          placement="topLeft"
+          overlayClassName="numeric-input"
+        >
+          <Input
+            className={styles.input}
+            value={value}
+            onChange={this.onChange}
+            onBlur={this.onBlur}
+            maxLength={13}
+          />
+        </Tooltip>
+        <span className={classNames(styles.iconBtn, 'iconfont', 'iconplus')} onClick={this.plus} />
+      </div>
+    )
+  }
+}
+
+export default InputNumber;

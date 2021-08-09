@@ -1,0 +1,19 @@
+import React from 'react';
+import PassWordInput from './PassWordInput';
+
+
+
+class PassWordInputDemo extends React.Component {
+
+  render() {
+    return (
+      <>
+          密码输入框:<div className={styles.showInput}>
+            <PassWordInput></PassWordInput>
+          </div>
+      </>
+    )
+  }
+}
+
+export default PassWordInputDemo;

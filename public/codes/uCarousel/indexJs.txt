@@ -1,0 +1,105 @@
+import React, { Component } from 'react'
+import { Carousel } from 'antd';
+import Link from 'umi/link'
+import handbookHome from '@/assets/handBookHome.png';
+import videoHome from '@/assets/videoHome.png';
+import FAQHome from '@/assets/FAQHome.png';
+import more from '@/assets/more.png'
+import styles from './index.less'
+
+
+class uCarousel extends Component {
+  setting = { // 轮播图参数设定
+    lazyLoad: true,
+    dotPosition: 'bottom',
+    autoplaySpeed: 2000,
+    speed: 700,
+  };
+
+  carouselImgs = [ // 轮播图图片资源及图片对应的路径
+    { src: handbookHome, linkTo: '/handbook' },
+    { src: videoHome, linkTo: '/video' },
+    { src: FAQHome, linkTo: '/faq' },
+  ];
+
+  carouselBtns = ['toLeft', 'toRight'];
+
+  componentDidMount() {
+    this.setCarouselInterval();
+  }
+  // antd里面虽自带自动切换轮播图功能，但是里面存在Bug,故这里手动写定时切换函数
+
+  componentWillUnmount() {
+    this.clearCarouselInterval();
+  }
+
+  setCarouselInterval = () => {
+    const { autoplaySpeed } = this.setting
+    if (this.CarouselInterval) clearInterval(this.CarouselInterval);
+    this.CarouselInterval = setInterval(() => {
+      if (this.Carousel) this.Carousel.next();
+    }, autoplaySpeed);
+  }
+
+  clearCarouselInterval = () => {
+    if (this.CarouselInterval) clearInterval(this.CarouselInterval);
+  }
+
+  renderCarouselList = () => {
+    const result = [];
+    this.carouselImgs.forEach((item, index) => {
+      result.push(
+        <div className={styles.carouseldiv} key={index.toString()}>
+          <Link to={item.linkTo}>
+            <img src={item.src} alt={index} />
+          </Link>
+        </div>,
+      )
+    })
+    return result;
+  }
+
+  renderCarouselBtn = () => {
+    const result = [];
+    if (this.carouselImgs && this.carouselImgs.length !== 0) {
+      result.push(this.carouselBtns.map(item => (
+        <div
+          key={item}
+          onClick={() => {
+            if (item === 'toLeft') {
+              this.Carousel.prev()
+            } else {
+              this.Carousel.next()
+            }
+          }}
+          className= {item}
+        >
+          <img src = { more } alt="switchPage"></img>
+        </div>
+      )))
+    }
+    return result
+  }
+
+  render() {
+    const listNodes = this.renderCarouselList()
+    const switchBtn = this.renderCarouselBtn()
+    return (
+      <div
+        className={styles.carouselContainer}
+        onMouseEnter={this.clearCarouselInterval}
+        onMouseLeave={this.setCarouselInterval}
+      >
+        <Carousel
+          {...this.setting}
+          ref={dom => { this.Carousel = dom }}
+        >
+          {listNodes}
+        </Carousel>
+        {switchBtn}
+      </div>
+    )
+  }
+}
+
+export default uCarousel

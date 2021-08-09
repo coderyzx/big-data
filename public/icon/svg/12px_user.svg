@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="12px" height="12px" viewBox="0 0 12 12" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 62 (91390) - https://sketch.com -->
+    <title>icon/12px/user</title>
+    <desc>Created with Sketch.</desc>
+    <g id="icon/12px/user" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M11,11 C11,9 8.76142375,8 6,8 C3.23857625,8 1,9 1,11" id="Path" stroke="#CCCCCC" stroke-width="0.5"></path>
+        <rect id="Rectangle" stroke="#CCCCCC" stroke-width="0.5" x="4" y="1" width="4" height="5.5" rx="2"></rect>
+    </g>
+</svg>

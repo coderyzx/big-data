@@ -1,0 +1,56 @@
+import React from 'react';
+import { Icon } from 'antd';
+import classNames from 'classnames'
+import styles from '@/components/UHistorySearchDemo/HistoryList/index.less';
+
+class HistoryList extends React.Component {
+  renderList = (datas, clickFuc) => {
+    const { switchCount } = this.props;
+    const result = [];
+    datas.forEach((element, index) => {
+      const { name } = element;
+      const isShow = switchCount === index;
+      result.push(
+        <div
+          onClick={() => clickFuc(name)}
+          onMouseEnter = {() => this.mouseEnter(index, name)} // 给每一个条历史记录绑定上鼠标选中样式
+          className={classNames(styles.item, (isShow && styles.isChosen))}
+          index={name}
+        >
+          <span>{name}</span>
+        </div>,
+      );
+    });
+    return result;
+  }
+
+  mouseEnter = (index, name) => {
+    const { updateChosenInfo } = this.props
+    updateChosenInfo(index, name)
+  }
+
+  clearHistory = () => {
+    const { clearHistory } = this.props;
+    clearHistory();
+  }
+
+  render() {
+    const { datas = [], clickFuc } = this.props;
+    const listNodes = this.renderList(datas, clickFuc);
+    return (
+      <div className={styles.historyWrap}>
+        <div className={styles.titleWrap}>
+          <div className={styles.title}>
+            <Icon className={styles.textIcon} type="clock-circle" />历史搜索记录
+          </div>
+          <div className={styles.clearHistory} onClick={this.clearHistory}>
+            <Icon className={styles.textIcon} type="delete" /><span>清除记录</span>
+          </div>
+        </div>
+        {listNodes}
+      </div>
+    );
+  }
+}
+
+export default HistoryList;

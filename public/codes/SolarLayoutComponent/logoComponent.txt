@@ -1,0 +1,14 @@
+import React from 'react
+import IconLogo from '@/assets/more.png'
+import { LogoComponent } from '@/components/BasicHeaderComponents';
+
+export default class extends React.Component {
+  render () {
+    return (
+      <LogoComponent
+        IconLogo={IconLogo}
+        logoText="SOLAR"
+      />
+    )
+  }
+}

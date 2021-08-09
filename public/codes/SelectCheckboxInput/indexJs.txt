@@ -1,0 +1,145 @@
+import React from 'react';
+import { Tooltip } from 'antd';
+import classNames from 'classnames';
+import { selectCheckArray } from '../config';
+import styles from './index.less';
+
+/*
+  单选 / 多选  isMulti
+*/
+
+class SelectCheckbox extends React.Component {
+  constructor(props) {
+    super(props);
+    selectCheckArray.map(item => ({ ...item, isCheck: false }))
+    this.state = {
+      focus: false,
+      checkedArray: [],
+      selectArray: selectCheckArray,
+    };
+    this.ref = React.createRef();
+  }
+
+  componentDidMount() {
+    document.body.addEventListener('click', this.blurInput, false);
+  }
+
+  componentWillUnmount() {
+    document.body.removeEventListener('click', this.blurInput);
+  }
+
+  treeNode = selectArray => (
+    selectArray.map(item => (
+      <li
+        className={classNames(styles.selectTreeNode)}
+        onClick={e => this.handleClick(e, item)}
+        key={item.id}
+      >
+        <span className={classNames(
+          styles.selectTreeCheckbox,
+          item.isCheck && styles.selectTreeIsChecked,
+        )}>
+          <span className={classNames(styles.selectTreeCheckboxInner, 'iconfont', 'icon12px_confirm')} />
+        </span>
+        <span className={styles.selectTreeText}>{item.name}</span>
+      </li>
+    ))
+  )
+
+  handleClick = (e, item) => {
+    e.preventDefault()
+    e.stopPropagation();
+    const { selectArray } = this.state;
+    // 1、ALL被勾选，所有item全选，输入框只显示ALL
+    // 2、ALL取消勾选，所有item取消选中，输入框清空
+    // 3、除了ALL以外所有item被勾选，那么ALL被自动勾选，输入框只显示ALL
+    const arr = selectArray.map(option => {
+      if (item.name === 'ALL') {
+        return { ...option, isCheck: !item.isCheck };
+      }
+      if (option.id === item.id) {
+        return { ...option, isCheck: !option.isCheck };
+      }
+      return option;
+    });
+    const checkedArray = arr.filter(some => some.isCheck && some.name !== 'ALL');
+    arr[0].isCheck = checkedArray.length === selectArray.length - 1;
+    this.setState({
+      checkedArray,
+      selectArray: arr,
+    });
+  }
+
+  focusInput = e => {
+    e.stopPropagation();
+    this.setState(preState => (
+      { focus: !preState.focus }
+    ))
+  }
+
+  blurInput = e => {
+    if (this.state.focus && !e.target.className.includes('selectTree')) {
+      this.setState({
+        focus: false,
+      })
+    }
+  }
+
+  clearChecked = e => {
+    e.stopPropagation();
+    const { selectArray } = this.state;
+    const arr = selectArray.map(item => ({ ...item, isCheck: false }));
+    this.setState({
+      selectArray: arr,
+      checkedArray: [],
+    })
+  }
+
+  tooltipTitle = () => {
+    let title = '';
+    const { selectArray, checkedArray } = this.state;
+    if (checkedArray.length === selectArray.length - 1) return 'ALL';
+    checkedArray.map(item => {
+      title += `${item.name}，`
+      return null;
+    });
+    return title;
+  }
+
+  render() {
+    const { focus, selectArray, checkedArray } = this.state;
+    return (
+      <div className="selectTreeWrap" style={{ position: 'relative' }} ref={this.ref}>
+        <div
+          className={classNames(styles.selectTreeSelection, focus && styles.selectTreeFocus)}
+          {...this.props}
+          onClick={e => this.focusInput(e)}
+        >
+          <Tooltip
+            trigger={['hover']}
+            title={this.tooltipTitle()}
+            placement="topLeft"
+          >
+            <div className={styles.selectTreeSelectedText}>
+              {checkedArray.length === selectArray.length - 1 ?
+                <span className="selectTreeSpan">ALL</span> : checkedArray.map(item => (
+                  <span key={item.id} className="selectTreeItemName">{item.name}，</span>
+              ))}
+            </div>
+          </Tooltip>
+          {checkedArray.length === 0 ?
+            <span className={classNames(styles.selectTreeSelectionArrow, focus ? styles.active : styles.none, 'iconfont', 'icon12px_dropdown5')} /> :
+            <span
+              className={classNames(styles.selectTreeSelectionClear, 'iconfont', 'icon12px_delete_item')}
+              onClick={e => this.clearChecked(e)}
+            />}
+        </div>
+        <div className={classNames(styles.selectTreeDropdown, focus ? styles.show : styles.hide)}>
+          <ul className={styles.selectTree}>{this.treeNode(selectArray)}</ul>
+        </div>
+      </div>
+    )
+  }
+}
+
+export default SelectCheckbox;

@@ -1,0 +1,117 @@
+import React from 'react';
+import { Button } from 'antd';
+import remindSvg403 from '@/assets/img_403_web.png';
+import styles from './index.less';
+
+/*---------错误提示403代码-------------------*/
+class remind extends React.Component {
+  state = {
+    stateArray: {
+        imgUrl: remindSvg403,
+        text: 'We are sorry , the page you resquested are forbidden.',
+    },
+  }
+
+  render() {
+    const { stateArray } = this.state;
+    return (
+      <>
+        <div className={styles.remind}>
+          <img className={styles.remindImg} src={stateArray.imgUrl} alt="" />
+          <div>
+            <div className={styles.remindTxt}>
+              Oops！<br />
+              Error <span className={styles.remindState}>403</span>…
+            </div>
+            <div className={styles.remindInfo}>
+              {stateArray.text}
+            </div>
+            <Button type="primary" className={styles.refresh}>点击重试</Button>
+          </div>
+        </div>
+      </>
+    )
+  }
+}
+
+export default remind;
+
+/*---------错误提示404代码-------------------*/
+
+import React from 'react';
+import { Button } from 'antd';
+import remindSvg404 from '@/assets/img_404_web.png';
+import styles from './index.less';
+
+
+class remind extends React.Component {
+  state = {
+    stateArray: {
+        imgUrl: remindSvg404,
+        text: 'We are sorry , the page you resquested are forbidden.',
+    },
+  }
+
+  render() {
+    const { stateArray } = this.state;
+    return (
+      <>
+        <div className={styles.remind}>
+          <img className={styles.remindImg} src={stateArray.imgUrl} alt="" />
+          <div>
+            <div className={styles.remindTxt}>
+              Oops！<br />
+              Error <span className={styles.remindState}>404</span>…
+            </div>
+            <div className={styles.remindInfo}>
+              {stateArray.text}
+            <Button type="primary" className={styles.refresh}>点击重试</Button>
+          </div>
+        </div>
+      </>
+    )
+  }
+}
+
+export default remind;
+
+/*---------错误提示500代码-------------------*/
+
+import React from 'react';
+import { Button } from 'antd';
+import remindSvg500 from '@/assets/img_500_web.png';
+import styles from './index.less';
+
+
+class remind extends React.Component {
+  state = {
+    stateArray: {
+        imgUrl: remindSvg500,
+          text: ['We are sorry , server side error!', 'Please clean your browser and try again.'],
+    },
+  }
+
+  render() {
+    const { stateArray } = this.state;
+    return (
+      <>
+        <div className={styles.remind}>
+          <img className={styles.remindImg} src={stateArray.imgUrl} alt="" />
+          <div>
+            <div className={styles.remindTxt}>
+              Oops！<br />
+              Error <span className={styles.remindState}>{500}</span>…
+            </div>
+            <div className={styles.remindInfo}>
+             {stateArray.text[0]}<br/>{stateArray.text[1]}</>
+            </div>
+            <Button type="primary" className={styles.refresh}>点击重试</Button>
+          </div>
+        </div>
+      </>
+    )
+  }
+}
+
+export default remind;
+

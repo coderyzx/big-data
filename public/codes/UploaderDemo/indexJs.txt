@@ -1,0 +1,163 @@
+import React from 'react';
+import sourceImg from '@/assets/upload.png';
+import styles from './index.less';
+import UploaderModel from './UploaderModel';
+
+class Uploader extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      disX: '415px',
+      disY: '147px',
+    }
+    this.x = 0; // 鼠标相对与div左边，上边的偏移
+    this.y = 0;
+  }
+
+  fuDown= e => {
+    e.preventDefault()
+    const box = document.getElementsByTagName('img')[1];
+    this.x = e.clientX - box.offsetLeft;
+    this.y = e.clientY - box.offsetTop;
+    let startTime = e.timeStamp
+    document.onmousemove = a => {
+      a.preventDefault();
+      // document.removeEventListener('click', () => { }); // 是否为可移动状态
+      let moveX = a.clientX - this.x; // 得到距离左边移动距离
+      let moveY = a.clientY - this.y; // 得到距离上边移动距离
+      // 可移动最大距离
+      const maxX = document.body.clientWidth - box.offsetWidth;
+      const maxY = document.body.clientHeight - box.offsetHeight;
+      // 范围限定  当移动的距离最小时取最大  移动的距离最大时取最小
+      // 范围限定方法一
+      /* if(moveX < 0) {
+          moveX = 0
+      } else if(moveX > maxX) {
+          moveX = maxX;
+      }
+
+      if(moveY < 0) {
+          moveY = 0;
+      } else if(moveY > maxY) {
+          moveY = maxY;
+      } */
+      moveX = Math.max(350, Math.min(maxX, Math.max(0, moveX)));
+      moveY = Math.max(50, Math.min(maxY, Math.max(0, moveY)));
+      this.setState({
+        disX: `${moveX}px`,
+        disY: `${moveY}px`,
+      })
+    }
+    document.onmouseup = b => {
+      const { clickFnc } = this.props
+      if (startTime) {
+       const diffTime = b.timeStamp - startTime
+       if (diffTime < 150) {
+         clickFnc()
+       }
+          startTime = 0
+      }
+      document.onmousemove = null;
+      document.onmouseup = null;
+  }
+}
+
+modalCancel = () => {
+  const { modalCancel } = this.props;
+  modalCancel()
+}
+
+  confirmDelete = () => {
+   const { confirmDelete } = this.props;
+   confirmDelete()
+}
+
+  render() {
+    const { disX, disY } = this.state;
+    const { isShowModal } = this.props;
+    return (
+      <div className={styles.UploaderWrapper} >
+        <img src={sourceImg} alt="上传"
+           style={{ position: 'absolute',
+           zIndex: '6',
+           display: `${!isShowModal ? 'block' : 'none'}`,
+           width: '84px',
+           height: '84px',
+           left: disX,
+           top: disY }} onMouseDown={e => { this.fuDown(e) }} />
+        <div className={styles.modaldiv} >
+          {isShowModal ? <UploaderModel></UploaderModel> : null}
+        </div>
+      </div>
+    )
+  }
+}
+
+export default Uploader;
+
+import React from 'react';
+import { Upload, Icon, Modal } from 'antd';
+import styles from './index.less'
+
+function getBase64(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = error => reject(error);
+  });
+}
+
+class PicturesWall extends React.Component {
+  state = {
+    previewVisible: false,
+    previewImage: '',
+    fileList: [
+    ],
+  };
+
+  handleCancel = () => this.setState({ previewVisible: false });
+
+  handlePreview = async file => {
+    if (!file.url && !file.preview) {
+      // eslint-disable-next-line no-param-reassign
+      file.preview = await getBase64(file.originFileObj);
+    }
+
+    this.setState({
+      previewImage: file.url || file.preview,
+      previewVisible: true,
+    });
+  };
+
+  handleChange = ({ fileList }) => this.setState({ fileList });
+
+  render() {
+    const { previewVisible, previewImage, fileList } = this.state;
+    const uploadButton = (
+      <div>
+        <Icon type="plus" />
+        <div className="ant-upload-text">Upload</div>
+      </div>
+    );
+    return (
+      <div className="clearfix">
+        <Upload
+          listType="picture-card"
+          fileList={fileList}
+          className={styles.upload}
+          onPreview={this.handlePreview}
+          onChange={this.handleChange}
+          accept=".jpg,.png"
+        >
+          {fileList.length >= 8 ? null : uploadButton}
+        </Upload>
+        <Modal visible={previewVisible} footer={null} onCancel={this.handleCancel}>
+          <img alt="example" style={{ width: '100%' }} src={previewImage} />
+        </Modal>
+      </div>
+    );
+  }
+}
+export default PicturesWall
+

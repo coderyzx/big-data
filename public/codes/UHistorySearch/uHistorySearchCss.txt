@@ -1,0 +1,41 @@
+@height: 28px;
+@color: #5063c2;
+
+.historyWrap {
+  padding: 5px;
+  .titleWrap {
+    overflow: hidden;
+    height: @height;
+    .title {
+      float: left;
+      color: #ccc;
+      .textIcon {
+        margin-right: 2px;
+      }
+    }
+    .clearHistory {
+      float: right;
+      cursor: pointer;
+      color: inherit;
+      .textIcon {
+        margin-right: 2px;
+      }
+    }
+    :hover {
+      color: #5063c2;
+    }
+  }
+  .item {
+    height: @height;
+    line-height: @height;
+    cursor: pointer;
+    a {
+      color: #1F2127;
+      display: block;
+      width: 100%;
+    }
+  }
+  .isChosen {
+    background-color: rgba(48, 80, 240, 0.12);;
+  }
+}

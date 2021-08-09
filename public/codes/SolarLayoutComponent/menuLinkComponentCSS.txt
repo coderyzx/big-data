@@ -1,0 +1,42 @@
+@import '~@/styles/flex.less';
+
+.navMenus {
+  .flex-cross(center);
+  flex: 1;
+
+  .navMenuItem {
+    color: rgba(255, 255, 255, 0.6);
+    // width: 104px;
+    margin: auto 20px;
+    display: block;
+    text-align: center;
+    font-size: 16px;
+    position: relative;
+    cursor: pointer;
+
+    &:hover {
+      color: rgba(255, 255, 255, 0.6);
+    }
+  }
+
+  .navMenuItemActive {
+    color: #ffffff;
+
+    &:after {
+      position: absolute;
+      bottom: 6px;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      border-radius: 2px;
+      background-color: #ffffff;
+      display: block;
+      content: '';
+      animation: show .2s cubic-bezier(0.645, 0.045, 0.355, 1) 0s 1 forwards;
+    }
+
+    &:hover {
+      color: #ffffff;
+    }
+  }
+}

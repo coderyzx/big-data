@@ -1,0 +1,17 @@
+import React from 'react';
+
+import SelectInput from './SelectInput';
+
+
+
+class SelectInputDemo extends React.Component {
+  render() {
+    return (
+      <>
+          下拉选择框:<div className={styles.showInput}>
+            <SelectInput style={{ width: 300 }} maxLength={12} placeholder="请输入内容"></SelectInput>
+          </div>
+      </>
+    )
+  }
+}

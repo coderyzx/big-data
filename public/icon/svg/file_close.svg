@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>icon/文件夹关</title>
+    <g id="icon/文件夹关" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="编组备份" transform="translate(1.000000, 3.000000)" fill-rule="nonzero">
+            <path d="M1,0 L9,0 L9,0 L11,2 L15,2 C15.5522847,2 16,2.44771525 16,3 L16,14 L16,14 L0,14 L0,1 C-6.76353751e-17,0.44771525 0.44771525,1.01453063e-16 1,0 Z" id="矩形" fill="#5063C2"></path>
+            <path d="M1,4 L15,4 C15.5522847,4 16,4.44771525 16,5 L16,14 L16,14 L0,14 L0,5 C-6.76353751e-17,4.44771525 0.44771525,4 1,4 Z" id="矩形" fill="#7487E3"></path>
+        </g>
+    </g>
+</svg>

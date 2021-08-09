@@ -1,0 +1,14 @@
+<Chart3 percent={0.75} data={chart3Data} width={320} height={260} />
+
+------------------------------
+
+export const chart3Data = [
+  { productTypeName: 'XR', percentage: 0.3332778 },
+  { productTypeName: 'MR', percentage: 0.19998667 },
+  { productTypeName: 'CT', percentage: 0.23075148 },
+  { productTypeName: 'MI', percentage: 0.18180165 },
+  { productTypeName: 'WS', percentage: 0.0 },
+  { productTypeName: 'RT', percentage: 0.0 },
+  { productTypeName: 'UCloud', percentage: 0.0 },
+  { productTypeName: 'PMR', percentage: 0.0 },
+]

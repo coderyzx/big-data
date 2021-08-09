@@ -1,0 +1,179 @@
+import React from 'react';
+import Chart1 from './Chart1'
+
+import styles from './index.less'
+
+class Charts1Demo extends React.Component {
+  render() {
+    const { title, subtitle, innerCircle, outerCircle, chart1Data, style: { width = '350px', height = '300px' } } = this.props;
+    return (
+      <>
+        <div style={{ width, height }} className={styles.statisticsWraper}>
+          <div className={styles.title}>{title}</div>
+          <div style={{ width, height }} className={styles.chartStatistics}>
+            <Chart1 data={chart1Data}
+            title={title}
+            style={{ width, height }}
+            subtitle={subtitle}
+            innerCircle={innerCircle}
+            outerCircle={outerCircle}
+            sumDeice={
+              // eslint-disable-next-line no-shadow
+              (chart1Data => {
+                let sum = 0;
+                chart1Data.forEach(item => {
+                  sum += item.value
+                })
+                return sum;
+              })(chart1Data)
+            } />
+          </div>
+        </div>
+      </>
+    )
+  }
+}
+
+export default Charts1Demo;
+
+----------------------------------
+
+import React, { Component } from 'react';
+import echarts from 'echarts/lib/echarts';
+import 'echarts/lib/chart/pie'
+import 'echarts/lib/component/tooltip'
+import 'echarts/lib/component/title'
+import 'echarts/lib/component/legend'
+import 'echarts/lib/component/markPoint'
+
+class Chart1 extends Component {
+  echartRef = React.createRef();
+
+  componentDidMount() {
+    const { style: { width = '350px' } } = this.props;
+    this.widthNum = width.substring(0, width.indexOf('px'));
+    this.initalECharts();
+  }
+
+  componentDidUpdate() {
+    this.initalECharts();
+  }
+
+  onResize = () => {
+    if (this.chart) {
+      this.chart.resize(this.divRef.current);
+    }
+  }
+
+  calcFontSize = size => parseInt(size * this.widthNum / 242, 10).toString();
+
+  initalECharts = () => {
+    setTimeout(() => {
+      const { data, sumDeice, subtitle, title, innerCircle, outerCircle } = this.props;
+      const legendData = []
+      data.forEach(item => {
+        legendData.push(item.name)
+      });
+      const myChart = echarts.init(this.echartRef.current);
+      myChart.setOption({
+        title: {
+          text: sumDeice.toString(),
+          subtext: subtitle,
+          top: 'center',
+          left: 'center',
+          itemGap: parseInt(-10 * this.widthNum / 242, 10),
+          textStyle: {
+            fontSize: this.calcFontSize(36),
+            height: this.calcFontSize(36),
+            lineHeight: this.calcFontSize(36),
+          },
+          subtextStyle: {
+            fontSize: this.calcFontSize(14),
+            lineHeight: this.calcFontSize(14),
+            height: this.calcFontSize(14),
+          },
+        },
+        tooltip: {
+          trigger: 'item',
+          showContent: true,
+          position: (pos, params, dom, rect, size) => {
+            // 鼠标在左侧时 tooltip 显示到右侧，鼠标在右侧时 tooltip 显示到左侧。
+            const obj = { top: pos[1] };
+            if (pos[0] < (size.viewSize[0] / 2)) {
+              obj.left = +pos[0] + 15;
+            } else {
+              obj.right = size.viewSize[0] - pos[0];
+            }
+            return obj;
+          },
+          textStyle: {
+            fontSize: 14,
+          },
+          formatter: '{b}: {c} ({d}%)',
+        },
+        legend: {
+          orient: 'horizontal',
+          data: legendData,
+          padding: [0, 0, '100%', 0],
+          formatter: name => {
+            const current = data.filter(item => item.name === name)
+            return `${name} ${current[0].value}`
+          },
+
+        },
+        series: [
+          {
+            name: title,
+            type: 'pie',
+            top: 10,
+            radius: [innerCircle, outerCircle],
+            avoidLabelOverlap: true,
+            minAngle: 10,
+            itemStyle: {
+              color: params => (params.data.firstC || '#000'),
+              borderWidth: this.calcFontSize(3), // 边框的宽度
+              borderColor: '#ffffff', // 边框的颜色
+            },
+            label: {
+              show: true,
+              position: 'outerside',
+              alignTo: 'labelLine',
+              bleedMargin: 5,
+              margin: 10,
+            },
+            emphasis: {
+              label: {
+                show: true,
+                fontSize: 14,
+                fontWeight: 'bold',
+              },
+            },
+            labelLine: {
+              show: true,
+              length: 10,
+              length2: 20,
+            },
+            data,
+          },
+        ],
+        animationType: 'scale',
+        animationEasing: 'elasticOut',
+      });
+
+      // 添加charts自适应
+      window.removeEventListener('resize', this.onResize);
+      window.addEventListener('resize', this.onResize)
+    }, 0)
+  }
+
+  render() {
+    return (
+      <>
+        <div ref={this.echartRef} style={{ width: '100%', height: '100%' }}>
+        </div>
+      </>
+    )
+  }
+}
+
+export default Chart1;

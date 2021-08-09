@@ -1,0 +1,162 @@
+import React, { useState, useEffect } from 'react';
+import ReactDOM from 'react-dom';
+import { Button, Icon } from 'antd';
+import BG401 from '@/assets/bg401.png';
+
+let errorPop = {};
+
+const styles = {
+  maskDiv: {
+    position: 'fixed',
+    zIndex: 20,
+    top: 0,
+    opacity: 0.5,
+    width: '100%',
+    height: '100%',
+    background: '100%',
+  },
+  content: {
+    position: 'relative',
+    paddingTop: '20px',
+    width: '100%',
+    height: '100%',
+  },
+  numText: {
+    width: '100%',
+    textAlign: 'center',
+    color: '#001C00',
+    fontSize: '16px',
+    marginTop: '55px',
+  },
+  text: {
+    width: '100%',
+    textAlign: 'center',
+    color: '#3D404D',
+    fontSize: '14px',
+    marginTop: '40px',
+  },
+  tips: {
+    width: '100%',
+    textAlign: 'center',
+    color: '#5C6280',
+    fontWeight: '700',
+    fontSize: '16px',
+  },
+  closeButton: {
+    position: 'absolute',
+    top: '10px',
+    right: '10px',
+    fontSize: '16px',
+    color: '#8D91A6',
+    cursor: 'pointer',
+    fontWeight: '700',
+  },
+  reLoginButton: {
+    position: 'absolute',
+    bottom: '20px',
+    top: '335px',
+    left: '50%',
+    width: '140px',
+    height: '32px',
+    marginLeft: '-70px',
+
+  },
+}
+
+const reLogin = client => {
+  if (client) {
+    const { origin, href } = window.location;
+    sessionStorage.redirectUrl = href.replace(origin, '');
+    client.logout();
+    client.login();
+  }
+}
+
+const closePop = () => {
+  document.body.removeChild(errorPop.oMask);
+  document.body.removeChild(errorPop.oContent);
+  document.body.removeChild(errorPop.oStyle);
+  errorPop = {}
+}
+
+const RenderContent = ({ client }) => {
+  const [num, setNum] = useState(5);
+  const [stop, setStop] = useState(false);
+  const { content, reLoginButton, closeButton, tips, text, numText } = styles;
+  useEffect(() => {
+    if (stop) return;
+    if (num === 1) {
+      setStop(true);
+      reLogin(client);
+    }
+    setTimeout(() => {
+      setNum(num - 1);
+    }, 1000);
+  })
+  return (
+    <div style={{ ...content }}>
+      <div style={{ ...closeButton }}
+        onClick={() => {
+          setStop(true);
+          closePop();
+        }}>
+        <Icon type="close" />
+      </div>
+      <div style={{ ...tips }}>提示</div>
+      <div style={{ ...text }}>抱歉，会话超时，为保障您安全使用，请重新登录！</div>
+      <div style={{ ...numText }}>
+        <span style={{ color: '#5063C2' }}>
+          {num}s&nbsp;
+        </span>
+        后尝试登录...
+      </div>
+      <Button style={{ ...reLoginButton }} type="primary" onClick={() => { reLogin(client) }}>重新登录</Button>
+    </div>
+  )
+};
+
+const setStyle = () => {
+  const oStyle = document.createElement('style');
+  oStyle.innerHTML = `
+    .maskDiv {
+      position: fixed;
+      z-index: 20;
+      top: 0;
+      opacity: 0.5;
+      width: 100%;
+      height: 100%;
+      background: #222;
+    }
+    .errorContent {
+      position: fixed;
+      z-index: 9999;
+      top: 50%;
+      left: 50%;
+      width: 390px;
+      height: 420px;
+      margin-left: -195px;
+      margin-top: -210px;
+      border-radius: 4px;
+      background: url(${BG401});
+    }
+  `;
+  document.body.append(oStyle);
+  errorPop.oStyle = oStyle;
+}
+
+const ReLogin = client => {
+  if (!errorPop.oMask) {
+    setStyle();
+    const oMask = document.createElement('div');
+    const oContent = document.createElement('div');
+    oMask.className = 'maskDiv';
+    oContent.className = 'errorContent';
+    document.body.append(oContent);
+    document.body.append(oMask);
+    ReactDOM.render(<RenderContent client={client} />, oContent);
+    errorPop.oMask = oMask;
+    errorPop.oContent = oContent;
+  }
+};
+
+export default ReLogin;

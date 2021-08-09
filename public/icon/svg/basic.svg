@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 62 (91390) - https://sketch.com -->
+    <title>icon/新手入门</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <linearGradient x1="86.7346939%" y1="0%" x2="13.2653061%" y2="100%" id="linearGradient-1">
+            <stop stop-color="#FAE061" offset="0%"></stop>
+            <stop stop-color="#FFC482" offset="100%"></stop>
+        </linearGradient>
+        <filter x="-133.3%" y="-33.3%" width="366.7%" height="166.7%" filterUnits="objectBoundingBox" id="filter-2">
+            <feOffset dx="0" dy="1" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="0.5" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0.45923913   0 0 0 0 0.217969344   0 0 0 0 0.0467027294  0 0 0 0.604649257 0" type="matrix" in="shadowBlurOuter1" result="shadowMatrixOuter1"></feColorMatrix>
+            <feMerge>
+                <feMergeNode in="shadowMatrixOuter1"></feMergeNode>
+                <feMergeNode in="SourceGraphic"></feMergeNode>
+            </feMerge>
+        </filter>
+        <linearGradient x1="55.5555556%" y1="0%" x2="44.4444444%" y2="100%" id="linearGradient-3">
+            <stop stop-color="#C6D4FF" offset="0%"></stop>
+            <stop stop-color="#B0BDFF" offset="28.607238%"></stop>
+            <stop stop-color="#7983FF" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="icon/新手入门" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <circle id="椭圆形" fill-opacity="0" fill="#F1F1F1" cx="10" cy="10" r="10"></circle>
+        <rect id="矩形" fill="url(#linearGradient-1)" x="3" y="3" width="12" height="14" rx="1"></rect>
+        <rect id="矩形" fill="#ECAB49" style="mix-blend-mode: multiply;" x="5" y="6" width="4" height="1" rx="0.5"></rect>
+        <rect id="矩形备份" fill="#ECAB49" style="mix-blend-mode: multiply;" x="5" y="9" width="8" height="1" rx="0.5"></rect>
+        <rect id="矩形备份-2" fill="#ECAB49" style="mix-blend-mode: multiply;" x="5" y="12" width="8" height="1" rx="0.5"></rect>
+        <g id="编组-13" filter="url(#filter-2)" transform="translate(12.500000, 12.000000) rotate(-315.000000) translate(-12.500000, -12.000000) translate(11.000000, 6.000000)">
+            <path d="M1,-2.27373675e-13 L2,-2.27373675e-13 C2.55228475,-2.27475129e-13 3,0.44771525 3,1 L3,9 L3,9 L3.97903932e-13,9 L3.97903932e-13,1 C3.97836297e-13,0.44771525 0.44771525,-2.27272222e-13 1,-2.27373675e-13 Z" id="矩形" fill="url(#linearGradient-3)"></path>
+            <path d="M3.41060513e-13,9 L3,9 L1.9472136,11.1055728 C1.82371897,11.3525621 1.52338245,11.4526742 1.2763932,11.3291796 C1.1796295,11.2807978 1.10116826,11.2023365 1.0527864,11.1055728 L3.41060513e-13,9 L3.41060513e-13,9 Z" id="矩形备份-3" fill="#FFFFFF"></path>
+        </g>
+    </g>
+</svg>

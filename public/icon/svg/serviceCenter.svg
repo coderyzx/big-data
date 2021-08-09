@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="100px" height="87px" viewBox="0 0 100 87" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 62 (91390) - https://sketch.com -->
+    <title>icon/mr-服务中心</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="linearGradient-1">
+            <stop stop-color="#4559E6" offset="0%"></stop>
+            <stop stop-color="#4559E6" stop-opacity="0.15" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="linearGradient-2">
+            <stop stop-color="#4559E6" offset="0%"></stop>
+            <stop stop-color="#4559E6" stop-opacity="0.15" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="linearGradient-3">
+            <stop stop-color="#FFFFFF" offset="0%"></stop>
+            <stop stop-color="#FFFFFF" stop-opacity="0.500600962" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="linearGradient-4">
+            <stop stop-color="#FFFFFF" stop-opacity="0.404392483" offset="0%"></stop>
+            <stop stop-color="#FFFFFF" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="linearGradient-5">
+            <stop stop-color="#FFFFFF" stop-opacity="0.4" offset="0%"></stop>
+            <stop stop-color="#FFFFFF" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="linearGradient-6">
+            <stop stop-color="#FF5B4C" stop-opacity="0.7" offset="0%"></stop>
+            <stop stop-color="#FF5B4C" stop-opacity="0.412265473" offset="51.5356817%"></stop>
+            <stop stop-color="#FF5B4C" stop-opacity="0.299228638" offset="73.9482287%"></stop>
+            <stop stop-color="#FF5B4C" stop-opacity="0.05" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="linearGradient-7">
+            <stop stop-color="#4559E6" offset="0%"></stop>
+            <stop stop-color="#4559E6" stop-opacity="0.15" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="icon/mr-服务中心" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="编组-2备份-2">
+            <rect id="矩形备份-3" stroke="#E6E9F5" fill="#FFFFFF" opacity="0" x="0.5" y="0.5" width="99" height="86" rx="2"></rect>
+            <g id="编组-2" transform="translate(31.000000, 20.000000)">
+                <path d="M6,0 L19,0 C27.2842712,-1.52179594e-15 34,6.71572875 34,15 L34,32 L34,32 L0,32 L0,6 C-4.05812251e-16,2.6862915 2.6862915,6.08718376e-16 6,0 Z" id="矩形备份-2" fill-opacity="0.5" fill="url(#linearGradient-1)"></path>
+                <circle id="椭圆形备份-2" fill-opacity="0.8" fill="url(#linearGradient-2)" cx="19" cy="15" r="14"></circle>
+                <circle id="椭圆形备份-3" fill="url(#linearGradient-3)" cx="19" cy="15" r="7"></circle>
+                <rect id="矩形备份-3" fill="url(#linearGradient-4)" x="15" y="15" width="8" height="15"></rect>
+                <rect id="矩形备份-4" fill="url(#linearGradient-5)" x="15" y="15" width="8" height="3"></rect>
+                <rect id="矩形备份-5" fill="url(#linearGradient-5)" x="15" y="29" width="8" height="3"></rect>
+                <g id="编组-13" transform="translate(21.000000, 15.000000)">
+                    <polygon id="多边形" fill="#FFFFFF" points="11 0 20.5262794 5.5 20.5262794 16.5 11 22 1.47372056 16.5 1.47372056 5.5"></polygon>
+                    <polygon id="形状结合" fill="url(#linearGradient-6)" points="11 2 18.7942286 6.5 18.7942286 15.5 11 20 3.20577137 15.5 3.20577137 6.5"></polygon>
+                    <polygon id="路径-3" fill-opacity="0.8" fill="url(#linearGradient-7)" points="18.7942286 6.5 11 11 11 20 18.7942286 15.5"></polygon>
+                    <polygon id="路径-3" fill-opacity="0.8" fill="url(#linearGradient-7)" points="18.7942286 6.5 11 11 11 20 18.7942286 15.5"></polygon>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

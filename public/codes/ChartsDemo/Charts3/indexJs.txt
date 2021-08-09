@@ -1,0 +1,140 @@
+import React, { Component } from 'react';
+import { Spin } from 'antd';
+
+class Chart3 extends Component {
+  componentDidMount() {
+    this.initialAndDraw()
+  }
+
+  initialAndDraw = () => {
+    const { data, percent } = this.props;
+    if (this.canvas) {
+      this.draw(percent, data)
+    }
+  }
+
+  draw = (percent, data) => {
+    const { width = 320, height = 260, R = 50, onLineWidth = 10, offLineWidth = 8 } = this.props;
+    const ctx = this.canvas.getContext('2d')
+    const cw = 0.37 * width;
+    const ch = height;
+    ctx.clearRect(0, 0, width, height);
+    const { PI } = Math
+    const center = [cw / 2, ch / 2];
+
+    const apRad = -Math.PI / 2
+    const afRad = percent * 2 * Math.PI - Math.PI / 2
+
+    let lastStart = apRad + PI / 6;
+
+    ctx.beginPath()
+    if (apRad + PI / 12 > afRad) {
+      ctx.arc(cw / 2, ch / 2, R, apRad + PI / 12, apRad + PI / 6);
+    } else {
+      lastStart = afRad;
+      if (lastStart + PI / 12 > 1.5 * PI) {
+        ctx.arc(cw / 2, ch / 2, R, apRad + PI / 12, afRad - PI / 6);
+      } else {
+        ctx.arc(cw / 2, ch / 2, R, apRad + PI / 12, afRad);
+      }
+    }
+    ctx.lineWidth = onLineWidth;
+    ctx.lineCap = 'round'
+
+    const xp = cw / 2 + R * Math.cos(apRad);
+    const yp = ch / 2 + R * Math.sin(apRad);
+    const xf = cw / 2 + R * Math.cos(afRad);
+    const yf = ch / 2 + R * Math.sin(afRad);
+
+    const grd = ctx.createLinearGradient(xp, yp, xf, yf);
+    grd.addColorStop(0, '#4ED4FF');
+    grd.addColorStop(1, '#4A6DFF');
+    ctx.strokeStyle = grd;
+    ctx.stroke();
+
+    ctx.beginPath()
+    if (lastStart + PI / 12 > 1.5 * PI) {
+      ctx.arc(cw / 2, ch / 2, R, 1.5 * PI - PI / 12, 1.5 * PI);
+    } else {
+      ctx.arc(cw / 2, ch / 2, R, lastStart + PI / 12, -Math.PI / 2);
+    }
+    ctx.strokeStyle = '#B9C5D7';
+    ctx.lineWidth = offLineWidth;
+    ctx.stroke();
+
+    ctx.beginPath()
+    ctx.font = 'bold 28px MicrosoftYaHei-bold';
+    ctx.textAlign = 'center';
+    ctx.fillStyle = '#3D8EFF';
+    ctx.fillText(`${(percent * 100).toFixed(0)}%`, center[0], center[1]);
+
+    ctx.beginPath()
+    ctx.font = '14px MicrosoftYaHei';
+    ctx.textAlign = 'center';
+    ctx.fillStyle = '#5C6280';
+    ctx.fillText('整体开机率', center[0], center[1] + 20);
+
+    ctx.beginPath()
+    ctx.moveTo(0.38 * width, 0.5 * height);
+    ctx.lineTo(0.5 * width, 0);
+    ctx.lineTo(0.5 * width, height);
+    const grad = ctx.createLinearGradient(0.38 * width, 0.5 * height, 0.5 * width, 0.5 * height)
+    grad.addColorStop(0, '#CCE1FF'); // 定义渐变色颜色
+    grad.addColorStop(1, 'rgba(204,225,255,0)');
+    ctx.fillStyle = grad;
+    ctx.closePath();
+    ctx.fill();
+
+    ctx.beginPath()
+    ctx.rect(0.523 * width, 0, width, height)
+    const grad1 = ctx.createLinearGradient(0.523 * width, 0, 0.523 * width, height)
+    grad1.addColorStop(0, '#4973FF')
+    grad1.addColorStop(1, '#4DD3FF')
+    ctx.fillStyle = grad1
+    ctx.fill()
+
+    const dataHeight = ch / data.length
+    data.forEach((item, index) => {
+      this.drawLine(ctx, index, dataHeight, item)
+    })
+  }
+
+  drawLine = (ctx, i, dataHeight, item) => {
+    const { width = 320 } = this.props;
+    ctx.beginPath()
+    ctx.lineWidth = 2;
+    if (i) {
+      ctx.moveTo(0.523 * width, dataHeight * i)
+      ctx.lineTo(width, dataHeight * i)
+      ctx.strokeStyle = '#ffffff'
+      ctx.stroke()
+    }
+
+    ctx.beginPath()
+    ctx.font = '12px MicrosoftYaHei';
+    ctx.textAlign = 'left';
+    ctx.fillStyle = '#ffffff';
+    ctx.fillText(item.productTypeName, 0.58 * width, dataHeight * i + 21);
+
+    ctx.beginPath()
+    ctx.font = 'bold 14px MicrosoftYaHei';
+    ctx.textAlign = 'left';
+    ctx.fillStyle = '#ffffff';
+    ctx.fillText(`${(item.percentage * 100).toFixed(2)}%`, 0.82 * width, dataHeight * i + 21);
+  }
+
+  render() {
+    const { width = 320, height = 260 } = this.props;
+    const { data } = this.props;
+    return (
+      <Spin spinning={!data}>
+        <div>
+          {/* eslint-disable-next-line no-return-assign */}
+          <canvas ref={node => this.canvas = node} width={width} height={height}></canvas>
+        </div>
+      </Spin>
+    )
+  }
+}
+
+export default Chart3;

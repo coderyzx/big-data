@@ -1,0 +1,19 @@
+import React from 'react';
+import CommonInput from './CommonInput';
+
+
+
+class CommonInputDemo extends React.Component {
+
+  render() {
+    return (
+      <>
+          普通输入框:<div className={styles.showInput}>
+            <CommonInput></CommonInput>
+          </div>
+      </>
+    )
+  }
+}
+
+export default CommonInputDemo;

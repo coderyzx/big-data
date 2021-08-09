@@ -1,0 +1,64 @@
+import React from 'react';
+import { Button } from 'antd';
+import CodeBoard from '@/components/CodeBoard';
+import InputComponent from '@/components/InputComponent';
+import ApiTable from '@/components/ApiTable';
+import { apiData } from './data.js'
+import styles from './index.less';
+
+
+class FormDemo extends React.Component {
+
+  render() {
+    const { visibal } = this.state
+    return (
+      <>
+          <div className={styles.codeBox}>
+            <label className={styles.codeLabel}>数字输入框:</label>
+            <InputComponent type="inputNumber" maxLength={8} />
+          </div>
+          <div className={styles.codeBox}>
+            <label className={styles.codeLabel}>树形选择框-单选:</label>
+            <InputComponent resize="large" treeCheckable type="treeSelect" maxLength={12} placeholder="请输入内容" />
+          </div>
+          <div className={styles.codeBox}>
+            <label className={styles.codeLabel}>U课堂选择框-多选:</label>
+            <InputComponent type="selectCheckbox" placeholder="请输入内容" />
+          </div>
+          <div className={styles.codeBox}>
+            <label className={styles.codeLabel}>普通输入框-large尺寸:</label>
+            <InputComponent resize="large" placeholder="请输入内容" />
+          </div>
+          <div className={styles.codeBox}>
+            <label className={styles.codeLabel}>普通输入框-default尺寸:</label>
+            <InputComponent resize="default" disabled placeholder="请输入内容" />
+          </div>
+          <div className={styles.codeBox}>
+            <label className={styles.codeLabel}>普通输入框-small尺寸:</label>
+            <InputComponent resize="small" placeholder="请输入内容" />
+          </div>
+          <div className={styles.codeBox}>
+            <label className={styles.codeLabel}>密码框:</label>
+            <InputComponent resize="large" type="password" placeholder="请输入密码" />
+          </div>
+          <div className={styles.codeBox}>
+            <label className={styles.codeLabel}>搜索输入框:</label>
+            <InputComponent resize="large" type="search" maxLength={12} placeholder="请输入内容" />
+          </div>
+          <div className={styles.codeBox}>
+            <label className={styles.codeLabel}>下拉选择:</label>
+            <InputComponent style={{ width: 200 }} type="select" maxLength={12} placeholder="请输入内容" />
+          </div>
+          <div className={styles.codeBox}>
+            <label className={styles.codeLabel}>多行文本框:</label>
+            <InputComponent style={{ width: 500 }} disabled type="textArea" maxLength={12} placeholder="请输入内容" />
+          </div>
+          <div style={{ marginTop: '20px' }}>
+            <Button type="primary" onClick={() => { this.showParam() }}>查看参数列表</Button>
+          </div>
+      </>
+    );
+  }
+}
+
+export default FormDemo;

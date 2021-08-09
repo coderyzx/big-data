@@ -1,0 +1,271 @@
+import React from 'react';
+import { Tree, Menu, Form, Modal, Input } from 'antd';
+import styles from './index.less'
+
+const { Item } = Menu
+const { TreeNode } = Tree;
+const FormItem = Form.Item;
+
+class Index extends React.Component {
+    state = {
+      pos: '',
+      OperTypeName: '',
+      modelVisibal: false,
+      rightMenuVisible: false,
+      rightClickNodeTreeItem: {
+        pageX: '',
+        pageY: '',
+        id: '',
+        categoryName: '',
+       },
+      treeData: [
+      {
+        title: 'parent 0',
+        key: '0-0',
+        children: [
+          { title: 'leaf 0-0', key: '0-0-0' },
+          { title: 'leaf 0-1', key: '0-0-1' },
+        ],
+      },
+      {
+        title: 'parent 1',
+        key: '0-1',
+        children: [
+          { title: 'leaf 1-0', key: '0-1-0' },
+          { title: 'leaf 1-1', key: '0-1-1' },
+        ],
+      },
+    ],
+   }
+
+   componentDidMount () {
+    document.addEventListener('click', this.hidenMenu)
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('click', this.hidenMenu)
+  }
+
+  hidenMenu= () => {
+     this.setState({
+      rightMenuVisible: false,
+     })
+  }
+
+  onRightClick = ({ event, node }) => {
+  // console.log(node.props.pos)
+  let x = event.clientX;
+  let y = event.clientY;
+  const maxClientX = document.body.clientWidth - 113;// 网页可见区域宽：document.body.clientWidth
+  const maxClientY = document.body.clientHeight - 162;// 网页可见区域高: document.body.clientHeight
+  if (x > maxClientX) {
+    x = maxClientX
+  }
+  if (y > maxClientY) {
+    y = maxClientY
+  }
+  this.setState({
+    rightMenuVisible: true,
+    pos: node.props.pos,
+    rightClickNodeTreeItem: {
+      pageX: x,
+      pageY: y,
+      id: node.props.eventKey,
+      categoryName: node.props.title,
+    },
+  });
+}
+
+  getRightMenu = () => {
+    const { rightMenuVisible } = this.state;
+    const { pageX, pageY } = { ...this.state.rightClickNodeTreeItem };
+    const tmpStyle = {
+      position: 'absolute',
+      left: `${pageX + 50}px`,
+      top: `${pageY - 50}px`,
+      display: rightMenuVisible ? 'block' : 'none',
+      width: '90px',
+    };
+    const menu = (
+      <div style={tmpStyle} >
+        <Menu>
+          <Item onClick={() => { this.addItem() }}>新建</Item>
+          <Item onClick={() => { this.editItem() }}>编辑</Item>
+          <Item onClick={() => { this.deleteItem() }}>删除</Item>
+        </Menu>
+      </div>
+    );
+    return this.state.rightClickNodeTreeItem == null ? '' : menu;
+  };
+
+
+  editItem = () => {
+    this.setState({
+      modelVisibal: true,
+      OperTypeName: '编辑',
+    })
+  }
+
+
+ deleteItem = () => {
+    this.setState({
+      modelVisibal: true,
+      OperTypeName: '删除',
+    })
+  }
+
+
+  addItem = () => {
+    this.setState({
+      modelVisibal: true,
+      OperTypeName: '新建',
+    })
+  }
+
+  handleCancel = () => {
+  this.setState({
+    modelVisibal: false,
+  })
+}
+
+handleOk = () => {
+   const { treeData, OperTypeName, pos } = this.state;
+   const { form } = this.props;
+      form.validateFieldsAndScroll((err, values) => {
+        if (!err) {
+          const { name } = values;
+          if (OperTypeName === '新建') {
+            this.createNode(name, pos)
+          } else if (OperTypeName === '编辑') {
+            this.editNode(name, pos)
+          } else {
+            this.deleteNode(pos)
+          }
+        }
+      })
+      this.setState({
+      modelVisibal: false,
+      treeData: [...treeData],
+    })
+  form.resetFields();
+}
+
+
+findNode = pos => {
+  let node = this.state.treeData;
+  const deepNum = pos.split('-');
+  if (deepNum.length > 2) {
+    for (let i = 1; i < deepNum.length; i += 1) {
+      const curData = node[deepNum[i]];
+      if (i !== deepNum.length - 1) {
+        node = curData.children;
+      } else {
+        node = curData;
+      }
+    }
+  } else {
+    node = node[deepNum[1]];
+  }
+  return node
+}
+
+createNode = (value, pos) => {
+    const id = Math.random().toString().split('.')[1].substring(1, 8);
+    const curNode = this.findNode(pos);
+    const param = { title: value, key: id }
+    const { children } = curNode;
+      if (children) {
+        children.push(param);
+      } else {
+        curNode.children = [param];
+      }
+    }
+
+editNode = (value, pos) => {
+  const curNode = this.findNode(pos);
+  curNode.title = value;
+  }
+
+deleteNode= pos => {
+  let node = this.state.treeData;
+  const deepNum = pos.split('-');
+  const length = deepNum.length - 1;
+  if (deepNum.length > 2) {
+    for (let i = 1; i < deepNum.length; i += 1) {
+      const curData = node[deepNum[i]];
+      if (i !== deepNum.length - 1) {
+        node = curData.children;
+      } else {
+        break
+      }
+    }
+    node.splice(deepNum[length], 1)
+  } else {
+    node.splice(deepNum[1], 1);
+  }
+}
+
+   getModalVisibal = () => {
+    const { getFieldDecorator } = this.props.form;
+    const { OperTypeName } = this.state
+    const model = (
+      <Modal
+      title={OperTypeName}
+      visible
+      centered
+      bodyStyle={{ padding: '10px 40px 10px 40px' }}
+      width= {450}
+      okText="保存"
+      cancelText="取消"
+      onCancel={this.handleCancel}
+      onOk={this.handleOk}
+      maskClosable={false}
+      destroyOnClose
+  >
+        {OperTypeName === '删除' ? null : <Form labelCol={{ span: 4 }} wrapperCol={{ span: 12 }}>
+          <FormItem label="名称">
+            {getFieldDecorator('name', {
+          rules: [{ required: true, message: '请输入名称' }, { max: 20, message: '最多20个字符' }],
+          })(
+            <Input placeholder="请输入名称" />,
+          )}
+          </FormItem>
+        </Form>}
+      </Modal>
+    )
+     return model
+}
+
+  setTree= data => data.map(value => {
+      if (value.children && value.children.length > 0) {
+        return (<TreeNode title={value.title} key={value.key}>
+          {this.setTree(value.children)}
+        </TreeNode>)
+       }
+        return (<TreeNode title={value.title} key={value.key}></TreeNode>)
+     })
+
+
+  render() {
+    const { treeData, modelVisibal, rightClickNodeTreeItem } = this.state
+    const result = this.setTree(treeData)
+    return (
+      <div className={styles.wrapper}>
+        <Tree
+          showLine
+          autoExpandParent
+          defaultExpandAll
+          onRightClick={this.onRightClick}
+        >
+          {result}
+        </Tree>
+        {rightClickNodeTreeItem !== null ? this.getRightMenu() : ''}
+        <div className={styles.model}>
+          {modelVisibal ? this.getModalVisibal() : null}
+        </div>
+      </div>
+    )
+  }
+}
+const TreeSelect = Form.create()(Index);
+export default TreeSelect;

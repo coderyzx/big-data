@@ -1,0 +1,18 @@
+import React from 'react';
+import InputNumber from './InputNumber';
+
+
+
+class InputNumberDemo extends React.Component {
+
+  render() {
+    return (
+      <>
+          数字输入框:<div className={styles.showInput}>
+            <InputNumber maxLength={8} ></InputNumber>
+          </div>
+    )
+  }
+}
+
+export default InputNumberDemo;

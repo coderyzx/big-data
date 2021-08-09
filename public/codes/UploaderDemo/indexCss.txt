@@ -1,0 +1,7 @@
+.UploaderWrapper{
+  width: 100%;
+  height: 100%;
+}
+:global(.anticon-download) {
+   display: none;
+}

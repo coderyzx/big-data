@@ -1,0 +1,604 @@
+import React, { PureComponent } from 'react';
+import { Drawer, Tabs, Switch, Button } from 'antd';
+import CustomForm from '@/components/CustomForm';
+import { isDateDisabled, showConfirm } from '@/utils/customForm';
+import config from './config';
+import styles from './index.less';
+
+const { TabPane } = Tabs;
+
+const col = { span: 12 };
+
+const formItemLayout = {
+  labelCol: { span: 8 },
+  wrapperCol: { span: 16 },
+}
+
+class DeviceArchive extends PureComponent {
+  constructor(props) {
+    super(props);
+    this.state = {
+      deviceArchiveDisabled: true,
+      deviceInstallDisabled: true,
+
+      deviceArchiveFormInitValues: null,
+      deviceInstallFormInitValues: null,
+      submitting: false,
+      activeTabKey: 'deviceArchive',
+    }
+
+    this.form = {
+      deviceArchiveForm: null,
+      deviceInstallForm: null,
+    }
+  }
+
+  getForm = formName => instance => {
+    if (instance) {
+      this.form[formName] = instance.props.form;
+    }
+  }
+
+  submitForm=() => {
+     const { onSubmit } = this.props;
+     onSubmit();
+  }
+
+  disabledDate = (current, field) => {
+    if (field === 'installCompleteTime') {
+      const { getFieldValue } = this.form.deviceInstallForm;
+      const endDate = getFieldValue('acceptCompleteTime');
+      return isDateDisabled(current, 'start', endDate);
+    }
+    if (field === 'acceptCompleteTime') {
+      const { getFieldValue } = this.form.deviceInstallForm;
+      const startDate = getFieldValue('installCompleteTime');
+      return isDateDisabled(current, 'end', startDate);
+    }
+    if (field === 'deviceStartCirculationTime') {
+      const { getFieldValue } = this.form.deviceCirculationForm;
+      const endDate = getFieldValue('deviceReturnTime');
+      return isDateDisabled(current, 'start', endDate);
+    }
+    if (field === 'deviceReturnTime') {
+      const { getFieldValue } = this.form.deviceCirculationForm;
+      const startDate = getFieldValue('deviceStartCirculationTime');
+      return isDateDisabled(current, 'end', startDate);
+    }
+    if (field === 'patientPayTime') {
+      const { getFieldValue } = this.form.devicePatientTreatForm;
+      const endDate = getFieldValue('patientAppointTime') || getFieldValue('patientStudyTime');
+      return isDateDisabled(current, 'start', endDate);
+    }
+    if (field === 'patientAppointTime') {
+      const { getFieldValue } = this.form.devicePatientTreatForm;
+      const startDate = getFieldValue('patientPayTime');
+      const endDate = getFieldValue('patientStudyTime');
+      return isDateDisabled(current, 'middle', startDate, endDate);
+    }
+    if (field === 'patientStudyTime') {
+      const { getFieldValue } = this.form.devicePatientTreatForm;
+      const startDate = getFieldValue('patientAppointTime') || getFieldValue('patientPayTime');
+      return isDateDisabled(current, 'end', startDate);
+    }
+    return false;
+  }
+
+  onDrawerClose = () => {
+    // const key = this.state.activeTabKey;
+    // const isDisabled = this.state[`${key}Disabled`];
+    // const { updateVisibleState } = this.props;
+    // if (isDisabled) {
+    //   updateVisibleState(false)
+    // } else {
+    //   const okFunc = () => {
+    //     this.submitForm(key, true);
+    //   };
+    //   const cancelFunc = () => {
+    //     this.setState({ [`${key}Disabled`]: true })
+    //     updateVisibleState(false)
+    //   };
+    //   showConfirm('提示', '是否保存当前编辑内容？', okFunc, cancelFunc)
+    // }
+   const { onDrawerClose } = this.props;
+   onDrawerClose();
+  }
+
+  onTabsChange = activeKey => {
+    const lastKey = this.state.activeTabKey;
+    const isDisabled = this.state[`${lastKey}Disabled`];
+    if (isDisabled) {
+      this.setState({ activeTabKey: activeKey });
+    } else {
+      const okFunc = () => {
+        this.submitForm(lastKey);
+        this.setState({ activeTabKey: activeKey });
+      };
+      const cancelFunc = () => {
+        const { resetFields } = this.form[`${lastKey}Form`] || {};
+        if (resetFields) resetFields();
+        this.setState({ activeTabKey: activeKey, [`${lastKey}Disabled`]: true });
+      };
+      showConfirm('提示', '是否保存当前编辑内容？', okFunc, cancelFunc)
+    }
+  }
+
+  handleSwitchChange = (e, checked, key) => {
+    e.preventDefault();
+    if (checked) {
+      this.setState({ [`${key}Disabled`]: false })
+    } else {
+      const okFunc = () => {
+        this.submitForm(key);
+      };
+      const cancelFunc = () => {
+        const { resetFields } = this.form[`${key}Form`];
+        resetFields();
+        this.setState({ [`${key}Disabled`]: true })
+      };
+      showConfirm('提示', '是否保存当前编辑内容？', okFunc, cancelFunc)
+    }
+  }
+
+  getSwitch = key => (
+    <div className={styles.switch}>
+      <span className={styles.switchText}>编辑</span>
+      <Switch
+        key={Math.random().toString()}
+        defaultChecked={!this.state[`${key}Disabled`]}
+        onClick={(checked, e) => { this.handleSwitchChange(e, checked, key) }}
+      />
+    </div>
+  )
+
+  render() {
+    const {
+      deviceArchiveDisabled,
+      deviceInstallDisabled,
+
+      deviceArchiveFormInitValues,
+      deviceInstallFormInitValues,
+
+      submitting,
+    } = this.state;
+    const { visibal } = this.props
+    return (
+      <Drawer
+        width={1200}
+        onClose={this.onDrawerClose}
+        destroyOnClose
+        visible={visibal}
+        headerStyle={{ position: 'fixed' }}
+        bodyStyle={{ padding: '0', overflow: 'hidden', height: '100%' }}
+        className={styles.archiveDrawerWrapper}
+      >
+        <Tabs className={styles.customTabsStyle} defaultActiveKey="deviceArchive" onChange={this.onTabsChange}>
+          <TabPane className={styles.customTabsTabpane} tab="设备档案" key="deviceArchive">
+            {this.getSwitch('deviceArchive')}
+            <div className={styles.centerFormContainer}>
+              <CustomForm
+                config={config.deviceArchive}
+                col={col}
+                formItemLayout={formItemLayout}
+                disabled={deviceArchiveDisabled}
+                wrappedComponentRef={this.getForm('deviceArchiveForm')}
+                initialValues={deviceArchiveFormInitValues}
+              />
+            </div>
+            <div className={styles.commonBottomContainer}>
+              <Button
+                type="primary"
+                disabled={deviceArchiveDisabled}
+                className={styles.commonBottomBtn}
+                onClick={() => this.submitForm('deviceArchive')}
+                loading={submitting}
+              >保存</Button>
+            </div>
+          </TabPane>
+          <TabPane className={styles.customTabsTabpane} tab="安装验收" key="deviceInstall">
+            {this.getSwitch('deviceInstall')}
+            <div className={styles.centerFormContainer}>
+              <CustomForm
+                config={config.deviceInstall}
+                col={col}
+                formItemLayout={formItemLayout}
+                disabled={deviceInstallDisabled}
+                wrappedComponentRef={this.getForm('deviceInstallForm')}
+                initialValues={deviceInstallFormInitValues}
+                disabledDate={this.disabledDate}
+              />
+            </div>
+            <div className={styles.commonBottomContainer}>
+              <Button
+                type="primary"
+                disabled={deviceInstallDisabled}
+                className={styles.commonBottomBtn}
+                onClick={() => this.submitForm('deviceInstall')}
+              >保存</Button>
+            </div>
+          </TabPane>
+            <div className={styles.commonBottomContainer}>
+              <Button
+                type="primary"
+                disabled={deviceScrapDisabled}
+                className={styles.commonBottomBtn}
+                onClick={() => this.submitForm('deviceScrap')}
+              >保存</Button>
+            </div>
+          </TabPane>
+        </Tabs>
+      </Drawer>
+    );
+  }
+}
+export default DeviceArchive;
+
+import React, { Component } from 'react';
+import { Form, Input, Select, TreeSelect, Row, Col, Radio, DatePicker } from 'antd';
+// import moment from 'moment';
+import { createOptions, formatTreeData, createRadioButtons, createRadio } from '@/utils/customForm';
+import IconNode from '@/components/IconNode';
+import styles from './index.less';
+
+const { RangePicker } = DatePicker;
+/**
+ * props:
+ * {
+ *  col: 全局FormItem的col配置
+ *  formItemLayout: 全局表单元素的布局
+ *  initialValues: 表单初始值
+ *  gutter: 元素间隔，可设置数字（水平间隔）或者数组（水平垂直间隔）
+ *  onChange: 元素值改变回调事件
+ *  asyncOptions: Obejct, 异步获取的下拉选项, key为field
+ *  disabled: true 禁止所有编辑 | Object 部分禁止，key为禁止编辑的field，
+ *  config: 所有输入元素的配置的数组，每项如下
+ *  {
+ *    type: 输入控件类型 Input/Select/TreeSelect/RadioButton/DatePicker
+ *    label: 控件label,
+ *    field: 服务端交互字段，
+ *    rules: 校验规则
+ *    formItemLayout: 局部表单元素的布局
+ *    col: 局部FormItem的col配置
+ *    comProps: 输入控件属性扩展
+ *    options: Select/TreeSelect控件的下拉选项 Array | String, 若为String，表示异步获取，从asyncOptions中获取该值对应的选项
+ *    optionKey: 下拉选项用于交互字段, 可选，统一成key/value后可删除
+ *    optionValue: 下拉选项用于显示字段, 可选，统一成key/value后可删除
+ *  }
+ * }
+ *
+ * @deprecated 废弃使用
+ * use ConfigForm in the future
+ *
+ */
+@Form.create({})
+class CustomForm extends Component {
+  state = {
+    treeSearchValue: '',
+  }
+
+  handleTreeSearch = value => {
+    this.setState({ treeSearchValue: value })
+  }
+
+  handleTreeBlur = () => {
+    setTimeout(() => {
+      this.setState({ treeSearchValue: '' })
+    }, 200);
+  }
+
+  getComponent = configItem => {
+    const {
+      type,
+      comProps: originalProps,
+      options,
+      optionKey = 'key',
+      optionValue = 'value',
+    } = configItem;
+    const comProps = { ...originalProps, disabled: this.isItemDisabled(configItem) }
+
+    let component = null;
+    if (type === 'Input') {
+      component = (
+        <Input
+          {...comProps}
+          onChange={e => this.handleOnChange(e.target.value, configItem)}
+        />
+      )
+    } else if (type === 'Select') {
+      const optionDataSource = this.getOptionData(options);
+      component = (
+        <Select
+          {...comProps}
+          suffixIcon={IconNode.Arrow}
+          onChange={value => this.handleOnChange(value, configItem)}
+        >
+          {createOptions(optionDataSource, optionKey, optionValue)}
+        </Select>
+      )
+    } else if (type === 'TreeSelect') {
+      let treeData = this.getOptionData(options);
+      treeData = formatTreeData(treeData, optionKey, optionValue);
+      component = (
+        <TreeSelect
+          {...comProps}
+          treeData={treeData}
+          suffixIcon={IconNode.Arrow}
+          onChange={value => this.handleOnChange(value, configItem)}
+          searchValue={this.state.treeSearchValue}
+          onSearch={this.handleTreeSearch}
+          onBlur={this.handleTreeBlur}
+        />
+      )
+    } else if (type === 'RadioButton') {
+      const optionDataSource = this.getOptionData(options);
+      component = (
+        <Radio.Group
+          {...comProps}
+          className={styles.customRadioGroup}
+          onChange={e => this.handleOnChange(e.target.value, configItem)}
+        >
+          {createRadioButtons(optionDataSource, optionKey, optionValue)}
+        </Radio.Group>
+      )
+    } else if (type === 'Radio') {
+      const optionDataSource = this.getOptionData(options);
+      component = (
+        <Radio.Group {...comProps} onChange={e => this.handleOnChange(e.target.value, configItem)}>
+          {createRadio(optionDataSource, optionKey, optionValue)}
+        </Radio.Group>
+      )
+    } else if (type === 'DatePicker') {
+      component = (
+        <DatePicker {...comProps}
+          onChange={value => this.handleOnChange(value, configItem)}
+          disabledDate={current => this.handleDisabledDate(current, configItem)}
+          style={{ width: '100%' }}
+        />
+      )
+    } else if (type === 'DateRangePicker') {
+      component = (
+        <RangePicker
+          {...comProps}
+          onChange={value => this.handleOnChange(value, configItem)}
+          disabledDate={current => this.handleDisabledDate(current, configItem)}
+          onCalendarChange={dates => this.onCalendarChange(dates)}
+          onOpenChange={status => this.onOpenChange(status)}
+        />
+      )
+    }
+
+    return component;
+  }
+
+  // 判断是静态数据源还是动态数据源
+  getOptionData = options => {
+    let optionDataSource = []
+    if (Array.isArray(options)) {
+      optionDataSource = options;
+    } else if (typeof options === 'string') {
+      const { asyncOptions } = this.props;
+      optionDataSource = asyncOptions ? asyncOptions[options] : [];
+    }
+    return optionDataSource;
+  }
+
+  renderFormItems = () => {
+    const {
+      config,
+      initialValues = {},
+      col: globalCol = { span: 12 },
+      form,
+    } = this.props;
+    const { getFieldDecorator } = form;
+
+    return config.map(configItem => {
+      const { type, label, field, col, formItemLayout } = configItem;
+      const component = this.getComponent(configItem);
+
+      // 没有对应组件，以空作为占位
+      if (component === null) {
+        return <Col key={field} {...(col || globalCol)} />;
+      }
+
+      const initialValue = initialValues && initialValues[field];
+      if (type === 'DatePicker' && initialValue) {
+        // initialValue = moment(initialValue);
+      }
+
+      return (
+        <Col key={field} {...(col || globalCol)}>
+          <Form.Item
+            label={label}
+            {...formItemLayout}
+          >
+            {getFieldDecorator(field, { initialValue })(component)}
+          </Form.Item>
+        </Col>
+      )
+    })
+  }
+
+  isItemDisabled = configItem => {
+    const { disabled } = this.props;
+    if (disabled) {
+      if (typeof disabled === 'boolean') {
+        return disabled;
+      }
+
+      if (typeof disabled === 'object') {
+        return !!(disabled[configItem.field])
+      }
+    }
+    return false;
+  }
+
+  handleOnChange = (value, configItem) => {
+    const { onChange } = this.props;
+    if (onChange) {
+      onChange(configItem.field, value);
+    }
+  }
+
+  handleDisabledDate = (current, configItem) => {
+    const { disabledDate } = this.props;
+    if (disabledDate) {
+      return disabledDate(current, configItem.field);
+    }
+    return false;
+  }
+
+  onCalendarChange = dates => {
+    const { onCalendarChange } = this.props;
+    if (onCalendarChange) {
+      onCalendarChange(dates)
+    }
+  }
+
+  onOpenChange = status => {
+    const { onOpenChange } = this.props;
+    if (onOpenChange) {
+      onOpenChange(status)
+    }
+  }
+
+  render() {
+    const {
+      config,
+      formItemLayout,
+      gutter = 20,
+      hideRequiredMark = false,
+      labelAlign = 'right',
+    } = this.props;
+
+    if (!config || !Array.isArray(config)) {
+      return null;
+    }
+
+    return (
+      <Form
+        {...formItemLayout}
+        onSubmit={this.handleSubmit}
+        colon={false}
+        hideRequiredMark={hideRequiredMark}
+        labelAlign={labelAlign}
+        layout="horizontal">
+        <Row gutter={gutter} align="bottom" type="flex">
+          {this.renderFormItems()}
+        </Row>
+      </Form>
+    )
+  }
+}
+
+export default CustomForm;
+
+/***
+ * config data数据
+ */
+import Rules from '@/utils/rules';
+// 设备档案
+import Rules from '@/utils/rules';
+// 设备档案
+const deviceArchive = [
+  {
+    label: '设备类别',
+    field: 'deviceType',
+    type: 'Input',
+    comProps: {
+      placeholder: '',
+    },
+    rules: [
+      Rules.StrMax(50),
+    ],
+  },
+  {
+    label: '国产/进口',
+    field: 'importedOrNot',
+    type: 'Radio',
+    comProps: {
+      placeholder: '',
+    },
+    options: [
+      { key: 'false', value: '国产' },
+      { key: 'true', value: '进口' },
+    ],
+  },
+  {
+    label: '购置日期',
+    field: 'purchaseDate',
+    type: 'DatePicker',
+    comProps: {
+      placeholder: '',
+    },
+  },
+  {
+    label: '启用日期',
+    field: 'startDate',
+    type: 'DatePicker',
+    comProps: {
+      placeholder: '',
+    },
+  },
+]
+
+/**
+ * 设备流转字段：
+ * 设备购置科室(string,50)、设备流转科室(string,50)、设备开始流转时间date(yyyy-mm-dd)、
+ * 设备归还时间date(yyyy-mm-dd)、设备状态(string,50)
+ */
+const deviceCirculation = [
+  {
+    label: '设备购置科室',
+    field: 'devicePurchaseDept',
+    type: 'Input',
+    comProps: {
+      placeholder: '',
+    },
+    rules: [
+      Rules.StrMax(50),
+    ],
+  },
+  {
+    label: '设备流转科室',
+    field: 'deviceCirculationDept',
+    type: 'Input',
+    comProps: {
+      placeholder: '',
+    },
+    rules: [
+      Rules.StrMax(50),
+    ],
+  },
+  {
+    label: '设备开始流转时间',
+    field: 'deviceStartCirculationTime',
+    type: 'DatePicker',
+    comProps: {
+      placeholder: '',
+    },
+  },
+  {
+    label: '设备归还时间',
+    field: 'deviceReturnTime',
+    type: 'DatePicker',
+    comProps: {
+      placeholder: '',
+    },
+  },
+  {
+    label: '设备状态',
+    field: 'deviceStatus',
+    type: 'Input',
+    comProps: {
+      placeholder: '',
+    },
+    rules: [
+      Rules.StrMax(50),
+    ],
+  },
+]
+
+export default {
+  deviceArchive,
+  deviceCirculation,
+}

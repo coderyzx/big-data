@@ -1,0 +1,22 @@
+import React from 'react';
+import { Button } from 'antd';
+import ReLogin from '@/utils/ReLogin';
+import styles from './index.less';
+
+class ReLoginDemo extends React.Component {
+
+  showReLoginPop = () => {
+    ReLogin();
+  }
+
+  render() {
+    const { visible, jsData, jsUseData, cssData } = this.state;
+    return (
+      <div className={styles.reLoginWrap}>
+        <Button type="primary" onClick={() => { this.showReLoginPop() }}>触发重新登录浮层效果</Button>
+      </div>
+    )
+  }
+}
+
+export default ReLoginDemo;

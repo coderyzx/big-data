@@ -1,0 +1,27 @@
+import React from 'react';
+import { Button } from 'antd';
+import Toast from '@/components/ToastComponent';
+
+class ToastDemo extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
+  render() {
+    return (
+      <>
+        <Button type="primary" onClick={() => {
+            Toast({
+              // style: { width: '900px', height: '200px' },
+              type: 'success',
+              icon: 'usb',
+              duration: 3000,
+              row: true,
+            })
+        }}>显示Toast</Button>
+      </>
+    )
+  }
+}
+
+export default ToastDemo;

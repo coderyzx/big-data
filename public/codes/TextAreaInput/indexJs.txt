@@ -1,0 +1,32 @@
+import React, { useState, useEffect } from 'react';
+import { Input } from 'antd';
+
+import styles from './index.less'
+
+const { TextArea } = Input;
+
+const TextAreaInput = props => {
+  const [max, setMax] = useState(0);
+  const [maxLength, setMaxLength] = useState(0);
+  useEffect(() => {
+    setMaxLength(props.maxLength)
+  }, [])
+  const textAreaChange = e => {
+     const { value } = e.target;
+     setMax(value.length);
+  }
+
+  return (
+    <div className={styles.textArea}>
+      <TextArea
+      // {...props}
+      allowClear
+      onChange={e => { textAreaChange(e) }}
+      maxLength={maxLength}
+  />
+      <span className={styles.maxLength}>{max}/{props.maxLength}</span>
+    </div>
+  )
+}
+
+export default TextAreaInput;

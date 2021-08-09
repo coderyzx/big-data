@@ -1,0 +1,17 @@
+import React from 'react';
+import SelectCheckbox from './SelectCheckbox';
+
+
+class SelectCheckboxInputDemo extends React.Component {
+  render() {
+    return (
+      <>
+          U课堂选择框-多选:<div className={styles.showInput}>
+            <SelectCheckbox></SelectCheckbox>
+          </div>
+      </>
+    )
+  }
+}
+
+export default SelectCheckboxInputDemo;

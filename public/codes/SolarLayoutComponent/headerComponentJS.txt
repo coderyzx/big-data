@@ -1,0 +1,102 @@
+import React, { PureComponent } from 'react';
+import { Layout, Divider } from 'antd';
+import { LogoComponent, MenuLinkComponent, UserBehaviorComponent } from '@/components/BasicHeaderComponents';
+
+import styles from './index.less'
+
+const { Header: HeaderLayout } = Layout;
+
+
+class Header extends PureComponent {
+  render() {
+    const { menus, usercenter, IconLogo, logoText } = this.props;
+    return (
+      // <Layout style={{ height: '100%' }}>
+      <HeaderLayout className={styles.header}>
+        <LogoComponent IconLogo={IconLogo} logoText={logoText} />
+        <Divider type="vertical" className={styles.divider} />
+        <MenuLinkComponent menus={menus} />
+        <UserBehaviorComponent usercenter={usercenter} />
+      </HeaderLayout>
+      // </Layout>
+
+    )
+  }
+}
+
+export default Header;
+
+import React from 'react'
+import { Menu, Layout } from 'antd'
+import { ContentsComponent } from '@/components/ContentsComponents'
+import styles from './index.less'
+
+const { Sider } = Layout;
+const MenuItem = Menu.Item;
+
+class SideMenusComponents extends React.Component {
+  renderSiderMenus = sideMenus => {
+    const sideMenu = sideMenus.map(item => (
+      <MenuItem key={item.path} className={styles.siderMenuItem}>
+        <span className={styles.siderMenuText}>{item.name}</span>
+      </MenuItem>
+  ))
+
+  return (
+    <Sider
+      width={200}
+      className={styles.siderMenu}>
+      <Menu
+        mode="inline"
+        style={{ height: '100%' }}
+        defaultSelectedKeys={ localStorage.SelectedKeys || '/Components/Wellcome1' }
+      >
+        {sideMenu}
+      </Menu>
+    </Sider>
+  );
+}
+
+  render() {
+    const { sideMenus, contents, layoutVisibal } = this.props;
+    const sideMenu = this.renderSiderMenus(sideMenus)
+    return (
+      <>
+        <Layout style={{ height: '100%' }}>
+           {sideMenu}
+          <ContentsComponent contents={contents}/>
+        </Layout>
+      </>
+    )
+  }
+}
+
+export default SideMenusComponents
+
+import React from 'react';
+import { Layout } from 'antd';
+import styles from './index.less'
+
+const { Content } = Layout;
+
+export const ContentsComponent = props => (
+  <Content style={{ margin: '20px 25px 0' }}>
+    <div className={styles.siteLayoutBackground} style={{ padding: '24px', minHeight: '480px', fontSize: '20px' }}>
+      {props.contents.title}
+    </div>
+  </Content>
+ )
+
+import React from 'react';
+import { Layout } from 'antd';
+import styles from './index.less'
+
+const { Footer } = Layout;
+
+export const FooterContentsComponent = props => (
+  <Footer style={{ textAlign: 'center' }}>
+    <div className={styles.siteLayoutBackground} >
+      {props.footerContents.title}
+    </div>
+  </Footer>
+ )

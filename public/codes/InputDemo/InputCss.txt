@@ -1,0 +1,153 @@
+.input {
+  font-family: MicrosoftYaHei;
+  font-size: 14px;
+  color: #1F2127;
+  :global {
+    .anticon {
+      color: #B3B6C7;
+    }
+    .ant-input {
+      line-height: 32px;
+    }
+  }
+<<<<<<< HEAD
+  input::-webkit-input-placeholder {
+    color: #B3B6C7;
+  }
+  input:-moz-placeholder {
+    color: #B3B6C7;
+  }
+  input::-moz-placeholder {
+    color: #B3B6C7;
+    opacity:  1;
+  }
+  input:-ms-input-placeholder {
+    color: #B3B6C7;
+  }
+}
+
+.textArea {
+  position: relative;
+  .maxLength {
+    position: absolute;
+    right: 10px;
+    bottom: 7px;
+    font-family: MicrosoftYaHei;
+    font-size: 12px;
+    color: #B3B6C7;
+  }
+  textArea::-webkit-input-placeholder {
+    color: #B3B6C7;
+  }
+  textArea:-moz-placeholder {
+    color: #B3B6C7;
+  }
+  textArea::-moz-placeholder {
+    color: #B3B6C7;
+    opacity:  1;
+  }
+  textArea:-ms-input-placeholder {
+    color: #B3B6C7;
+  }
+}
+
+.selectDemo {
+  :global {
+    .ant-select-selection__placeholder, .ant-select-search__field__placeholder {
+      color: #B3B6C7;
+    }
+  }
+}
+
+.searchIcon {
+  color: #B3B6C7;
+}
+
+.selectDropDown {
+  .selectOption {
+    height: 40px;
+    line-height: 40px!important;
+    padding: 0 12px!important;
+    &:first-child {
+      margin-top: 5px;
+    }
+  }
+
+}
+
+.treeWrapper(@width) {
+  width: calc(100% - @width)!important;
+}
+
+.treeBeforeWrapper(@num) {
+  content: '';
+  display: inline-block;
+  width: 18px * @num;
+  height: 100%;
+}
+
+.TreeSelectDropdown {
+  .treeNode, .TreeParent, .TreeItem, .TreeChild {
+    position: relative;
+  }
+  .TreeParent {
+    :global(.ant-select-tree-node-content-wrapper) {
+      .treeWrapper(64px);
+    }
+    &:before {
+      .treeBeforeWrapper(1);
+    }
+  }
+  .TreeItem {
+    :global(.ant-select-tree-node-content-wrapper) {
+      .treeWrapper(82px);
+    }
+    &:before {
+      .treeBeforeWrapper(2);
+    }
+  }
+  .TreeChild {
+    :global(.ant-select-tree-node-content-wrapper) {
+      .treeWrapper(100px);
+    }
+    &:before {
+      .treeBeforeWrapper(3);
+    }
+  }
+  :global {
+    .ant-select-tree {
+      padding: 5px 0;
+      li {
+        margin: 0;
+        ul {
+          padding-left: 0;
+        }
+        .ant-select-tree-node-content-wrapper {
+          &.ant-select-tree-node-selected {
+            background-color: transparent;
+          }
+          &:hover {
+            background-color: transparent;
+          }
+          &:before {
+            content: '';
+            display: block;
+            width: 100%;
+            height: 40px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            background-color: transparent;
+          }
+          padding: 10px 0;
+          margin: 0;
+        }
+        .ant-select-tree-node-content-wrapper:hover:before, .ant-select-tree-node-content-wrapper:active:before {
+          background-color: #f0f5ff;
+        }
+      }
+    }
+  }
+}
+

@@ -1,0 +1,292 @@
+import React, { PureComponent } from 'react'
+import IconLogo from '@/assets/more.png'
+import { FooterContentsComponent } from '@/components/FooterContentsComponent'
+import Header from './Header'
+import SideMenus from './SideMenus'
+
+
+const menus = [
+  {
+    path: '/Components/Wellcome1',
+    name: '首页',
+  },
+  {
+    path: '/Components/Wellcome2',
+    name: '首页',
+  },
+  {
+    path: '/Components/Wellcome3',
+    name: '首页',
+  },
+  {
+    path: '/Components/Wellcome4',
+    name: '首页',
+  },
+  {
+    path: '/Components/Wellcome5',
+    name: '首页',
+  },
+]
+
+const sideMenus = [
+  {
+    path: '/Components/Wellcome1',
+    name: '首页',
+  },
+  {
+    path: '/Components/Wellcome2',
+    name: '首页',
+  },
+  {
+    path: '/Components/Wellcome3',
+    name: '首页',
+  },
+  {
+    path: '/Components/Wellcome4',
+    name: '首页',
+  },
+  {
+    path: '/Components/Wellcome5',
+    name: '首页',
+  },
+]
+
+const usercenter = [
+  {
+    title: '个人中心',
+    linkTo: '/gerenzhongxin',
+    component: <div>111</div>,
+  },
+  {
+    title: '消息',
+    linkTo: '/xiaoxi',
+    component: <div>111</div>,
+  },
+]
+
+const contents = {
+  title: 'hello ded-design ！',
+}
+
+const footerContents = {
+  title: 'DeD Design ©2020 Created by UIH DED',
+}
+
+class SolarLayout extends PureComponent {
+  setLocalStorage=() => {
+    if (!localStorage.SelectedKeys) {
+        localStorage.SelectedKeys = sideMenus[0].path
+    }
+  }
+
+  render() {
+     this.setLocalStorage()
+    return (
+      <>
+        <Header
+        IconLogo={IconLogo}
+        logoText="SOLAR"
+        menus={menus}
+        usercenter={usercenter}
+        contents={contents}
+       />
+        <SideMenus
+        sideMenus={sideMenus}
+        contents={contents}
+        />
+        <FooterContentsComponent
+        footerContents={footerContents}
+        />
+      </>
+    )
+  }
+}
+
+export default SolarLayout;
+
+/******headerComponent*******/
+import React, { PureComponent } from 'react';
+import { Layout, Divider } from 'antd';
+import { LogoComponent, MenuLinkComponent, UserBehaviorComponent } from '@/components/BasicHeaderComponents';
+
+import styles from './index.less'
+
+const { Header: HeaderLayout } = Layout;
+
+
+class Header extends PureComponent {
+  render() {
+    const { menus, usercenter, IconLogo, logoText } = this.props;
+    return (
+      // <Layout style={{ height: '100%' }}>
+      <HeaderLayout className={styles.header}>
+        <LogoComponent IconLogo={IconLogo} logoText={logoText} />
+        <Divider type="vertical" className={styles.divider} />
+        <MenuLinkComponent menus={menus} />
+        <UserBehaviorComponent usercenter={usercenter} />
+      </HeaderLayout>
+      // </Layout>
+
+    )
+  }
+}
+
+export default Header;
+
+import React, { Component } from 'react';
+import { Tooltip, Button } from 'antd';
+import { connect } from 'dva';
+import styles from './index.less'
+
+
+class UserBehaviorComponent extends Component {
+  gotoLink = link => {
+    window.open(link)
+  }
+
+  render() {
+    const { usercenter } = this.props;
+    return (
+      <div className={styles.rightMenus}>
+        {
+          usercenter.map(item => (
+            <Tooltip key={item.title} placement="bottom" title={item.title}>
+              <div className={styles.commonImgIcon} onClick={() => this.gotoLink(item.linkTo)}>
+                {item.component}
+              </div>
+            </Tooltip>
+          ))
+        }
+      </div>
+    );
+  }
+}
+
+export default UserBehaviorComponent;
+
+import React, { Component } from 'react';
+import NavLink from 'umi/navlink'
+import styles from './index.less'
+
+class MenuLinkComponent extends Component {
+  static getDerivedStateFromProps(props) {
+    const { menus } = props;
+    return {
+      menus,
+    }
+  }
+
+  renderHeaderMenus = () => this.state.menus.map(item => (
+    <NavLink
+      key={item.path}
+      to={item.subMenus ? item.subMenus[0].path : item.path}
+      isActive={() => this.state.navMenu === item}
+      className={styles.navMenuItem}
+      activeClassName={styles.navMenuItemActive}
+    >
+      {item.name}
+    </NavLink>
+  ))
+
+  render() {
+    return (
+      <div className={styles.navMenus}>
+        {this.renderHeaderMenus()}
+      </div>
+    );
+  }
+}
+
+export default MenuLinkComponent;
+
+import React, { PureComponent } from 'react';
+import styles from './index.less';
+
+class LogoComponent extends PureComponent {
+  render() {
+    const { IconLogo, logoText } = this.props;
+    return (
+      <div className={styles.logo}>
+        <img src={IconLogo} alt="logo" className={styles.logoImg} />
+        <span className={styles.logoText}>{logoText}</span>
+      </div>
+    )
+  }
+}
+
+export default LogoComponent;
+
+import React from 'react'
+import { Menu, Layout } from 'antd'
+import { ContentsComponent } from '@/components/ContentsComponents'
+import styles from './index.less'
+
+const { Sider } = Layout;
+const MenuItem = Menu.Item;
+
+class SideMenusComponents extends React.Component {
+  renderSiderMenus = sideMenus => {
+    const sideMenu = sideMenus.map(item => (
+      <MenuItem key={item.path} className={styles.siderMenuItem}>
+        <span className={styles.siderMenuText}>{item.name}</span>
+      </MenuItem>
+  ))
+
+  return (
+    <Sider
+      width={200}
+      className={styles.siderMenu}>
+      <Menu
+        mode="inline"
+        style={{ height: '100%' }}
+        defaultSelectedKeys={ localStorage.SelectedKeys || '/Components/Wellcome1' }
+      >
+        {sideMenu}
+      </Menu>
+    </Sider>
+  );
+}
+
+  render() {
+    const { sideMenus, contents, layoutVisibal } = this.props;
+    const sideMenu = this.renderSiderMenus(sideMenus)
+    return (
+      <>
+        <Layout style={{ height: '100%' }}>
+           {sideMenu}
+          <ContentsComponent contents={contents}/>
+        </Layout>
+      </>
+    )
+  }
+}
+
+export default SideMenusComponents
+
+import React from 'react';
+import { Layout } from 'antd';
+import styles from './index.less'
+
+const { Content } = Layout;
+
+export const ContentsComponent = props => (
+  <Content style={{ margin: '20px 25px 0' }}>
+    <div className={styles.siteLayoutBackground} style={{ padding: '24px', minHeight: '480px', fontSize: '20px' }}>
+      {props.contents.title}
+    </div>
+  </Content>
+ )
+
+import React from 'react';
+import { Layout } from 'antd';
+import styles from './index.less'
+
+const { Footer } = Layout;
+
+export const FooterContentsComponent = props => (
+  <Footer style={{ textAlign: 'center' }}>
+    <div className={styles.siteLayoutBackground} >
+      {props.footerContents.title}
+    </div>
+  </Footer>
+ )

@@ -1,0 +1,43 @@
+.notice {
+  max-width: 900px;
+  min-width: 180px;
+  min-height: 167px;
+  padding: 30px;
+  position: fixed;
+  top: 346px;
+  left: 50%;
+  z-index: 10000;
+  background: rgba(0, 0, 0, .75);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.toastIcon {
+  color: #fff!important;
+  font-size: 40px;
+}
+
+.noticeText {
+  font-family: MicrosoftYaHei;
+  font-size: 22px;
+  color: #FFFFFF;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 100%;
+  text-align: center;
+  margin-top: 18px;
+}
+
+.row {
+  align-items: center;
+  .noticeText {
+    margin: 0 0 0 10px;
+  }
+}
+
+.column {
+  flex-direction: column;
+}

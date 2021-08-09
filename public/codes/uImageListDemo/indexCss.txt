@@ -1,0 +1,211 @@
+@import "~@/theme/theme.less";
+
+@width: 100%;
+@color: #3D304D;
+@descColor: #9298B3;
+@collectionColor: #3F51B5;
+
+.popularImageListWrap {
+  color: @descColor;
+  .imageListBox {
+    display: flex;
+    flex-wrap: wrap;
+    border-radius: 4px 4px 0 0;
+    a {
+      transition: all 0.2s ease;
+      display: inline-block;
+    }
+
+    .title {
+      cursor: pointer;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      margin-top: 15px;
+      font-size: 16px;
+      color: #000;
+      line-height: 24px;
+    }
+
+    .desc {
+      width: 100%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      margin-top: 10px;
+      font-size: 14px;
+      color: @descColor;
+    }
+
+    .item {
+      position: relative;
+      margin: 10px 40px 50px 0;
+      width: 240px;
+      .imgA {
+        position: relative;
+        display: block;
+        height: 130px;
+        background-repeat:no-repeat;
+        background-size:cover;
+        box-shadow: 0 2px 16px 0 rgba(10, 17, 51, 0.10);
+        border-radius: 4px;
+        cursor: pointer;
+      }
+
+      a {
+        .title {
+          color: #000;
+        }
+        .tags {
+          color: @descColor;
+        }
+        .summary {
+          color: @descColor;
+        }
+      }
+
+      .title {
+        width: 232px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        margin-top: 10px;
+        font-size: 16px;
+        color: #000;
+        line-height: 22px;
+      }
+      .desc {
+        width: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        margin-top: 10px;
+        font-size: 14px;
+        color: @descColor;
+      }
+
+      .popCardWrap {
+        display: block;
+        visibility: hidden;
+        overflow: hidden;
+        z-index: 100;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        // min-width: 232px;
+        opacity: 0;
+        width: 100%;
+        height: 200px;
+        background-color: #fff;
+        border-radius: 4px;
+        box-shadow: 0 4px 16px 0 rgba(43, 44, 82, 0.30);
+        cursor: pointer;
+        .contentWrap {
+          width: 260px;
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+
+          .img {
+            width: 100%;
+            min-height: 130px;
+            img {
+              width: 100%;
+              height: 130px;
+              border-radius: 4px 4px 0 0;
+            }
+          }
+
+          .infoConent {
+            padding: 0 10px;
+          }
+
+          .title {
+            width: 100%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            margin-top: 10px;
+            font-size: 16px;
+            font-weight: 700;
+            color: #000;
+            line-height: 24px;
+          }
+          .secName {
+            font-size: 14px;
+            color: #9298B3;
+          }
+
+          .tags {
+            line-height: 20px;
+
+            .tagItem {
+              margin-right: 7px;
+            }
+          }
+
+          .summary {
+            width: 100%;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            max-height: 48px;
+            line-height: 24px;
+          }
+          .moreAction {
+            height: 22px;
+            margin-top: 10px;
+            margin-bottom: 10px;
+
+            .time {
+              color: @textColor;
+              .text {
+                display: flex;
+                align-items: center;
+                img {
+                  width: 14px;
+                  height: 14px;
+                  margin-right: 4px;
+                }
+              }
+            }
+          }
+        }
+      }
+
+      .showPopCard {
+        visibility: visible;
+        opacity: 1;
+        width: 260px;
+        height: 250px;
+        transition: all 0.2s ease;
+      }
+    }
+
+    .videoCover {
+      width: 100%;
+
+      img {
+        width: 100%;
+      }
+
+      .title {
+        margin-top: 10px;
+        font-size: 16px;
+        line-height: 22px;
+      }
+
+      .desc {
+        width: 100%;
+        margin-top: 10px;
+        font-size: 14px;
+        color: @descColor;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+    }
+  }
+}

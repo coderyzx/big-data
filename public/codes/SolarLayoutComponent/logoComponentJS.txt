@@ -1,0 +1,16 @@
+import React, { PureComponent } from 'react';
+import styles from './index.less';
+
+class LogoComponent extends PureComponent {
+  render() {
+    const { IconLogo, logoText } = this.props;
+    return (
+      <div className={styles.logo}>
+        <img src={IconLogo} alt="logo" className={styles.logoImg} />
+        <span className={styles.logoText}>{logoText}</span>
+      </div>
+    )
+  }
+}
+
+export default LogoComponent;

@@ -1,0 +1,223 @@
+/****header样式***/
+/*
+    引用方式：
+    @import '~@/styles/flex.less';
+*/
+
+// flex布局
+.flex() {
+  display: flex;
+}
+
+//指定主轴方向(默认row) row / row-reverse / column / column-reverse
+.flex-direction(@direction) {
+  .flex();
+  flex-direction: @direction;
+}
+
+//主轴对齐方式 flex-start /center / flex-end / space-between / space-around
+.flex-main(@justify) {
+  .flex();
+  justify-content: @justify;
+}
+
+//交叉轴对齐方式 flex-start / flex-end / center / stretch / baseline
+.flex-cross(@alignItem) {
+  .flex();
+  align-items: @alignItem;
+}
+
+//主轴和交叉轴的对齐方式
+.flex-main-cross(@justify, @alignItem) {
+  .flex();
+  justify-content: @justify;
+  align-items: @alignItem;
+}
+
+// 规定主轴对齐方式并设置是否换行
+.flex-main-wrap(@justify, @wrap) {
+  .flex-main(@justify);
+  flex-wrap: @wrap;
+}
+
+//改变主轴后主轴的对齐方式
+.flex-direction-main(@direction, @justify) {
+  .flex-direction(@direction);
+  justify-content: @justify;
+}
+
+//改变主轴后交叉轴的对齐方式
+.flex-direction-cross(@direction, @alignItem) {
+  .flex-direction(@direction);
+  align-items: @alignItem;
+}
+
+// 改变主轴后主轴和交叉轴的对齐方式
+.flex-center-direction(@direction, @justify, @alignItem) {
+  .flex-direction(@direction);
+  justify-content: @justify;
+  align-items: @alignItem;
+}
+
+//flex取值缩写
+// .flex-@{value} {
+//     flex: @value;
+// }
+
+.flex-basis(@num) {
+  flex-basis: @num;
+}
+
+//flex布局
+// logoComponent
+@import '~@/styles/flex.less';
+
+.logo {
+  .flex-cross(center);
+  width: 199px;
+  padding-left: 24px;
+  cursor: pointer;
+
+  .logoImg {
+    width: 27px;
+    height: 27px;
+  }
+
+  .logoText {
+    color: #ffffff;
+    font-size: 18px;
+    margin-left: 10px;
+    font-weight: bold;
+  }
+}
+
+//MenuLinkComponent
+@import '~@/styles/flex.less';
+
+.navMenus {
+  .flex-cross(center);
+  flex: 1;
+
+  .navMenuItem {
+    color: rgba(255, 255, 255, 0.6);
+    // width: 104px;
+    margin: auto 20px;
+    display: block;
+    text-align: center;
+    font-size: 16px;
+    position: relative;
+    cursor: pointer;
+
+    &:hover {
+      color: rgba(255, 255, 255, 0.6);
+    }
+  }
+
+  .navMenuItemActive {
+    color: #ffffff;
+
+    &:after {
+      position: absolute;
+      bottom: 6px;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      border-radius: 2px;
+      background-color: #ffffff;
+      display: block;
+      content: '';
+      animation: show .2s cubic-bezier(0.645, 0.045, 0.355, 1) 0s 1 forwards;
+    }
+
+    &:hover {
+      color: #ffffff;
+    }
+  }
+}
+
+//useBehaviorComponent
+@import '~@/styles/flex.less';
+
+.rightMenus {
+  .flex-cross(center);
+  padding-right: 30px;
+
+  .commonImgIcon {
+    .flex-main-cross(center, center);
+    font-size: 22px;
+    width: 32px;
+    height: 32px;
+    margin-left: 20px;
+    background-color: #3444AA;
+    border-radius: 2px;
+    cursor: pointer;
+  }
+  .switchButton{
+    margin-left: 20px;
+    :global{.ant-btn-primary{
+      color: black
+    }
+   }
+  }
+}
+
+//sideMenu
+@import '~@/styles/flex.less';
+.siderMenu {
+  background: #ffffff !important;
+  height: 500px;
+  :global {
+    .ant-menu {
+      border-right: 1px solid rgba(64, 74, 128, 0.15);
+    }
+
+    .ant-menu-item:not(:last-child) {
+      margin: 0;
+    }
+
+    .ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected {
+      background-color: rgba(48, 80, 240, 0.05);
+    }
+
+    .ant-menu-inline-collapsed {
+      width: 64px;
+    }
+
+    .ant-menu-inline-collapsed > .ant-menu-item {
+      padding: 0 20px !important;
+    }
+
+    .ant-menu-inline-collapsed > .ant-menu-item .anticon {
+      font-size: 24px;
+    }
+    // .ant-menu-inline .ant-menu-item::after {
+    //   display: none;
+    // }
+  }
+
+  .siderMenuItem {
+    line-height: 60px !important ;
+    height: 60px !important ;
+    margin: 0;
+    padding-left: 75px !important;
+    font-size: 16px !important;
+  }
+
+  .sideMenuText{
+    font-size: 22px;
+  }
+
+  .siderMenuLink {
+    .flex-cross(center);
+  }
+
+  .commonLinkIcon {
+    font-size: 24px;
+    line-height: 24px;
+    margin-right: 10px;
+    &::before {
+      display: block;
+    }
+  }
+}
+

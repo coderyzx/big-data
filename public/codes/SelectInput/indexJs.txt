@@ -1,0 +1,34 @@
+import React from 'react';
+import { Select } from 'antd';
+
+import styles from './index.less'
+
+const { Option } = Select;
+
+const SelectInput = props => {
+  const getChildren = () => {
+    const children = [];
+    for (let i = 10; i < 36; i += 1) {
+      children.push(<Option
+        className={styles.selectOption}
+        key={i.toString(36) + i}
+      >{i.toString(36) + i}</Option>);
+    }
+    return children;
+  }
+
+  return (
+    <Select
+    className={styles.selectDemo}
+    dropdownClassName={styles.selectDropDown}
+    showSearch
+    allowClear
+    style={{ width: 300 }}
+    maxLength={12}
+    placeholder="请输入内容"
+  >{getChildren() }
+    </Select>
+  )
+}
+
+export default SelectInput;
