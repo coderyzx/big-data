@@ -1,88 +1,87 @@
 import React from 'react';
-import { Layout, Menu, Icon } from 'antd';
+import { Layout, Menu, Icon, Tooltip, Button } from 'antd';
 import Link from 'umi/link';
 import backgroundImg from '../assets/logo.png';
 import styles from './home.less';
-import SearchInput from './searchInput';
+import Wellcome from '../pages/Wellcome';
+import Sider from '../pages/sider';
 
-const { Header, Content, Sider, Footer } = Layout;
+const { Header, Content, Footer } = Layout;
 
+// eslint-disable-next-line react/prefer-stateless-function
 class BasicLayout extends React.Component {
-  state = {
-    collapsed: false,
-    theme: 'dark',
-  };
-
-  onCollapse = collapsed => {
-    this.setState({ collapsed });
-  };
-
-  handleClick = e => {
-    console.log('click ', e);
-  };
-
   render() {
+    const text = {
+      text1: <span>个人中心</span>,
+      text2: <span>主页</span>,
+      text3: <span>退出</span>,
+    };
     return (
       <Layout style={{ minHeight: '100vh' }} >
-        <Sider collapsible collapsed={this.state.collapsed} onCollapse={this.onCollapse} >
-          <div className={styles.logo} >
-            <div className={styles.pic} ><img src={backgroundImg} alt="" /></div>
-            <div className={this.state.theme === 'dark' ? styles.text : styles.textDark} >
-              <div className={styles.subtitle}>大数据管理平台</div>
-              BDMP
-            </div>
+        <Header
+        style={{
+           position: 'fixed', zIndex: 1, width: '100%', background: '#fff', padding: 0, boxShadow: ' 0 0 20px rgb(0 0 0 / 20%)',
+        }}>
+          <div className={styles.logo}>
+            <a href="https://echarts.apache.org/zh/index.html">
+              <img src={backgroundImg} alt="BDMP logo" />
+              <div className={styles.title}>
+                BDMP
+              </div>
+            </a>
           </div>
-          <br/>
-          <br/>
           <Menu
-            onClick={this.handleClick}
-            theme="dark"
-            defaultSelectedKeys={['1']}
-            mode="inline"
+          mode="horizontal"
+          defaultSelectedKeys={['1']}
+          style={{ lineHeight: '64px' }}
           >
-            <Menu.Item key="1">
-              <Icon type="pie-chart" />
-              通用字段库
-            </Menu.Item>
-            <Menu.Item key="2">
-              <Icon type="laptop" />
-              私有字段库
-            </Menu.Item>
-            <Menu.Item key="3">
-              <Icon type="appstore" />
-              自定义字段库
-            </Menu.Item>
+            <Menu.Item key="1" >首页</Menu.Item>
+            <Menu.Item key="2">字段库管理</Menu.Item>
+            <Menu.Item key="3">表单管理</Menu.Item>
+            <Menu.Item key="4">页面管理</Menu.Item>
+            <Menu.Item key="5">form关联页面管理</Menu.Item>
+            <Menu.Item key="6">预览</Menu.Item>
+            <Link to="/user" >
+              <Tooltip placement="bottom" title={text.text1} >
+                <Button style={{ marginLeft: 180 }}>
+                  <Icon type="user" />
+                  user
+                </Button>
+              </Tooltip>
+            </Link>
+            <Link to="/home" >
+              <Tooltip placement="bottom" title={text.text2} >
+                <Button style={{ marginLeft: 10 }}>
+                  <Icon type="home" />
+                  home
+                </Button>
+              </Tooltip>
+            </Link>
+            <Link to="/login" >
+              <Tooltip placement="bottom" title={text.text3} >
+                <Button style={{ marginLeft: 10 }}>
+                  <Icon type="login" />
+                  exit
+                </Button>
+              </Tooltip>
+            </Link>
           </Menu>
-        </Sider>
+        </Header>
         <Layout>
-          <Header style={{ background: '#fff', padding: 0 }}>
-            <Menu
-            theme="dark"
-            mode="horizontal"
-            defaultSelectedKeys={['1']}
-            style={{ lineHeight: '64px' }}
+          <Sider/>
+          <Layout>
+            <Content
+              style={{
+                background: '#fff',
+                padding: 24,
+                margin: 0,
+                minHeight: 280,
+              }}
             >
-              <Menu.Item key="1" style={{ marginLeft: 100 }}>字段库管理</Menu.Item>
-              <Menu.Item key="2">表单管理</Menu.Item>
-              <Menu.Item key="3">页面管理</Menu.Item>
-              <Menu.Item key="4">form关联页面管理</Menu.Item>
-              <Menu.Item key="5">预览</Menu.Item>
-              <SearchInput />
-              <Icon type="user" style={{ marginLeft: 220, fontSize: 22 }}/>
-              <Icon type="home" style={{ marginLeft: 25, fontSize: 22 }}/>
-              <Link to="/login" ><Icon type="login" style={{ marginLeft: 25, fontSize: 22 }}/></Link>
-            </Menu>
-          </Header>
-          <Content
-            style={{
-              background: '#fff',
-              padding: 24,
-              margin: 0,
-              minHeight: 280,
-            }}
-          >
-          </Content>
-          <Footer style={{ textAlign: 'center' }}>UIH ©2021 Created by UIH-BDMP</Footer>
+              <Wellcome/>
+            </Content>
+            <Footer style={{ textAlign: 'center' }}>UIH ©2021 Created by UIH-BDMP</Footer>
+          </Layout>
         </Layout>
       </Layout>
     );

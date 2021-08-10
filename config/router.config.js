@@ -10,7 +10,7 @@ const routes = [
     path: '/',
     // 鉴权 有坑 鉴权下级一定要component
     wrappers: [
-      './Authorized',
+      '../pages/Authorized',
     ],
     component: '../layouts/home',
     routes: [

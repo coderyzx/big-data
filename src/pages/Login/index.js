@@ -21,7 +21,6 @@ class NormalLogin extends Component {
           type: 'loginModel/submit',
           payload: values,
         })
-        // console.log(values);
       }
     });
   }
@@ -70,7 +69,6 @@ class NormalLogin extends Component {
         </Form>
       )
     }
-
       return <Redirect to="/" />
   }
 }
