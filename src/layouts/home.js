@@ -3,10 +3,8 @@ import { Layout, Menu, Icon, Tooltip, Button } from 'antd';
 import Link from 'umi/link';
 import backgroundImg from '../assets/logo.png';
 import styles from './home.less';
-import Wellcome from '../pages/Wellcome';
-import Sider from '../pages/sider';
 
-const { Header, Content, Footer } = Layout;
+const { Header } = Layout;
 
 // eslint-disable-next-line react/prefer-stateless-function
 class BasicLayout extends React.Component {
@@ -17,7 +15,7 @@ class BasicLayout extends React.Component {
       text3: <span>退出</span>,
     };
     return (
-      <Layout style={{ minHeight: '100vh' }} >
+      <Layout>
         <Header
         style={{
            position: 'fixed', zIndex: 1, width: '100%', background: '#fff', padding: 0, boxShadow: ' 0 0 20px rgb(0 0 0 / 20%)',
@@ -35,53 +33,39 @@ class BasicLayout extends React.Component {
           defaultSelectedKeys={['1']}
           style={{ lineHeight: '64px' }}
           >
-            <Menu.Item key="1" >首页</Menu.Item>
-            <Menu.Item key="2">字段库管理</Menu.Item>
-            <Menu.Item key="3">表单管理</Menu.Item>
-            <Menu.Item key="4">页面管理</Menu.Item>
-            <Menu.Item key="5">form关联页面管理</Menu.Item>
-            <Menu.Item key="6">预览</Menu.Item>
-            <Link to="/user" >
-              <Tooltip placement="bottom" title={text.text1} >
-                <Button style={{ marginLeft: 180 }}>
-                  <Icon type="user" />
-                  user
-                </Button>
-              </Tooltip>
-            </Link>
-            <Link to="/home" >
-              <Tooltip placement="bottom" title={text.text2} >
-                <Button style={{ marginLeft: 10 }}>
-                  <Icon type="home" />
-                  home
-                </Button>
-              </Tooltip>
-            </Link>
+            <Menu.Item key="1" ><Link to="/">首页</Link></Menu.Item>
+            <Menu.Item key="2"><Link to="/charts">图表管理</Link></Menu.Item>
+            <Menu.Item key="3"><Link to="/charts">表单管理</Link></Menu.Item>
+            <Menu.Item key="4"><Link to="/charts">字段库管理</Link></Menu.Item>
+            <Menu.Item key="6"><Link to="/charts">预览</Link></Menu.Item>
             <Link to="/login" >
               <Tooltip placement="bottom" title={text.text3} >
-                <Button style={{ marginLeft: 10 }}>
+                <Button style={{ float: 'right', margin: '17px 30px 17px 0' }}>
                   <Icon type="login" />
                   exit
                 </Button>
               </Tooltip>
             </Link>
+            <Link to="/home" >
+              <Tooltip placement="bottom" title={text.text2} >
+                <Button style={{ float: 'right', margin: '17px 10px 17px 0' }}>
+                  <Icon type="home" />
+                  home
+                </Button>
+              </Tooltip>
+            </Link>
+            <Link to="/user" >
+              <Tooltip placement="bottom" title={text.text1} >
+                <Button style={{ float: 'right', margin: '17px 10px 17px 0' }}>
+                  <Icon type="user" />
+                  user
+                </Button>
+              </Tooltip>
+            </Link>
           </Menu>
         </Header>
-        <Layout>
-          <Sider/>
-          <Layout>
-            <Content
-              style={{
-                background: '#fff',
-                padding: 24,
-                margin: 0,
-                minHeight: 280,
-              }}
-            >
-              <Wellcome/>
-            </Content>
-            <Footer style={{ textAlign: 'center' }}>UIH ©2021 Created by UIH-BDMP</Footer>
-          </Layout>
+        <Layout style={{ marginTop: 67, minHeight: '100vh' }}>
+          { this.props.children }
         </Layout>
       </Layout>
     );

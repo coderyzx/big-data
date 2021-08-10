@@ -1,6 +1,8 @@
 import React from 'react';
-import styles from './home.less'
+import { Layout } from 'antd';
+import styles from './wellcome.less'
 
+const { Footer } = Layout;
 class Wellcome extends React.Component {
     constructor (props) {
         super(props);
@@ -10,9 +12,12 @@ class Wellcome extends React.Component {
     render () {
       return (
         <>
-          <h2 onClick={() => { this.sendMsg() }} className ={styles.h2} >
-            <b>欢迎访问大数据管理平台-BDMP</b>
-          </h2>
+          <Layout className ={styles.Wellcome} style={{ minHeight: 'calc(100vh - 67px)' }}>
+            <h2 onClick={() => { this.sendMsg() }} >
+              欢迎访问大数据管理平台-BDMP
+            </h2>
+          </Layout>
+          <Footer style={{ textAlign: 'center' }}>UIH ©2021 Created by UIH-BDMP</Footer>
         </>
       )
     }

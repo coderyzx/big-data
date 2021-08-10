@@ -8,34 +8,31 @@ const routes = [
   },
   {
     path: '/',
-    // 鉴权 有坑 鉴权下级一定要component
-    wrappers: [
-      '../pages/Authorized',
-    ],
     component: '../layouts/home',
     routes: [
       {
         path: '/',
-        redirect: '/home',
+        component: '../pages/Wellcome',
       },
       {
-        path: '/home',
-        component: '../layouts/home',
-      },
-      {
-        component: '../pages/404',
+        path: '/charts',
+        component: '../pages/charts',
+        routes: [
+          {
+            path: '/charts',
+            component: '../pages/charts/LineChart',
+          },
+          {
+            path: '/charts/chart-type-bar',
+            component: '../pages/charts/BarChart',
+          },
+        ],
       },
     ],
 
   },
-
   {
-    path: '/charts',
-    component: '../layouts/charts',
-  },
-  {
-    path: '/mirror',
-    component: '../layouts/mirror',
+    component: '../pages/404',
   },
 
 ]
