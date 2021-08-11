@@ -28,6 +28,8 @@ class Chart extends React.Component {
     }).then(() => {
       // eslint-disable-next-line no-console
       console.log('图表加载完毕');
+    }).catch(error => {
+      console.log(error);
     });
   }
 
@@ -35,10 +37,9 @@ class Chart extends React.Component {
   //   this.setState({ collapsed });
   // }
 
-  // handleClick = e => {
-  //   retrurn {
-  //   }
-  // }
+  handleClick = e => {
+    console.log(e.item.props.children.props.to);
+  }
 
 
   render() {
@@ -47,11 +48,12 @@ class Chart extends React.Component {
     return (
       <>
         <Sider width={200}
-          style={{ background: '#fff', zIndex: 99, minHeight: 'cal(100%)' }}>
+          style={{ background: '#fff', minHeight: '100vh' }}>
           <Menu
             mode="inline"
             style={{ height: '100%' }}
             defaultSelectedKeys={['1']}
+            onClick={this.handleClick}
           >
             {
               chartList.map(item => (
@@ -83,7 +85,7 @@ class Chart extends React.Component {
             </Menu.Item> */}
           </Menu>
         </Sider>
-        <Layout style={{ padding: 14, marginLeft: 220 }}>
+        <Layout style={{ padding: 14, marginLeft: 20 }}>
           {children }
         </Layout>
       </>

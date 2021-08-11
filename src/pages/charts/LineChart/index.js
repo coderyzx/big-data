@@ -16,7 +16,7 @@ class LineChart extends React.Component {
     return (
       <div style={{ margin: '30px 15px 30px 15px' }}>
         <div>
-          <h3 id="chart-type-line" className={styles.chartTypeHead}>折线图<span>line</span></h3>
+          <h3 className={styles.chartTypeHead}>折线图<span>line</span></h3>
           <div style={{ marginRight: '-15px', marginLeft: '-15px' }}>
             <div className={styles.colItem}>
               <div className={styles.listLtem}>
