@@ -12,19 +12,23 @@ const routes = [
     routes: [
       {
         path: '/',
-        component: '../pages/Wellcome',
+        component: './Wellcome',
       },
       {
         path: '/charts',
-        component: '../pages/charts',
+        component: './charts',
         routes: [
           {
             path: '/charts',
-            component: '../pages/charts/LineChart',
+            component: './charts/LineChart',
           },
           {
             path: '/charts/chart-type-bar',
-            component: '../pages/charts/BarChart',
+            component: './charts/BarChart',
+          },
+          {
+            path: '/charts/chart-type-pie',
+            component: './charts/PieChart',
           },
         ],
       },

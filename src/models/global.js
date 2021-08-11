@@ -30,12 +30,6 @@ const globalModel = {
         layoutVisibal: payload.layoutVisibal,
       }
     },
-    login(state, { payload }) {
-      return {
-        ...state,
-        login: payload.login,
-      }
-    },
 
   },
 };

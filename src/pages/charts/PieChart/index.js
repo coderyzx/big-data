@@ -1,7 +1,7 @@
 import React from 'react';
 // import styles from './index.less'
 
-class BarChart extends React.Component {
+class PieChart extends React.Component {
   constructor (props) {
     super(props);
     this.state = {};
@@ -19,12 +19,12 @@ class BarChart extends React.Component {
           // data-src="https://cdn.jsdelivr.net/gh/apache/echarts-website@asf-site/examples/data/thumb/line-simple.webp?_v_=1627897138964"
           // data-was-processed="true"
           />
-          <h4 className="example-title">柱状图</h4>
-          <h5 className="example-subtitle">Bar Chart</h5>
+          <h4 className="example-title">饼图</h4>
+          <h5 className="example-subtitle">Pie Chart</h5>
         </a>
       </div>
     )
   }
 }
 
-export default BarChart;
+export default PieChart;

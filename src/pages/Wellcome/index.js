@@ -1,6 +1,7 @@
 import React from 'react';
 import { Layout } from 'antd';
-import styles from './wellcome.less'
+import styles from './wellcome.less';
+import bigData from '@/assets/bigdata.jpeg'
 
 const { Footer } = Layout;
 class Wellcome extends React.Component {
@@ -11,14 +12,20 @@ class Wellcome extends React.Component {
 
     render () {
       return (
-        <>
-          <Layout className ={styles.Wellcome} style={{ minHeight: 'calc(100vh - 67px)' }}>
-            <h2 onClick={() => { this.sendMsg() }} >
-              欢迎访问大数据管理平台-BDMP
-            </h2>
-          </Layout>
+        <div className={styles.pageMain}>
+          <div className ={styles.mainContent}>
+            <section className ={styles.homeSection}>
+              <div className={styles.homeDescriptionContainer }>
+                <div className={styles.homeInfo }>
+                  <div className={styles.homeBrand}>BDMP</div>
+                  <div className={styles.homeSubtitle}>大数据可视化管理平台</div>
+                </div>
+                <div className={styles.homeChart}><img src={bigData} /></div>
+              </div>
+            </section>
+          </div>
           <Footer style={{ textAlign: 'center' }}>UIH ©2021 Created by UIH-BDMP</Footer>
-        </>
+        </div>
       )
     }
 }

@@ -15,3 +15,10 @@ export async function getLogin(username, password) {
       password,
   });
 }
+export async function getChart(payload) {
+  // console.log(username, password);
+  return request('/api/query/chart', {
+      method: 'get',
+      payload,
+  });
+}
