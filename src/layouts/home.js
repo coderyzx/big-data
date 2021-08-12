@@ -33,11 +33,10 @@ class BasicLayout extends React.Component {
           defaultSelectedKeys={['1']}
           style={{ lineHeight: '64px' }}
           >
-            <Menu.Item key="1" ><Link to="/">首页</Link></Menu.Item>
-            <Menu.Item key="2"><Link to="/charts">图表管理</Link></Menu.Item>
-            <Menu.Item key="3"><Link to="/charts">表单管理</Link></Menu.Item>
-            <Menu.Item key="4"><Link to="/charts">字段库管理</Link></Menu.Item>
-            <Menu.Item key="6"><Link to="/charts">预览</Link></Menu.Item>
+            <Menu.Item key="1"><Link to="/charts">仪表板</Link></Menu.Item>
+            <Menu.Item key="2"><Link to="/charts">模板库</Link></Menu.Item>
+            <Menu.Item key="3"><Link to="/charts">数据接入</Link></Menu.Item>
+            <Menu.Item key="4"><Link to="/charts">系统管理</Link></Menu.Item>
             <Link to="/login" >
               <Tooltip placement="bottom" title={text.text3} >
                 <Button style={{ float: 'right', margin: '17px 30px 17px 0' }}>
@@ -46,7 +45,7 @@ class BasicLayout extends React.Component {
                 </Button>
               </Tooltip>
             </Link>
-            <Link to="/home" >
+            <Link to="/" >
               <Tooltip placement="bottom" title={text.text2} >
                 <Button style={{ float: 'right', margin: '17px 10px 17px 0' }}>
                   <Icon type="home" />
@@ -68,6 +67,7 @@ class BasicLayout extends React.Component {
           { this.props.children }
         </Layout>
       </Layout>
+
     );
   }
 }

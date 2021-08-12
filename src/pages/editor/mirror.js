@@ -14,12 +14,12 @@ import 'codemirror/addon/fold/foldgutter.css';
 import 'codemirror/addon/lint/lint.css';
 import 'codemirror/theme/monokai.css';
 
-import styles from './index.less';
+import styles from './chart.less';
 
 class Mirror extends React.Component {
   editConfig = {
     mode: 'application/json', // 编辑器语言
-    theme: 'monokai', // 编辑器主题
+    theme: 'mdn-like', // 编辑器主题
     lineNumbers: true, // 显示行号
     // tabSize: 2,
     smartIndent: true,
@@ -58,7 +58,7 @@ class Mirror extends React.Component {
       try {
         console.log(JSON.parse(value));
       } catch (e) {
-        // console.log(e);
+        console.log(e);
       }
     })
   }

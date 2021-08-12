@@ -58,12 +58,14 @@ class NormalLogin extends Component {
               valuePropName: 'checked',
               initialValue: true,
             })(<Checkbox>Remember me</Checkbox>)}
+            {/* eslint-disable-next-line jsx-a11y/anchor-has-content */}
             <a className={styles.loginFormForgot} href="">
               Forgot password
             </a>
             <Button type="primary" htmlType="submit" className={styles.loginFormButton}>
               Log in
             </Button>
+            {/* eslint-disable-next-line jsx-a11y/anchor-has-content */}
             Or <a href="">register now!</a>
           </Form.Item>
         </Form>

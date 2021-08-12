@@ -2,13 +2,16 @@ export function getMenuMapArrData (datas = []) {
   const result = [];
 
   datas.forEach(ele => {
-    const { id, key, iconType, chartName, path } = ele;
+    const { id, path, src, dataSrc, dataProcessed, title, subTitle } = ele;
     result.push({
       id,
-      key,
-      iconType,
-      chartName,
+      key: id,
       path,
+      src,
+      dataSrc,
+      dataProcessed,
+      title,
+      subTitle,
     })
   })
   // console.log('result', result);

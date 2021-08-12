@@ -4,10 +4,13 @@ import { getChart } from '@/services/global';
 const chartModel = {
   namespace: 'chartModel',
   state: {
-   chartList: [],
+    lineChartList: [],
+    barChartList: [],
+    pieChartList: [],
+
   },
   effects: {
-    *getChart({ payload }, { call, put }) {
+    *getChartList({ payload }, { call, put }) {
       const response = yield call(getChart, payload);
       // console.log(response);
       if (response.code === 'U000001') {
@@ -23,7 +26,9 @@ const chartModel = {
       // console.log(payload);
       return {
         ...state,
-        chartList: payload.chartlist,
+        lineChartList: payload.lineChartList,
+        barChartList: payload.barChartList,
+        pieChartList: payload.pieChartList,
       }
     },
 

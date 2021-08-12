@@ -4,7 +4,7 @@
 const routes = [
   {
     path: '/login',
-    component: '../pages/Login',
+    component: '../pages/login',
   },
   {
     path: '/',
@@ -12,31 +12,75 @@ const routes = [
     routes: [
       {
         path: '/',
-        component: './Wellcome',
+        component: './wellcome',
       },
       {
-        path: '/charts',
-        component: './charts',
+        path: '/dashBoard',
+        component: './dashBoard',
+      },
+      {
+        path: '/library',
+        component: './library',
         routes: [
           {
-            path: '/charts',
-            component: './charts/LineChart',
+            path: '/library/component',
+            component: './library/component',
+            routes: [
+              {
+                path: '/library/component/line',
+                component: './library/component/lineChart',
+              },
+              {
+                path: '/library/component/bar',
+                component: './library/component/barChart',
+              },
+              {
+                path: '/library/component/pie',
+                component: './library/component/pieChart',
+              },
+            ],
           },
           {
-            path: '/charts/chart-type-bar',
-            component: './charts/BarChart',
+            path: '/library/type',
+            component: './library/type',
           },
           {
-            path: '/charts/chart-type-pie',
-            component: './charts/PieChart',
+            path: '/library/filter',
+            component: './library/filter',
+          },
+          {
+            path: '/library/text',
+            component: './library/text',
+          },
+          {
+            path: '/library/photo',
+            component: './library/photo',
           },
         ],
       },
+      {
+        path: '/editor',
+        component: './editor',
+        routes:[
+          {
+            path: '/editor/:id',
+            component: './editor/editorChart',
+          },
+        ],
+      },
+      {
+        path: '/dataAccess',
+        component: './dataAccess',
+      },
+      {
+        path: '/sysManage',
+        component: './sysManage',
+      },   
     ],
 
   },
   {
-    component: '../pages/404',
+    component: './404',
   },
 
 ]
