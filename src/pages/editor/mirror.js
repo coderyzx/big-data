@@ -14,7 +14,7 @@ import 'codemirror/addon/fold/foldgutter.css';
 import 'codemirror/addon/lint/lint.css';
 import 'codemirror/theme/monokai.css';
 
-import styles from './chart.less';
+// import styles from './chart.less';
 
 class Mirror extends React.Component {
   editConfig = {
@@ -65,9 +65,15 @@ class Mirror extends React.Component {
 
   render () {
     return (
-      <div className={styles.editWrap} style={{ height: `${document.body.clientHeight}px` }}>
+      // <div className={styles.editWrap} style={{ height: `${document.body.clientHeight}px` }}>
+      //   <textarea
+      //     className={styles.edit}
+      //     ref={ el => { this.edit = el }}
+      //   />
+      // </div>
+      <div style={{ height: `${document.body.clientHeight}px` }}>
         <textarea
-          className={styles.edit}
+          // className={styles.edit}
           ref={ el => { this.edit = el }}
         />
       </div>

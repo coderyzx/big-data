@@ -3,7 +3,7 @@ import ReactECharts from 'echarts-for-react';
 import { connect } from 'dva'
 // import Link from 'umi/link';
 import { Layout } from 'antd';
-import Mirror from '../../mirror';
+import Mirror from './mirror';
 
 const { Content } = Layout;
 @connect(({ chartModel }) => (
@@ -11,7 +11,7 @@ const { Content } = Layout;
     lineChartEditor: chartModel.lineChartEditor,
   }),
 )
-class BaseLineChart extends React.Component {
+class Editor extends React.Component {
   constructor (props) {
     super(props);
     this.state = {};
@@ -33,4 +33,4 @@ class BaseLineChart extends React.Component {
   }
 }
 
-export default BaseLineChart;
+export default Editor;

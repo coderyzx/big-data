@@ -33,10 +33,10 @@ class BasicLayout extends React.Component {
           defaultSelectedKeys={['1']}
           style={{ lineHeight: '64px' }}
           >
-            <Menu.Item key="1"><Link to="/charts">仪表板</Link></Menu.Item>
-            <Menu.Item key="2"><Link to="/charts">模板库</Link></Menu.Item>
-            <Menu.Item key="3"><Link to="/charts">数据接入</Link></Menu.Item>
-            <Menu.Item key="4"><Link to="/charts">系统管理</Link></Menu.Item>
+            <Menu.Item key="1"><Link to="/chart">仪表板</Link></Menu.Item>
+            <Menu.Item key="2"><Link to="/tempLibrary">模板库</Link></Menu.Item>
+            <Menu.Item key="3"><Link to="/dataAccess">大数据接入</Link></Menu.Item>
+            <Menu.Item key="4"><Link to="/sysManage">预览</Link></Menu.Item>
             <Link to="/login" >
               <Tooltip placement="bottom" title={text.text3} >
                 <Button style={{ float: 'right', margin: '17px 30px 17px 0' }}>

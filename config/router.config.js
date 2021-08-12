@@ -19,55 +19,50 @@ const routes = [
         component: './dashBoard',
       },
       {
-        path: '/library',
-        component: './library',
+        path: '/tempLibrary',
+        component: './tempLibrary',
         routes: [
           {
-            path: '/library/component',
-            component: './library/component',
+            path: '/tempLibrary/chart',
+            component: './tempLibrary/chart',
             routes: [
               {
-                path: '/library/component/line',
-                component: './library/component/lineChart',
+                path: '/tempLibrary/chart/line',
+                component: './tempLibrary/chart/lineChart',
               },
               {
-                path: '/library/component/bar',
-                component: './library/component/barChart',
+                path: '/tempLibrary/chart/bar',
+                component: './tempLibrary/chart/barChart',
               },
               {
-                path: '/library/component/pie',
-                component: './library/component/pieChart',
+                path: '/tempLibrary/chart/pie',
+                component: './tempLibrary/chart/pieChart',
+              },
+              {
+                path: '/tempLibrary/chart/radar',
+                component: './tempLibrary/chart/radarChart',
               },
             ],
           },
           {
-            path: '/library/type',
-            component: './library/type',
+            path: '/tempLibrary/type',
+            component: './tempLibrary/type',
           },
           {
-            path: '/library/filter',
-            component: './library/filter',
+            path: '/tempLibrary/toolBar',
+            component: './tempLibrary/toolBar',
           },
           {
-            path: '/library/text',
-            component: './library/text',
-          },
-          {
-            path: '/library/photo',
-            component: './library/photo',
+            path: '/tempLibrary/largeScreen',
+            component: './tempLibrary/largeScreen',
           },
         ],
       },
       {
         path: '/editor',
         component: './editor',
-        routes:[
-          {
-            path: '/editor/:id',
-            component: './editor/editorChart',
-          },
-        ],
       },
+      // 大数据接入
       {
         path: '/dataAccess',
         component: './dataAccess',
