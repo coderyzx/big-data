@@ -1,98 +1,84 @@
+// 从后端读取二级目录如图表类型管理，组件列表的子菜单名称，显示在左侧菜单栏
 export default {
-  'POST /api/query/menus': {
-    code: 'U000000',
+  'GET /api/query/chartMenu': {
+    code: '000',
     data: {
-      rows: [
+      chartMenu: [
         {
-          id: 'Components',
-          name: '组件',
-          description: '组件',
-          children: [
+          iconType: 'area-chart',
+          subkey: 'sub1',
+          listName: '图表组件列表',
+          child: [
             {
-              id: 'wellcome',
-              name: '欢迎',
-              description: '欢迎',
-              children: [],
+              key: '1',
+              listName: '折线图',
+              path: '/templateLib',
+              iconType: 'line-chart',
             },
             {
-              key: 'dragTable',
-              id: '拖拽表格',
-              name: '拖拽表格',
-              path: '/Components/DragTable',
+              key: '2',
+              listName: '饼图',
+              path: '/templateLib/chart/pie',
+              iconType: 'pie-chart',
             },
             {
-              key: 'localeDemo',
-              id: 'localeDemo',
-              name: '国际化',
-              path: '/Components/LocaleDemo',
+              key: '3',
+              listName: '雷达图',
+              path: '/templateLib/chart/radar',
+              iconType: 'radar-chart',
             },
             {
-              key: 'themeDemo',
-              id: '主题切换',
-              name: '主题切换',
-              path: '/Components/ThemeDemo',
-            },
-            {
-              key: 'borderDemo',
-              id: 'borderDemo',
-              name: '投影',
-              path: '/Components/BorderDemo',
-            },
-            {
-              key: 'mockDemo',
-              id: 'mockDemo',
-              name: '本地假数据',
-              path: '/Components/MockDemo',
-            },
-            {
-              key: 'pdfDemo',
-              id: 'pdfDemo',
-              name: 'PDF在线预览',
-              path: '/Components/PdfDemo',
-            },
-            {
-              key: 'inputDemo',
-              id: 'inputDemo',
-              name: 'InputDemo',
-              path: '/Components/InputDemo',
-            },
-            {
-              key: 'dialogDemo',
-              id: 'dialogDemo',
-              name: 'DialogDemo',
-              path: '/Components/DialogDemo',
-            },
-            {
-              key: 'toastDemo',
-              id: 'toastDemo',
-              name: 'ToastDemo',
-              path: '/Components/ToastDemo',
-            },
-            {
-              key: 'tableDemo',
-              id: 'tableDemo',
-              name: 'TableDemo',
-              path: '/Components/TableDemo',
-            },
-            {
-              key: 'iconfont',
-              id: 'iconfont',
-              name: 'Iconfont',
-              path: '/Components/Iconfont',
-            },
-            {
-              key: 'layoutDemo',
-              id: 'layoutDemo',
-              name: 'LayoutDemo',
-              path: '/Components/LayoutDemo',
-            },
-            {
-              key: 'remindDemo',
-              id: 'remindDemo',
-              name: 'RemindDemo',
-              path: '/Components/RemindDemo',
+              key: '4',
+              listName: '柱状图',
+              path: '/templateLib/chart/bar',
+              iconType: 'bar-chart',
             },
           ],
+        },
+        {
+          subkey: 'sub2',
+          iconType: 'form',
+          listName: '图表类型列表',
+          child: [
+            {
+              key: '5',
+              listName: '类型1',
+              path: '/templateLib/chartType',
+              iconType: 'line-chart',
+            },
+            {
+              key: '6',
+              listName: '类型2',
+              path: '/templateLib/chartType',
+              iconType: 'pie-chart',
+            },
+            {
+              key: '7',
+              listName: '类型3',
+              path: '/templateLib/chartType',
+              iconType: 'radar-chart',
+            },
+            {
+              key: '8',
+              listName: '类型4',
+              path: '/templateLib/chartType',
+              iconType: 'bar-chart',
+            },
+          ],
+        },
+        {
+          subkey: 'sub3',
+          iconType: 'tool',
+          path: '/templateLib/toolBar',
+          listName: '工具栏列表',
+          child: [],
+        },
+        {
+          subkey: 'sub4',
+          iconType: 'desktop',
+          path: '/templateLib/largeScreen',
+          listName: '大屏配置',
+          child: [],
         },
       ],
     },

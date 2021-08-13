@@ -2,7 +2,7 @@ import React from 'react';
 import { Layout, Menu, Icon, Tooltip, Button } from 'antd';
 import Link from 'umi/link';
 import backgroundImg from '../assets/logo.png';
-import styles from './home.less';
+import styles from './index.less';
 
 const { Header } = Layout;
 
@@ -30,13 +30,14 @@ class BasicLayout extends React.Component {
           </div>
           <Menu
           mode="horizontal"
-          defaultSelectedKeys={['1']}
+          // defaultSelectedKeys={['1']}
           style={{ lineHeight: '64px' }}
           >
-            <Menu.Item key="1"><Link to="/chart">仪表板</Link></Menu.Item>
-            <Menu.Item key="2"><Link to="/tempLibrary">模板库</Link></Menu.Item>
-            <Menu.Item key="3"><Link to="/dataAccess">大数据接入</Link></Menu.Item>
-            <Menu.Item key="4"><Link to="/sysManage">预览</Link></Menu.Item>
+            <Menu.Item key="1"><Link to="/dashBoard">仪表盘</Link></Menu.Item>
+            <Menu.Item key="2"><Link to="/templateLib">模板库</Link></Menu.Item>
+            <Menu.Item key="3"><Link to="/metaData">元数据管理</Link></Menu.Item>
+            <Menu.Item key="4"><Link to="/evaluReport">测评报告</Link></Menu.Item>
+            <Menu.Item key="5"><Link to="/dataProcessing">数据加工厂</Link></Menu.Item>
             <Link to="/login" >
               <Tooltip placement="bottom" title={text.text3} >
                 <Button style={{ float: 'right', margin: '17px 30px 17px 0' }}>

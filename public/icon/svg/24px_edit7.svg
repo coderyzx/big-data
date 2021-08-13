@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <title>icon/24px/编辑监控设备/dis</title>
-    <g id="icon/24px/编辑监控设备/dis" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <rect id="矩形" stroke="#E6E6E6" stroke-width="0.5" fill="#F3F3F3" x="1.25" y="1.25" width="21.5" height="21.5" rx="4"></rect>
-        <path d="M17,12 L17,16 C17,16.5522847 16.5522847,17 16,17 L8,17 C7.44771525,17 7,16.5522847 7,16 L7,8 C7,7.44771525 7.44771525,7 8,7 L12,7" id="路径" stroke="#C3C7D9" stroke-width="2" stroke-linecap="round"></path>
-        <line x1="18" y1="6" x2="13" y2="11" id="路径-20" stroke="#C3C7D9" stroke-width="2" stroke-linecap="round"></line>
-    </g>
-</svg>

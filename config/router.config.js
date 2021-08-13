@@ -4,7 +4,7 @@
 const routes = [
   {
     path: '/login',
-    component: '../pages/login',
+    component: './login',
   },
   {
     path: '/',
@@ -19,57 +19,60 @@ const routes = [
         component: './dashBoard',
       },
       {
-        path: '/tempLibrary',
-        component: './tempLibrary',
+        path: '/templateLib',
+        component: './templateLib',
         routes: [
           {
-            path: '/tempLibrary/chart',
-            component: './tempLibrary/chart',
+            path: '/templateLib',
+            component: './templateLib/chart',
             routes: [
               {
-                path: '/tempLibrary/chart/line',
-                component: './tempLibrary/chart/lineChart',
+                path: '/templateLib',
+                component: './templateLib/chart/lineChart',
               },
               {
-                path: '/tempLibrary/chart/bar',
-                component: './tempLibrary/chart/barChart',
+                path: '/templateLib/chart/bar',
+                component: './templateLib/chart/barChart',
               },
               {
-                path: '/tempLibrary/chart/pie',
-                component: './tempLibrary/chart/pieChart',
+                path: '/templateLib/chart/pie',
+                component: './templateLib/chart/pieChart',
               },
               {
-                path: '/tempLibrary/chart/radar',
-                component: './tempLibrary/chart/radarChart',
+                path: '/templateLib/chart/radar',
+                component: './templateLib/chart/radarChart',
               },
             ],
           },
           {
-            path: '/tempLibrary/type',
-            component: './tempLibrary/type',
+            path: '/templateLib/chartType',
+            component: './templateLib/chartType',
           },
           {
-            path: '/tempLibrary/toolBar',
-            component: './tempLibrary/toolBar',
+            path: '/templateLib/toolBar',
+            component: './templateLib/toolBar',
           },
           {
-            path: '/tempLibrary/largeScreen',
-            component: './tempLibrary/largeScreen',
+            path: '/templateLib/largeScreen',
+            component: './templateLib/largeScreen',
           },
         ],
       },
       {
-        path: '/editor',
+        path: '/editor/:id',
         component: './editor',
       },
-      // 大数据接入
       {
-        path: '/dataAccess',
-        component: './dataAccess',
+        path: '/metaData',
+        component: './metaData',
       },
       {
-        path: '/sysManage',
-        component: './sysManage',
+        path: '/evaluReport',
+        component: './evaluReport',
+      },
+      {
+        path: '/dataProcessing',
+        component: './dataProcessing',
       },   
     ],
 

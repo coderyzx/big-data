@@ -8,9 +8,16 @@ export async function getLogin(username, password) {
       password,
   });
 }
-export async function getChart(payload) {
+export async function getChartMenu(payload) {
   // console.log(username, password);
-  return request('/api/query/chart', {
+  return request('/api/query/chartMenu', {
+      method: 'get',
+      payload,
+  });
+}
+export async function getChartList(payload) {
+  // console.log(username, password);
+  return request('/api/query/chartList', {
       method: 'get',
       payload,
   });

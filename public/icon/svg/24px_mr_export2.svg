@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <title>icon/24px/mr日志导出/dis</title>
-    <g id="icon/24px/mr日志导出/dis" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <rect id="矩形" stroke="#E6E6E6" stroke-width="0.5" fill="#F3F3F3" x="1.25" y="1.25" width="21.5" height="21.5" rx="4"></rect>
-        <path d="M14,5 C14.2652165,5 14.5195704,5.10535684 14.7071068,5.29289322 L17.7071068,8.29289322 C17.8946432,8.4804296 18,8.73478351 18,9 L18,18 C18,18.5522847 17.5522847,19 17,19 L7,19 C6.44771525,19 6,18.5522847 6,18 L6,6 C6,5.44771525 6.44771525,5 7,5 L14,5 Z M13.5857864,7 L8,7 L8,17 L16,17 L16,9.41421356 L13.5857864,7 Z M14,13 L14,15 L9,15 L9,13 L14,13 Z M13,9 L13,11 L9,11 L9,9 L13,9 Z" id="形状结合" fill="#C3C7D9"></path>
-    </g>
-</svg>
