@@ -3,11 +3,8 @@ import { getChartMenu, getChartList } from '@/services/global';
 const chartModel = {
   namespace: 'chartModel',
   state: {
-    lineChart: {},
-    barChart: {},
-    pieChart: {},
     chartMenu: [],
-
+    chartList: {},
   },
   effects: {
     *getChartMenu({ payload }, { call, put }) {
@@ -21,9 +18,20 @@ const chartModel = {
     },
 
     *getChartList({ payload }, { call, put }) {
+      // console.log(typeof payload);
       const response = yield call(getChartList, payload);
       // console.log(response);
       if (response.code === '001') {
+        // for(let i in response.data){
+        //   // console.log(typeof i);
+        //   if(i == payload){
+        //     // console.log(i);
+        //     yield put({
+        //       type: 'chartList',
+        //       payload: response.data.i ,
+        //     });
+        //   }
+        // }
         yield put({
           type: 'chartList',
           payload: response.data,
@@ -32,22 +40,19 @@ const chartModel = {
     },
   },
   reducers: {
-    chartList(state, { payload }) {
-      return {
-        ...state,
-        lineChart: payload.lineChart,
-        barChart: payload.barChart,
-        pieChart: payload.pieChart,
-      }
-    },
     chartMenu(state, { payload }) {
-      // console.log(payload);
       return {
         ...state,
         chartMenu: payload.chartMenu,
       }
     },
-
+    chartList(state, { payload }) {
+      // console.log(payload);
+      return {
+        ...state,
+        chartList: payload,
+      }
+    },
   },
 };
 

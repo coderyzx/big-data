@@ -18,7 +18,12 @@ class BasicLayout extends React.Component {
       <Layout>
         <Header
         style={{
-          position: 'fixed', zIndex: 1000, width: '100%', background: '#fff', padding: 0, boxShadow: ' 0 0 20px rgb(0 0 0 / 20%)',
+          position: 'fixed',
+zIndex: 1000,
+width: '100%',
+          padding: 0,
+          background: '#fff',
+          boxShadow: ' 0 0 20px rgb(0 0 0 / 20%)',
         }}>
           <div className={styles.logo}>
             <a href="https://echarts.apache.org/zh/index.html">
@@ -29,6 +34,7 @@ class BasicLayout extends React.Component {
             </a>
           </div>
           <Menu
+          // theme='dark'
           mode="horizontal"
           // defaultSelectedKeys={['1']}
           style={{ lineHeight: '64px' }}

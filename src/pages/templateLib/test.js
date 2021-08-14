@@ -10,7 +10,7 @@ const { SubMenu } = Menu;
     chartMenu: chartModel.chartMenu,
   }),
 )
-class TempLib extends React.Component {
+class SiderMenu extends React.Component {
   componentDidMount() {
     const { dispatch } = this.props;
     dispatch({
@@ -20,7 +20,7 @@ class TempLib extends React.Component {
   }
 
   render() {
-    const { children } = this.props;
+    const { children, chartMenu } = this.props;
     return (
       <>
         <Sider
@@ -28,42 +28,43 @@ class TempLib extends React.Component {
             overflow: 'auto',
             height: '100vh',
             position: 'fixed',
-            background: '#fff',
+            // background: '#fff',
             left: 0,
           }}>
           <Menu
+            theme="dark"
             mode="inline"
             style={{ height: '100%' }}
             defaultSelectedKeys={['1']}
             defaultOpenKeys = {['sub1']}
           >
             {
-              this.chartMenu.map(item => (
+              chartMenu.map(item => (
                 item.child.length ?
                   <SubMenu
-                  key={item.subkey}
+                  key={item.id}
                   title={
                     <span>
-                      <Icon type={item.iconType} />
-                      <span>{item.listName}</span>
+                      <Icon type={item.icon} />
+                      <span>{item.name}</span>
                     </span>
                   }
                   >
                     {
                     item.child.map(child => (
-                      <Menu.Item key={child.key} >
+                      <Menu.Item key={child.id} >
                         <Link to={child.path}>
-                          <Icon type={child.iconType} />
-                          <span>{child.listName}</span>
+                          <Icon type={child.icon} />
+                          <span>{child.name}</span>
                         </Link>
                       </Menu.Item>
                     ))}
                   </SubMenu>
                 :
-                  <Menu.Item key={item.subkey} >
+                  <Menu.Item key={item.id} >
                     <Link to={item.path} >
-                      <Icon type={item.iconType} />
-                      <span>{item.listName}</span>
+                      <Icon type={item.icon} />
+                      <span>{item.name}</span>
                     </Link>
                   </Menu.Item>
               ))
@@ -77,4 +78,4 @@ class TempLib extends React.Component {
     )
   }
 }
-export default TempLib;
+export default SiderMenu;

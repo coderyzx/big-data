@@ -15,6 +15,7 @@ export async function getChartMenu(payload) {
   });
 }
 export async function getChartList(payload) {
+  // console.log(payload);
   return request('/api/query/chartList', {
       method: 'get',
       payload,
