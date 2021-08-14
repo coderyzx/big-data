@@ -19,7 +19,15 @@ const routes = [
         component: './templateLib',
         routes: [
           {
-            path: '/templateLib/chart/:id',
+            path: '/templateLib',
+            component: './templateLib/chartType',
+          },
+          {
+            path: '/templateLib/chartType',
+            component: './templateLib/chartType',
+          },
+          {
+            path: '/templateLib/chart',
             component: './templateLib/chart',
             // routes: [
               //动态路由
@@ -40,10 +48,6 @@ const routes = [
               //   component: './templateLib/chart/radarChart',
               // },
             // ],
-          },
-          {
-            path: '/templateLib/chartType',
-            component: './templateLib/chartType',
           },
           {
             path: '/templateLib/toolBar',

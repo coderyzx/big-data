@@ -5,7 +5,22 @@ const chartModel = {
   state: {
     chartMenu: [],
     chartList: {},
+    chartListName: '',
   },
+  subscriptions: {
+    setup ({ dispatch, history }) {
+      history.listen(location => {
+        // console.log(location.query.id);
+        if (location.pathname === '/templateLib/chart') {
+          dispatch({
+            type: 'chartListName',
+            payload: location.query.id,
+          });
+        }
+      })
+    },
+  },
+
   effects: {
     *getChartMenu({ payload }, { call, put }) {
       const response = yield call(getChartMenu, payload);
@@ -18,20 +33,10 @@ const chartModel = {
     },
 
     *getChartList({ payload }, { call, put }) {
-      // console.log(typeof payload);
+      // console.log(payload);
       const response = yield call(getChartList, payload);
       // console.log(response);
       if (response.code === '001') {
-        // for(let i in response.data){
-        //   // console.log(typeof i);
-        //   if(i == payload){
-        //     // console.log(i);
-        //     yield put({
-        //       type: 'chartList',
-        //       payload: response.data.i ,
-        //     });
-        //   }
-        // }
         yield put({
           type: 'chartList',
           payload: response.data,
@@ -53,6 +58,15 @@ const chartModel = {
         chartList: payload,
       }
     },
+    chartListName(state, { payload }) {
+      // console.log(payload);
+      return {
+        ...state,
+        chartListName: payload,
+      }
+    },
+
+
   },
 };
 

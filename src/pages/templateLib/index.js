@@ -28,18 +28,21 @@ class TempLib extends React.Component {
             overflow: 'auto',
             height: '100vh',
             position: 'fixed',
-            // background: '#fff',
+            background: '#fff',
             left: 0,
           }}>
           <Menu
             // theme='dark'
             mode="inline"
             style={{ height: '100%' }}
-            // defaultSelectedKeys={['1']}
+            defaultSelectedKeys={['sub1']}
             defaultOpenKeys = {['sub1']}
           >
+            <Menu.Item key="sub1">
+              <Link to="/templateLib/chartType"><Icon type="form"/><span>图表类型列表</span></Link>
+            </Menu.Item>
             <SubMenu
-              key="sub1"
+              key="sub2"
               title={
                 <span>
                   <Icon type="area-chart"/>
@@ -48,19 +51,16 @@ class TempLib extends React.Component {
               }
               >
               {
-                  chartMenu.map(item => (
-                    <Menu.Item key={item.id}>
-                      <Link to ={`/templateLib/chart/${item.path}`}>
-                        <Icon type={item.icon} />
-                        <span>{item.name}</span>
-                      </Link>
-                    </Menu.Item>
-                  ))
-                }
+                chartMenu.map(item => (
+                  <Menu.Item key={item.id}>
+                    <Link to ={`/templateLib/chart?id=${item.path}`}>
+                      <Icon type={item.icon} />
+                      <span>{item.name}</span>
+                    </Link>
+                  </Menu.Item>
+                ))
+              }
             </SubMenu>
-            <Menu.Item key="sub2">
-              <Link to="/templateLib/chartType"><Icon type="form"/><span>图表类型列表</span></Link>
-            </Menu.Item>
             <Menu.Item key="sub3">
               <Link to="/templateLib/toolBar"><Icon type="tool"/><span>工具栏列表</span></Link>
             </Menu.Item>

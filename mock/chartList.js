@@ -5,9 +5,10 @@ export default {
     data: {
       lineChart: {
         name: '折线图',
-        lineChartList: [
+        list: [
           {
             id: '1',
+            title: '基础折线图',
             option: {
               xAxis: {
                   type: 'category',
@@ -21,7 +22,6 @@ export default {
                   type: 'line',
               }],
             },
-            title: '基础折线图',
           },
           {
             id: '2',
@@ -113,7 +113,7 @@ export default {
       },
       barChart: {
         name: '柱状图',
-        barChartList: [
+        list: [
           {
             id: '1',
             path: './BasicLineChart',
@@ -181,7 +181,7 @@ export default {
       },
       pieChart: {
         name: '饼图',
-        pieChartList: [
+        list: [
           {
             id: '1',
             path: './pieChartList',
